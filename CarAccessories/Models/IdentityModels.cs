@@ -12,12 +12,10 @@ namespace CarAccessories.Models
     {
         public string Type { get; set; }
 
-        public virtual Seller Seller { get; set; }
+        public virtual Vendor Seller { get; set; }
         public virtual Customer Customer { get; set; }
-        public virtual ICollection<Cart> Cart { get; set; }
+        public virtual ICollection<Order> Cart { get; set; }
         public virtual ICollection<Product> Product { get; set; }
-        public virtual ICollection<Rate> CustomerRate { get; set; }
-        public virtual ICollection<Rate> SellerRate { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -40,9 +38,9 @@ namespace CarAccessories.Models
         public virtual DbSet<Model> Models { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Description> Descriptions { get; set; }
-        public virtual DbSet<Seller> Sellers { get; set; }
+        public virtual DbSet<Vendor> Sellers { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
-        public virtual DbSet<Cart> Carts { get; set; }
+        public virtual DbSet<Order> Carts { get; set; }
         public virtual DbSet<Rate> Rates { get; set; }
 
         public static ApplicationDbContext Create()

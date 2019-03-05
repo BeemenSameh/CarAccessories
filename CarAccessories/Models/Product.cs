@@ -17,8 +17,6 @@ namespace CarAccessories.Models
         public string State { get; set; }
 
         public Model Model { get; set; }
-        public ApplicationUser Seller { get; set; }
-        public virtual ICollection<Description> Description { get; set; }
-        public virtual ICollection<Cart> Cart { get; set; }
+        public virtual ICollection<VendorProduct> VendorProducts { get; set; }
     }
 }

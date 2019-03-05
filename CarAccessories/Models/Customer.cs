@@ -17,5 +17,6 @@ namespace CarAccessories.Models
         public string Photo { get; set; }
 
         public ApplicationUser ApplicationUser { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

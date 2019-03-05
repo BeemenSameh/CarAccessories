@@ -9,17 +9,15 @@ namespace CarAccessories.Models
     public class Rate
     {
         public int ID { set; get; }
-        [ForeignKey("Seller")]
-        [Index("IX_UserSeller", 1, IsUnique = true)]
-        public string Seller_ID { get; set; }
+        [ForeignKey("Vendor")]
+        [Index("IX_UserVendor", 1, IsUnique = true)]
+        public string Vendor_ID { get; set; }
         [ForeignKey("Customer")]
-        [Index("IX_UserProduct", 2, IsUnique = true)]
+        [Index("IX_UserVendor", 2, IsUnique = true)]
         public string Customer_ID { get; set; }
         public int RateNumber { get; set; }
 
-        [InverseProperty("SellerRate")]
-        public ApplicationUser Seller { get; set; }
-        [InverseProperty("CustomerRate")]
-        public ApplicationUser Customer { get; set; }
+        public Vendor Vendor { get; set; }
+        public Customer Customer { get; set; }
     }
 }
