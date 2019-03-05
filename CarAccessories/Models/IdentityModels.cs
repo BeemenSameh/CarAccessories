@@ -30,9 +30,9 @@ namespace CarAccessories.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        //"Data Source=.; Initial Catalog=ITISystem; Integrated Security=True"
+        //"Data Source=.; Initial Catalog=CarAccessories; User id=sa; Password=rootroot;"
         public ApplicationDbContext()
-            : base("Data Source=.; Initial Catalog=CarAccessories; User id=sa; Password=rootroot;", throwIfV1Schema: false)
+            : base("Data Source=.; Initial Catalog=ITISystem; Integrated Security=True", throwIfV1Schema: false)
         {
         }
 
