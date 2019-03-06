@@ -29,31 +29,29 @@
                         <th class="column-4 p-l-70">Quantity</th>
                         <th class="column-5">Total</th>
                     </tr>
-                    @foreach (var item in Model.Cart)
+                    @foreach (var order in Model.Order)
                     {
-                        if (item.Isbuy == true)
+                        if (order.Isbuy == true)
                         {
-                            <tr class="table-row">
-                                <td class="column-1">
-                                    <div class="cart-img-product b-rad-4 o-f-hidden">
-                                        <img src="~/Content/images/images/@item" alt="IMG-PRODUCT">
-                                    </div>
-                                </td>
-                                <td class="column-2">@item.Product.Name
-                                <td>
-                                    @if (item.Product.Sale_price == 0)
-                                    {
-                                    <td class="column-3">@item.Product.Price</td>
+                            foreach (var orderDetails in order.OrderDetails)
+                            {
+                                <tr class="table-row">
+                                    <td class="column-1">
+                                        <div class="cart-img-product b-rad-4 o-f-hidden">
+                                            <img src="~/Content/images/images/@orderDetails.VendorProduct.Product.Image" alt="IMG-PRODUCT">
+                                        </div>
+                                    </td>
+                                    <td class="column-2">@orderDetails.VendorProduct.Product.Name</td>
+                                   
+        
+                                        <td class="column-3"> @orderDetails.VendorProduct.Product.Quantity</td>
+                                   
+                                        <td class="column-4">
+                                            @orderDetails.VendorProduct.Product.Quantity
+                                        </td>
+                                        <td class="column-5"> @(@orderDetails.VendorProduct.Product.Quantity * @orderDetails.VendorProduct.Product.Quantity)</td>
+                                    </tr>
                                 }
-                                else
-                                {
-                                    <td class="column-3">@item.Product.Sale_price</td>
-                                }
-                                    <td class="column-4">
-                                        @item.Quantity
-                                </td>
-                                <td class="column-5"> @(@item.Quantity * @item.Product.Price)</td>
-                            </tr>
                         }
                     }
                 </table>
@@ -68,15 +66,7 @@
     </div>
 
     <!-- Total -->
-    <div class="bo9 w-size18 p-l-40 p-r-40 p-t-30 p-b-38 m-t-30 m-r-0 m-l-auto p-lr-15-sm">
-     
-        <div class="size15 trans-0-4">
-            <!-- Button -->
-            <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
-                Proceed to Checkout
-            </button>
-        </div>
-    </div>
+    
 </section>
 
 
