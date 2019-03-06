@@ -20,6 +20,7 @@ namespace CarAccessories.Models
         public double? Sale_price { get; set; }
 
         public Model Model { get; set; }
+        public Category Category { get; set; }
         public virtual ICollection<VendorProduct> VendorProducts { get; set; }
     }
 }
