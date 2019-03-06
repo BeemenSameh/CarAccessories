@@ -1,4 +1,4 @@
-﻿@model  List<CarAccessories.Models.Brand>
+﻿@model  CarAccessories.Models.ViewModel.BrandsProducts
 @{
     ViewBag.Title = "Home Page";
 }
@@ -72,20 +72,21 @@
 <section class="banner bgwhite p-t-40 p-b-40">
     <div class="container">
         <div class="row">
-            @for (int i = 0; i < (Model.Count / 2) + 1; i++)
+            @for (int i = 0; i < (Model.Brands.Count / 2) + 1; i++)
             {
                 <div class="col-sm-10 col-md-8 col-lg-4 m-l-r-auto">
-                    @for (int j = 0; j < 2 && (2 * i + j) < Model.Count; j++)
+                    @for (int j = 0; j < 2 && (2 * i + j) < Model.Brands.Count; j++)
                     {
                         <!-- block1 -->
                         <div class="block1 hov-img-zoom pos-relative m-b-30">
-                            <img src="~/Content/images/images/@Model[2 * i + j].ID" style="height:360px" alt="IMG-BENNER">
+                            <img src="~/Content/images/images/@Model.Brands[2 * i + j].Image" style="height:360px" alt="IMG-BENNER">
 
                             <div class="block1-wrapbtn w-size2">
                                 <!-- Button -->
-                                <a href="#" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
-                                    @Model[2 * i + j].Name
-                                </a>
+                                @*<a href="#" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
+                                    @Model.Brands[2 * i + j].Name
+                                </a>*@
+                                @Html.ActionLink(@Model.Brands[2 * i + j].Name, "ShowThisBrandModels", "Home", new {BrandId=Model.Brands[2 * i + j].ID }, new {@class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4"})
                             </div>
                         </div>
                     }
@@ -107,12 +108,12 @@
         <!-- Slide2 -->
         <div class="wrap-slick2">
             <div class="slick2">
-                @foreach (var item in Model)
+                @foreach (var item in Model.Products)
                 {
                     <div class="item-slick2 p-l-15 p-r-15">
                         <!-- Block2 -->
                         <div class="block2">
-                            <div class="block2-img wrap-pic-w of-hidden pos-relative @(item.Sale_price == 0? "": "block2-labelsale") @((DateTime.Now-item.Insert_Date).TotalDays<=7? "block2-labelnew": "")">
+                            <div class="block2-img wrap-pic-w of-hidden pos-relative @(item.Sale_price== 0? "": "block2-labelsale") @((DateTime.Now-item.Insert_Date).TotalDays<=7? "block2-labelnew": "")">
                                 <img src="~/Content/images/images/@item.Image" style="height:360px" alt="IMG-PRODUCT">
 
                                 <div class="block2-overlay trans-0-4">

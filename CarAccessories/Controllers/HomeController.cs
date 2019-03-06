@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using CarAccessories.Models.ViewModel;
 
 namespace CarAccessories.Controllers
 {
@@ -12,22 +13,24 @@ namespace CarAccessories.Controllers
         ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult Index()
         {
-           List<Brand>BrandsList= db.Brands.ToList();
-            return View(BrandsList);
+            BrandsProducts b = new BrandsProducts {
+                Brands = db.Brands.ToList(),
+                Products = db.Products.ToList()
+            };  
+      
+            return View(b);
         }
-
-        public ActionResult About()
+        public ActionResult ShowThisBrandModels(int BrandId)
         {
-            ViewBag.Message = "Your application description page.";
+            BrandModelsAndBrandProducts b = new BrandModelsAndBrandProducts {
+                ModelsList = db.Models.Where(m => m.Brand.ID == BrandId).ToList(),
+                ProductsList = db.Products.Where(p => p.Model.Brand.ID == BrandId).ToList()
 
-            return View();
+            };
+
+            return View(b);
         }
+        
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
     }
 }

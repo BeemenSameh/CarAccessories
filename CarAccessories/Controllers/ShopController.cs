@@ -22,21 +22,21 @@ namespace CarAccessories.Controllers
             return View(ProductsList);
         }
 
-        //public ActionResult GetProductsByCatId(int Category_ID)
-        //{
-        //    //{  ? p.Price == f : p.Sale_price == f}
-        //    List<Product> ProductsList = db.Products.Where(i => i.Category.ID == Category_ID).ToList();
-
-
-        //    return PartialView("_GetProdByCatIdPartialView", ProductsList);
-
-        //}
-
-    
-
-        public ActionResult GetAllProducts()
+        public ActionResult GetProductsByModelId(int Model_ID)
         {
-            List<Product> ProductList = db.Products.ToList();
+            //{  ? p.Price == f : p.Sale_price == f}
+            List<Product> ProductsList = db.Products.Where(i => i.Model.ID == Model_ID).ToList();
+
+
+            return PartialView("_GetProdByCatIdPartialView", ProductsList);
+
+        }
+
+
+
+        public ActionResult GetAllProducts(List<Product> BrandProducts)
+        {
+            List<Product> ProductList = BrandProducts;
             return PartialView("_AllProductsPartialView", ProductList);
         }
 
