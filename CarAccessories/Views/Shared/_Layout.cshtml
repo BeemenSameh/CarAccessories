@@ -12,7 +12,9 @@
     <link rel="stylesheet" type="text/css" href="~/Content/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="~/Content/fonts/themify/themify-icons.css">
-    <!--===============================================================================================-->
+    <!--=== <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+    ============================================================================================-->
     <link rel="stylesheet" type="text/css" href="~/Content/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="~/Content/fonts/elegant-font/html-css/style.css">
@@ -33,7 +35,6 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="~/Content/css/util.css">
     <link rel="stylesheet" type="text/css" href="~/Content/css/main.css">
-    <!--===============================================================================================-->
 </head>
 <body class="animsition">
 
@@ -53,26 +54,48 @@
                 <div class="wrap_menu">
                     <nav class="menu">
                         <ul class="main_menu">
-                            <li>
-                                @Html.ActionLink("Home", "Index", "Home")
-                            </li>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li>
+                                    <a href="/Categories">Categories</a>
+                                    <ul class="sub_menu">
+                                        <li><a href="Categories/Create">Create</a></li>
+                                    </ul>
+                                </li>
 
-                            <li>
+                                <li>
+                                    <a href="/Products">Products</a>
+                                    <ul class="sub_menu">
+                                        <li><a href="Products/Create">Create</a></li>
+                                    </ul>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    @Html.ActionLink("Home", "Index", "Home")
+                                </li>
 
-                                @Html.ActionLink("Shop", "Index", "Shop")
-                            </li>
+                                <li>
 
-                            <li>
-                                @Html.ActionLink("Sale", "Index", "Sale")
-                            </li>
+                                    @Html.ActionLink("Shop", "Index", "Shop")
+                                </li>
 
-                            <li>
-                                @Html.ActionLink("Cart", "Index", "Cart")
-                            </li>
-                            <li>
-                                @Html.ActionLink("PaidProducts", "Index", "BaughtProducts")
-                            </li>
+                                <li>
+                                    @Html.ActionLink("Sale", "Index", "Sale")
+                                </li>
 
+                                if (Request.IsAuthenticated)
+                                {
+                                    <li>
+                                        @Html.ActionLink("Order", "Index", "Order")
+                                    </li>
+
+                                    <li>
+                                        @Html.ActionLink("PaidProducts", "Index", "BaughtProducts")
+                                    </li>
+                                }
+                            }
                         </ul>
                     </nav>
                 </div>
@@ -85,9 +108,12 @@
 
                     <span class="linedivide1"></span>
 
-                    <a href="Cart" class="header-wrapicon2">
-                        <img src="~/Content/images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
-                    </a>
+                    @if (Request.IsAuthenticated)
+                    {
+                        <a href="/Order" class="header-wrapicon2">
+                            <img src="~/Content/images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
+                        </a>
+                    }
                 </div>
             </div>
         </div>
@@ -103,9 +129,12 @@
             <div class="btn-show-menu">
                 <!-- Header Icon mobile -->
                 <div class="header-icons-mobile">
-                    <a href="Cart" class="header-wrapicon1 dis-block">
-                        <img src="~/Content/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
-                    </a>
+                    @if (Request.IsAuthenticated)
+                    {
+                        <a href="/Order" class="header-wrapicon2">
+                            <img src="~/Content/images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
+                        </a>
+                    }
                 </div>
 
                 <div class="btn-show-menu-mobile hamburger hamburger--squeeze">
@@ -120,25 +149,48 @@
         <div class="wrap-side-menu">
             <nav class="side-menu">
                 <ul class="main-menu">
-                    <li class="item-menu-mobile">
-                        @Html.ActionLink("Home", "Index", "Home")
-                    </li>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="item-menu-mobile">
+                            <a href="/Categories">Categories</a>
+                            <ul class="sub_menu">
+                                <li><a href="Categories/Create">Create</a></li>
+                            </ul>
+                        </li>
 
-                    <li class="item-menu-mobile">
+                        <li class="item-menu-mobile">
+                            <a href="/Products">Products</a>
+                            <ul class="sub_menu">
+                                <li><a href="Products/Create">Create</a></li>
+                            </ul>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="item-menu-mobile">
+                            @Html.ActionLink("Home", "Index", "Home")
+                        </li>
 
-                        @Html.ActionLink("Shop", "Index", "Shop")
-                    </li>
+                        <li class="item-menu-mobile">
 
-                    <li class="item-menu-mobile">
-                        @Html.ActionLink("Sale", "Index", "Sale")
-                    </li>
+                            @Html.ActionLink("Shope", "Index", "Shop")
+                        </li>
 
-                    <li class="item-menu-mobile">
-                        @Html.ActionLink("Cart", "Index", "Cart")
-                    </li>
-                    <li>
-                        @Html.ActionLink("PaidProducts", "Index", "BaughtProducts")
-                    </li>
+                        <li class="item-menu-mobile">
+                            @Html.ActionLink("Sale", "Index", "Sale")
+                        </li>
+
+                        if (Request.IsAuthenticated)
+                        {
+                            <li class="item-menu-mobile">
+                                @Html.ActionLink("Order", "Index", "Order")
+                            </li>
+
+                            <li class="item-menu-mobile">
+                                @Html.ActionLink("PaidProducts", "Index", "BaughtProducts")
+                            </li>
+                        }
+                    }
                 </ul>
             </nav>
         </div>

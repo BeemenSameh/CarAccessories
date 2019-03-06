@@ -178,6 +178,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\SaleController.cs" />
+    <Compile Include="Controllers\ShopController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -192,6 +194,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Brand.cs" />
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Description.cs" />
@@ -2710,6 +2713,18 @@
     <Content Include="Content\images\icons\paypal.png" />
     <Content Include="Content\images\icons\video-16-9.jpg" />
     <Content Include="Content\images\icons\visa.png" />
+    <Content Include="Content\images\images\asfour.jpg" />
+    <Content Include="Content\images\images\checken.jpg" />
+    <Content Include="Content\images\images\Crow.jpg" />
+    <Content Include="Content\images\images\duck.jpeg" />
+    <Content Include="Content\images\images\Falcon.jpg" />
+    <Content Include="Content\images\images\Hoopoe.jpg" />
+    <Content Include="Content\images\images\katkot.jpg" />
+    <Content Include="Content\images\images\Ostrich.jpg" />
+    <Content Include="Content\images\images\papan.jpg" />
+    <Content Include="Content\images\images\peacock.jpg" />
+    <Content Include="Content\images\images\Penguin.jpg" />
+    <Content Include="Content\images\images\Pigeon.jpg" />
     <Content Include="Content\images\item-01.jpg" />
     <Content Include="Content\images\item-02.jpg" />
     <Content Include="Content\images\item-03.jpg" />
@@ -2757,6 +2772,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Content\fonts\elegant-font\html-css\fonts\ElegantIcons.eot" />
     <Content Include="Content\fonts\elegant-font\html-css\fonts\ElegantIcons.ttf" />
     <Content Include="Content\fonts\elegant-font\html-css\fonts\ElegantIcons.woff" />
@@ -2856,11 +2872,16 @@
     <Content Include="Content\fonts\themify\Themify IconFonts 5-23-2014.json" />
     <Content Include="Content\includes\config.json" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -2872,6 +2893,10 @@
     <Content Include="Scripts\js\slick-custom.js" />
     <Content Include="Scripts\js\slick-custom.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\vendor\animate\animate.css" />
     <Content Include="Scripts\vendor\animsition\css\animsition.css" />
     <Content Include="Scripts\vendor\animsition\css\animsition.min.css" />
@@ -2993,6 +3018,11 @@
     <Content Include="Scripts\vendor\slick\slick.scss" />
     <Content Include="Views\Order\Index.cshtml" />
     <Content Include="Views\BaughtProducts\Index.cshtml" />
+    <Content Include="Views\Shared\_AllProductsPartialView.cshtml" />
+    <Content Include="Views\Shared\_GetProdByCatIdPartialView.cshtml" />
+    <Content Include="Views\Shared\_ProductDetailsView.cshtml" />
+    <Content Include="Views\Shop\Index.cshtml" />
+    <Content Include="Views\Sale\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
