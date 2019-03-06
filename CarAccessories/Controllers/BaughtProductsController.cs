@@ -12,7 +12,7 @@ namespace CarAccessories.Controllers
     {
         ApplicationDbContext db = new ApplicationDbContext();
         List<Product> ProductList = new List<Product>();
-        // GET: BaughtProducts
+       // GET: BaughtProducts
         public ActionResult Index()
         {
             var claimsIdentity = User.Identity as ClaimsIdentity;
@@ -25,16 +25,20 @@ namespace CarAccessories.Controllers
                     var userIdValue = userIdClaim.Value;
 
                     ApplicationUser user = db.Users.Where(i => i.Id == userIdValue).FirstOrDefault();
-                    db.Entry(user).Collection(c => c.Cart).Load();
-                    foreach (var i in user.Cart)
+                    db.Entry(user).Collection(c => c.Order).Load();
+                    foreach (var i in user.Order)
                     {
-                       // db.Entry(i).Reference(c => c.Orde).Load();
+                        db.Entry(i).Collection(c => c.OrderDetails).Load();
+                        foreach (var OrderDetails in i.OrderDetails)
+                        {
+                            db.Entry(OrderDetails).Reference(c => c.VendorProduct).Load();
+                            db.Entry(OrderDetails.VendorProduct).Reference(c => c.Product).Load();
+                        }
 
-
-
+                    
                     }
-                    return View(user);
-                }
+                return View(user);
+               }
                 else
                 {
                     return Redirect("/Account/Login");

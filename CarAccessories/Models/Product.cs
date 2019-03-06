@@ -13,9 +13,7 @@ namespace CarAccessories.Models
         public string Image { get; set; }
         public string MinDescription { get; set; }
         public int Quantity { get; set; }
-        public string Type { get; set; }
         public string State { get; set; }
-
         public DateTime Insert_Date { get; set; } = DateTime.Now;
         public double? Sale_price { get; set; }
 
