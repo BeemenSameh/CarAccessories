@@ -16,6 +16,9 @@ namespace CarAccessories.Models
         public string Type { get; set; }
         public string State { get; set; }
 
+        public DateTime Insert_Date { get; set; } = DateTime.Now;
+        public double? Sale_price { get; set; }
+
         public Model Model { get; set; }
         public virtual ICollection<VendorProduct> VendorProducts { get; set; }
     }
