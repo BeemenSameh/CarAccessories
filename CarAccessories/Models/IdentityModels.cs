@@ -42,6 +42,8 @@ namespace CarAccessories.Models
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Order> Carts { get; set; }
         public virtual DbSet<Rate> Rates { get; set; }
+        public virtual DbSet<OrderDetails> OrderDetails { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
 
         public static ApplicationDbContext Create()
         {
