@@ -27,13 +27,14 @@
                 <div class="leftbar p-r-20 p-r-0-sm">
                     <!--  -->
                     <h4 class="m-text14 p-b-7">
-                        Categories
+                        Brand Models
                     </h4>
 
                     <ul class="p-b-54">
                         <li class="p-t-4">
-                            @Ajax.ActionLink("All", "GetAllProducts", "Shop",
-                           new {BrandProducts=Model.ProductsList},
+                            @Ajax.ActionLink("All", "GetAllProducts", "Home", new { BrandId = Model.ModelsList[0].Brand.ID },
+
+
                                new AjaxOptions()
                                {
                                    UpdateTargetId = "SelectedModelProducts",
@@ -46,7 +47,7 @@
                         {
                             <li class="p-t-4">
                                 @*<a href="/GetSelectedCatProd/@item.ID" class="s-text13">@item.Name</a>*@
-                                @Ajax.ActionLink(item.ModelName, "GetProductsByModelId", "Shop", new { Model_ID = item.ID },
+                                @Ajax.ActionLink(item.ModelName, "GetProductsByModelId", "Home", new { Model_ID = item.ID },
                                new AjaxOptions()
                                {
                                    UpdateTargetId = "SelectedModelProducts",
@@ -59,7 +60,33 @@
                         }
                     </ul>
                     <br />
-                    <!--  -->
+
+
+                    <!--Categories-->
+                    <h4 class="m-text14 p-b-7">
+                        Categories
+                    </h4>
+
+                    <ul class="p-b-54">
+                        @foreach (var item in Model.CategoriesList)
+                        {
+                            <li class="p-t-4">
+                                @*<a href="/GetSelectedCatProd/@item.ID" class="s-text13">@item.Name</a>*@
+                                @Ajax.ActionLink(item.Name, "GetProductsByCategoryId", "Home", new { Cat_ID = item.ID },
+                               new AjaxOptions()
+                               {
+                                   UpdateTargetId = "SelectedModelProducts",
+                                   InsertionMode = InsertionMode.Replace,
+                                   HttpMethod = "Get"
+                               }
+                               )
+
+                            </li>
+                        }
+                    </ul>
+                    <br />
+
+                    <!--Filters  -->
                     <h4 class="m-text14 p-b-32">
                         Filters
                     </h4>
@@ -177,7 +204,7 @@
                 <!-- Product -->
 
                 <div id="SelectedModelProducts">
-                    @Html.Partial("_AllProductsPartialView", Model.ProductsList);
+                    @Html.Partial("_AllProductsPartialView", Model.VendorProductList);
 
                 </div>
                 <div class="row">
@@ -221,10 +248,10 @@
         dropdownParent: $('#dropDownSelect1')
     });
 
-    $(".selection-2").select2({
-        minimumResultsForSearch: 20,
-        dropdownParent: $('#dropDownSelect2')
-    });
+    //$(".selection-2").select2({
+    //    minimumResultsForSearch: 20,
+    //    dropdownParent: $('#dropDownSelect2')
+    //});
 </script>
 <!--===============================================================================================-->
 <script type="text/javascript" src="~/Scripts/vendor/daterangepicker/moment.min.js"></script>

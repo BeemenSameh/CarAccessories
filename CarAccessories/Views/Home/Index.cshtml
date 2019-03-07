@@ -108,13 +108,13 @@
         <!-- Slide2 -->
         <div class="wrap-slick2">
             <div class="slick2">
-                @foreach (var item in Model.Products)
+                @foreach (var item in Model.VendorProducts)
                 {
                     <div class="item-slick2 p-l-15 p-r-15">
                         <!-- Block2 -->
                         <div class="block2">
                             <div class="block2-img wrap-pic-w of-hidden pos-relative @(item.Sale_price== 0? "": "block2-labelsale") @((DateTime.Now-item.Insert_Date).TotalDays<=7? "block2-labelnew": "")">
-                                <img src="~/Content/images/images/@item.Image" style="height:360px" alt="IMG-PRODUCT">
+                                <img src="~/Content/images/images/@item.Product.Image" style="height:360px" alt="IMG-PRODUCT">
 
                                 <div class="block2-overlay trans-0-4">
                                     <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
@@ -133,7 +133,7 @@
 
                             <div class="block2-txt p-t-20">
                                 <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-                                    @item.Name
+                                    @item.Product.Name
                                 </a>
 
 
@@ -494,4 +494,4 @@
             </span>
         </div>
     </div>
-</section>*@
+</section>

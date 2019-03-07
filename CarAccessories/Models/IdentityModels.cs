@@ -37,6 +37,7 @@ namespace CarAccessories.Models
         public virtual DbSet<Brand> Brands { get; set; }
         public virtual DbSet<Model> Models { get; set; }
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<VendorProduct> VendorProducts { get; set; }
         public virtual DbSet<Description> Descriptions { get; set; }
         public virtual DbSet<Vendor> Sellers { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }

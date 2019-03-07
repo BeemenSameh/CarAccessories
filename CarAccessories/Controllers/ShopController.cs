@@ -5,7 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
-using CarAccessories.Models;
+using CarAccessories.Models.ViewModel;
 //using CarAccessories.Models.ViewModels;
 
 namespace CarAccessories.Controllers
@@ -17,9 +17,13 @@ namespace CarAccessories.Controllers
         // GET: Shop
         public ActionResult Index()
         {
-            List<Product> ProductsList = db.Products.ToList();
-
-            return View(ProductsList);
+            BrandsProducts b = new BrandsProducts
+            {
+                Brands = db.Brands.ToList(),
+                VendorProducts = db.VendorProducts.ToList(),
+                CategoriesList = db.Categories.ToList()
+            };
+            return View(b);
         }
 
         public ActionResult GetProductsByModelId(int Model_ID)
@@ -32,11 +36,9 @@ namespace CarAccessories.Controllers
 
         }
 
-
-
-        public ActionResult GetAllProducts(List<Product> BrandProducts)
+        public ActionResult GetAllProducts()
         {
-            List<Product> ProductList = BrandProducts;
+            List<Product> ProductList = db.Products.ToList();
             return PartialView("_AllProductsPartialView", ProductList);
         }
 
@@ -44,57 +46,72 @@ namespace CarAccessories.Controllers
         //{
         //    CategoryProducts Shop = new CategoryProducts
         //    {
-        //        Products = db.Products.Where(i=>i.Sale_price!=0).ToList(),
+        //        Products = db.Products.Where(i => i.Sale_price != 0).ToList(),
         //        Categories = db.Categories.ToList(),
         //    };
         //    return View("Index", Shop);
         //}
 
-        public ActionResult addCartDetailsToDataBase(string ProductName)
+        //public ActionResult addCartDetailsToDataBase(string ProductName)
+        //{
+        //    var claimsIdentity = User.Identity as ClaimsIdentity;
+        //    if (claimsIdentity != null)
+        //    {
+
+        //        var userIdClaim = claimsIdentity.Claims
+        //            .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+
+        //        if (userIdClaim != null)
+        //        {
+        //            var userIdValue = userIdClaim.Value;
+        //            Customer c = db.Customers.Where(i => i.ID == userIdValue).FirstOrDefault();
+
+        //            db.Entry(c).Collection(o => o.Orders).Load();
+        //            foreach (var o in c.Orders)
+        //            {
+        //                if (o.Isbuy == false)
+        //                {
+        //                    OrderDetails od = new OrderDetails();
+        //                    od.Price = db.Products.Where(p => p.Name == ProductName).Select(p => p.Price).FirstOrDefault();
+        //                    od.VendorProduct.Product = db.Products.Where(p => p.Name == ProductName).FirstOrDefault();
+
+        //                    break;
+        //                    // o.OrderDetails.Add();
+        //                }
+        //            }
+
+        //            //c.IsPaid = false;
+        //            db.Carts.Add(c);
+        //            db.SaveChanges();
+        //            return View();
+        //        }
+        //        else
+        //        {
+        //            return Redirect("/Account/Login");
+
+        //        }
+
+        //    }
+        //    else
+        //    {
+        //        return Redirect("/Account/Register");
+        //    }
+
+        //}
+
+        //public ActionResult ShowProductDetails(int id)
+        //{
+
+        //    Product p = db.Products.Where(i => i.ID == id).FirstOrDefault();
+
+        //    return View("_ProductDetailsView", p);
+        //}
+
+        public ActionResult GetProductsByCategoryId(int Cat_ID)
         {
-            var claimsIdentity = User.Identity as ClaimsIdentity;
-            if (claimsIdentity != null)
-            {
-
-                var userIdClaim = claimsIdentity.Claims
-                    .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
-
-                if (userIdClaim != null)
-                {
-                    var userIdValue = userIdClaim.Value;
-                    Order c = new Order();
-                    c.Customer = db.Customers.Where(i => i.ID == userIdValue).FirstOrDefault();
-
-                    //c.OrderDetails = db.Products.Where(p => p.Name == ProductName).FirstOrDefault();
-                    //c. = 1;
-                    //c.IsPaid = false;
-                    db.Carts.Add(c);
-                    db.SaveChanges();
-                    return View();
-                }
-                else
-                {
-                    return Redirect("/Account/Login");
-
-                }
-
-            }
-            else
-            {
-                return Redirect("/Account/Register");
-            }
-
+            List<Product> ProductsList = db.Categories.Where(i => i.ID == Cat_ID).Select(p => p.Products).FirstOrDefault().ToList();
+            return PartialView("_GetProdByCatIdPartialView", ProductsList);
         }
-
-        public ActionResult ShowProductDetails(int id)
-        {
-
-            Product p = db.Products.Where(i => i.ID == id).FirstOrDefault();
-          
-            return View("_ProductDetailsView", p);
-        }
-
-
 
     }
 }

@@ -1,4 +1,4 @@
-﻿@model  List<CarAccessories.Models.Product>
+﻿@model CarAccessories.Models.ViewModel.BrandsProducts
 @{
     ViewBag.Title = "Index";
 }
@@ -17,17 +17,15 @@
         New Arrivals Women Collection 2018
     </p>
 </section>
-
-
 <!-- Content page -->
 <section class="bgwhite p-t-55 p-b-65">
     <div class="container">
         <div class="row">
             <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                <div class="leftbar p-r-20 p-r-0-sm">
+                <div class="leftbar p-r-20 p-r-0-sm ">
                     <!--  -->
                     <h4 class="m-text14 p-b-7">
-                        Categories
+                        Brands
                     </h4>
 
                     <ul class="p-b-54">
@@ -40,12 +38,49 @@
                                    HttpMethod = "Get"
                                }
                                )
-                        </li>
-                        @foreach (var item in Model)
+
+                        @foreach (var item in Model.Brands)
+                        {
+                            <ul class="">
+                              
+                                    @item.Name
+                                
+                                        @foreach (var m in item.Models)
+                                        {
+                                            <li>
+                                                @Ajax.ActionLink(m.ModelName, "GetProductsByModelId", "Shop", new { Model_ID = m.ID },
+                                         new AjaxOptions()
+                                         {
+                                             UpdateTargetId = "SelectedCategory",
+                                             InsertionMode = InsertionMode.Replace,
+                                             HttpMethod = "Get"
+                                         }
+                                          )
+                                            </li>
+                                            <br />
+
+                                        }
+                                  
+
+                          </ul>
+                        }
+                            </li>
+                    </ul>
+                    <br />
+
+
+
+                    <!--Categories-->
+                    <h4 class="m-text14 p-b-7">
+                        Categories
+                    </h4>
+
+                    <ul class="p-b-54">
+                        @foreach (var item in Model.CategoriesList)
                         {
                             <li class="p-t-4">
-                                <!-- <a href="/GetSelectedCatProd/@item.ID" class="s-text13">@item.Name</a>-->
-                                @Ajax.ActionLink(item.Name, "GetProductsByCatId", "Shop", new { Category_ID = item.ID },
+                                @*<a href="/GetSelectedCatProd/@item.ID" class="s-text13">@item.Name</a>*@
+                                @Ajax.ActionLink(item.Name, "GetProductsByCategoryId", "Shop", new { Cat_ID = item.ID },
                                new AjaxOptions()
                                {
                                    UpdateTargetId = "SelectedCategory",
@@ -58,7 +93,9 @@
                         }
                     </ul>
                     <br />
-                    <!--  -->
+
+
+                    <!-- Filters -->
                     <h4 class="m-text14 p-b-32">
                         Filters
                     </h4>
@@ -176,7 +213,7 @@
                 <!-- Product -->
 
                 <div id="SelectedCategory">
-                    @Html.Partial("_AllProductsPartialView", Model);
+                    @Html.Partial("_AllProductsPartialView", Model.VendorProducts);
 
                 </div>
                 <div class="row">
@@ -220,10 +257,10 @@
         dropdownParent: $('#dropDownSelect1')
     });
 
-    $(".selection-2").select2({
-        minimumResultsForSearch: 20,
-        dropdownParent: $('#dropDownSelect2')
-    });
+    //$(".selection-2").select2({
+    //    minimumResultsForSearch: 20,
+    //    dropdownParent: $('#dropDownSelect2')
+    //});
 </script>
 <!--===============================================================================================-->
 <script type="text/javascript" src="~/Scripts/vendor/daterangepicker/moment.min.js"></script>
@@ -265,7 +302,7 @@
 <!--===============================================================================================-->
 
 <script type="text/javascript" src="~/Scripts/vendor/noui/nouislider.min.js"></script>
-<script type="text/javascript">
+@*<script type="text/javascript">
     /*[ No ui ]
     ===========================================================*/
     var filterBar = document.getElementById('filter-bar');
@@ -289,7 +326,7 @@
         console.log(Math.round(values[handle]));
 
     });
-</script>
+</script>*@
 <!--===============================================================================================-->
 <script src="~/Scripts/js/main.js"></script>
 

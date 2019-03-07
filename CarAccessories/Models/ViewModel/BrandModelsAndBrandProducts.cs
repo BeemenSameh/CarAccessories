@@ -8,6 +8,7 @@ namespace CarAccessories.Models.ViewModel
     public class BrandModelsAndBrandProducts
     {
         public List<Model> ModelsList;
-        public List<Product> ProductsList;
+        public List<VendorProduct> VendorProductList;
+        public List<Category> CategoriesList;
     }
 }
