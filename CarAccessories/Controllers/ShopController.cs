@@ -23,24 +23,35 @@ namespace CarAccessories.Controllers
                 VendorProducts = db.VendorProducts.ToList(),
                 CategoriesList = db.Categories.ToList()
             };
+            foreach (var vendorProduct in b.VendorProducts)
+            {
+                db.Entry(vendorProduct).Reference(p => p.Product).Load();
+                db.Entry(vendorProduct).Reference(v => v.Vendor).Load();
+            }
             return View(b);
         }
 
-        public ActionResult GetProductsByModelId(int Model_ID)
-        {
-            //{  ? p.Price == f : p.Sale_price == f}
-            List<Product> ProductsList = db.Products.Where(i => i.Model.ID == Model_ID).ToList();
+        //public ActionResult GetProductsByModelId(int Model_ID)
+        //{
+        //    //{  ? p.Price == f : p.Sale_price == f}
+        //    List<Product> ProductsList = db.Products.Where(i => i.Model.ID == Model_ID).ToList();
 
 
-            return PartialView("_GetProdByCatIdPartialView", ProductsList);
+        //    return PartialView("_GetProdByCatIdPartialView", ProductsList);
 
-        }
+        //}
 
         public ActionResult GetAllProducts()
         {
-            List<Product> ProductList = db.Products.ToList();
-            return PartialView("_AllProductsPartialView", ProductList);
+            List<VendorProduct> AllVendorProductsList = db.VendorProducts.ToList();
+            foreach (var i in AllVendorProductsList)
+            {
+                db.Entry(i).Reference(p => p.Product).Load();
+                db.Entry(i).Reference(p => p.Vendor).Load();
+            }
+            return PartialView("_AllProductsPartialView", AllVendorProductsList);
         }
+
 
         //public ActionResult Sale()
         //{
@@ -107,11 +118,11 @@ namespace CarAccessories.Controllers
         //    return View("_ProductDetailsView", p);
         //}
 
-        public ActionResult GetProductsByCategoryId(int Cat_ID)
-        {
-            List<Product> ProductsList = db.Categories.Where(i => i.ID == Cat_ID).Select(p => p.Products).FirstOrDefault().ToList();
-            return PartialView("_GetProdByCatIdPartialView", ProductsList);
-        }
+        //public ActionResult GetProductsByCategoryId(int Cat_ID)
+        //{
+        //    List<Product> ProductsList = db.Categories.Where(i => i.ID == Cat_ID).Select(p => p.Products).FirstOrDefault().ToList();
+        //    return PartialView("_GetProdByCatIdPartialView", ProductsList);
+        //}
 
     }
 }
