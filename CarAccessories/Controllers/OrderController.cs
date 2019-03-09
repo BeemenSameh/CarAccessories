@@ -14,11 +14,13 @@ namespace CarAccessories.Controllers
 
         public ActionResult Index()
         {
+            bool claimIdentity = User.Identity is ClaimsIdentity;
             ApplicationUser user = new ApplicationUser();
             List<OrderDetails> orders = new List<OrderDetails>();
        
-            if (User.Identity is ClaimsIdentity claimsIdentity)
+            if (claimIdentity)
             {
+                ClaimsIdentity claimsIdentity = User.Identity as ClaimsIdentity;
                 var userIdClaim = claimsIdentity.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
 
                 if (userIdClaim != null)
@@ -47,8 +49,10 @@ namespace CarAccessories.Controllers
         public ActionResult update(int[] num_product1)
         {
             ApplicationUser user = new ApplicationUser();
-            if (User.Identity is ClaimsIdentity claimsIdentity)
+            bool claimIdentity = User.Identity is ClaimsIdentity;
+            if (claimIdentity)
             {
+                ClaimsIdentity claimsIdentity = User.Identity as ClaimsIdentity;
                 var userIdClaim = claimsIdentity.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
 
                 if (userIdClaim != null)
