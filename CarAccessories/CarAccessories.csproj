@@ -208,6 +208,12 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\AdminPanel\adminlte.css" />
+    <Content Include="Content\css\AdminPanel\adminlte.min.css" />
+    <Content Include="Content\css\bootstrap-wysihtml5\bootstrap3-wysihtml5.all.js" />
+    <Content Include="Content\css\bootstrap-wysihtml5\bootstrap3-wysihtml5.all.min.js" />
+    <Content Include="Content\css\bootstrap-wysihtml5\bootstrap3-wysihtml5.css" />
+    <Content Include="Content\css\bootstrap-wysihtml5\bootstrap3-wysihtml5.min.css" />
     <Content Include="Content\css\main.css" />
     <Content Include="Content\css\main.min.css" />
     <Content Include="Content\css\MyLogin.css" />
@@ -2865,6 +2871,7 @@
     <Content Include="Content\fonts\themify\fonts\themify.woff" />
     <Content Include="Content\fonts\themify\Themify IconFonts 5-23-2014.json" />
     <Content Include="Content\includes\config.json" />
+    <Content Include="Content\css\AdminPanel\adminlte.css.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -3018,6 +3025,7 @@
     <Content Include="Views\Shop\Index.cshtml" />
     <Content Include="Views\Sale\Index.cshtml" />
     <Content Include="Views\Home\ShowThisBrandModels.cshtml" />
+    <Content Include="Views\Shared\_AdminPanel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
