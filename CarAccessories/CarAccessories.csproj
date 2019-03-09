@@ -225,6 +225,7 @@
     <Content Include="Content\css\MyLogin.css" />
     <Content Include="Content\css\util.css" />
     <Content Include="Content\css\util.min.css" />
+    <Content Include="Content\delete.gif" />
     <Content Include="Content\fonts\elegant-font\html-css\fonts\ElegantIcons.svg" />
     <Content Include="Content\fonts\elegant-font\html-css\index.html" />
     <Content Include="Content\fonts\elegant-font\html-css\lte-ie7.js" />
@@ -2772,6 +2773,8 @@
     <Content Include="Content\images\thumb-item-03.jpg" />
     <Content Include="Content\images\Untitled-5.jpg" />
     <Content Include="Content\includes\contact-form.php" />
+    <Content Include="Content\rateit.css" />
+    <Content Include="Content\star.gif" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -2890,6 +2893,9 @@
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <Content Include="Scripts\jquery.rateit.js" />
+    <Content Include="Scripts\jquery.rateit.min.js" />
+    <Content Include="Scripts\jquery.rateit.min.js.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
