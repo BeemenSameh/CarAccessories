@@ -12,7 +12,9 @@ namespace CarAccessories.Models
         [Key]
         [ForeignKey("ApplicationUser")]
         public string ID { get; set; }
+        public string Name { get; set; }
         public string Address { get; set; }
+        public string PhoneNumber { get; set; }
         public string NationalID { get; set; }
         public string Photo { get; set; }
 
