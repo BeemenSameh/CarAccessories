@@ -30,6 +30,11 @@
 
                 <div class="block2-txt p-t-20">
                     @Html.ActionLink(item.Product.Name, "ShowProductDetails", "Home", new { id = item.ID }, new { @class = "block2-name dis-block s-text3 p-b-5" })
+                    @Html.ActionLink(item.Vendor.ComponyName, "ShowVendorDetails", "Home", new { id = item.Vendor.ID }, new { @class = "block2-name dis-block s-text3 p-b-5" })
+                    @*<a href="ProductDetailsView.cshtml" class="block2-name dis-block s-text3 p-b-5">@item.Name</a>*@
+                    <div class="rateit" id="rateit11b" data-rateit-step="1">
+                    </div>
+
                     @if (item.Sale_price == 0)
                     {
                         <span class="block2-price m-text6 p-r-5">

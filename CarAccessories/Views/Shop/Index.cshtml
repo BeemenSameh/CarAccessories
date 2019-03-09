@@ -28,7 +28,7 @@
                         Brands
                     </h4>
 
-                    <ul class="p-b-54">
+                    @*<ul class="p-b-54">
                         <li class="p-t-4">
                             @Ajax.ActionLink("All", "GetAllProducts", "Shop",
                                new AjaxOptions()
@@ -39,12 +39,64 @@
                                }
                                )
 
-                        @foreach (var item in Model.Brands)
-                        {
-                            <ul class="">
-                              
-                                    @item.Name
-                                
+                            </li>
+                        </ul>*@
+                            <div id="accordion">
+                                <div class="card">
+                                    <div class="card-header">
+                                       
+                                            @Ajax.ActionLink("All", "GetAllProducts", "Shop", new {@class="card-link"  ,href="#collapseOne" },
+                               new AjaxOptions()
+                               {
+                                   UpdateTargetId = "SelectedCategory",
+                                   InsertionMode = InsertionMode.Replace,
+                                   HttpMethod = "Get"
+                               }
+                               )
+                                        
+                                    </div>
+                                  
+                                </div>
+
+                                @foreach (var item in Model.Brands)
+                                {
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <a class="card-link" data-toggle="collapse" href="#@item.Name">
+                                                @item.Name
+                                            </a>
+                                        </div>
+                                        <div id="@item.Name" class="collapse" data-parent="#accordion">
+                                            <div class="card-body">
+                                                <ul>
+                                                    @foreach (var m in item.Models)
+                                                    {
+                                                        <li>
+                                                            @Ajax.ActionLink(m.ModelName, "GetProductsByModelId", "Home", new { Model_ID = m.ID },
+                                                new AjaxOptions()
+                                                {
+                                                    UpdateTargetId = "SelectedCategory",
+                                                    InsertionMode = InsertionMode.Replace,
+                                                    HttpMethod = "Get"
+                                                }
+                                                 )
+                                                        </li>
+                                                        <br />
+
+                                                    }
+                                                </ul>
+                                              </div>
+                                            </div>
+                                        </div>
+                                 }
+                                </div>
+
+                                @*@foreach (var item in Model.Brands)
+                                {
+                                    <ul class="">
+
+                                        @item.Name
+
                                         @foreach (var m in item.Models)
                                         {
                                             <li>
@@ -60,13 +112,13 @@
                                             <br />
 
                                         }
-                                  
 
-                          </ul>
-                        }
-                            </li>
+
+                                    </ul>
+                                }
+</li>
                     </ul>
-                    <br />
+                    <br />*@
 
 
 
@@ -243,7 +295,7 @@
 <div id="dropDownSelect1"></div>
 <div id="dropDownSelect2"></div>
 
-<script type="text/javascript" src="~/Scripts/vendor/jquery/jquery-3.2.1.min.js"></script>
+@*<script type="text/javascript" src="~/Scripts/vendor/jquery/jquery-3.2.1.min.js"></script>*@
 <!--===============================================================================================-->
 <script type="text/javascript" src="~/Scripts/vendor/animsition/js/animsition.min.js"></script>
 <!--===============================================================================================-->
