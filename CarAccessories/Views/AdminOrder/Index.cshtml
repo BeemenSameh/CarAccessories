@@ -1,0 +1,75 @@
+﻿
+@model List<CarAccessories.Models.Order>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminPanel.cshtml";
+}
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Data Table With Full Features</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Customer Name</th>
+                                <th>Order Date</th>
+                                <th>Total Price</th>
+                                <th>Show Details</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.ID</td>
+                                    <td>
+                                        @item.Customer.Name
+                                    </td>
+                                    <td>@item.OrderDate</td>
+                                    <td> @item.TotalPrice</td>
+                                    <td>
+                                        <a href="\AdminOrder\GetOrderByID\@item.ID">show</a>
+                                    </td>
+                                </tr>
+
+                            }
+
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Customer Name</th>
+                                <th>Order Date</th>
+                                <th>Total Price</th>
+                                <th>Show Details</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+    </div>
+</section>
+@section scripts{
+    <!-- DataTables -->
+    <script src="~/Scripts/jquery.dataTables.js"></script>
+    <script src="~/Scripts/dataTables.bootstrap4.js"></script>
+    <!-- page script -->
+    <script>
+        $(function () {
+            $("#example1").DataTable();
+        });
+    </script>
+}
+@section style{
+ <link rel="stylesheet" href="~/Content/dataTables.bootstrap4.css">
+    }

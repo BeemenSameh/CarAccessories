@@ -206,10 +206,12 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\images\images\american-express.png" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\images\cirrus.png" />
     <Content Include="Content\css\AdminPanel\adminlte.css" />
     <Content Include="Content\css\AdminPanel\adminlte.min.css" />
     <Content Include="Content\css\bootstrap-wysihtml5\bootstrap3-wysihtml5.all.js" />
@@ -221,6 +223,7 @@
     <Content Include="Content\css\MyLogin.css" />
     <Content Include="Content\css\util.css" />
     <Content Include="Content\css\util.min.css" />
+    <Content Include="Content\dataTables.bootstrap4.css" />
     <Content Include="Content\delete.gif" />
     <Content Include="Content\fonts\elegant-font\html-css\fonts\ElegantIcons.svg" />
     <Content Include="Content\fonts\elegant-font\html-css\index.html" />
@@ -2769,8 +2772,13 @@
     <Content Include="Content\images\thumb-item-03.jpg" />
     <Content Include="Content\images\Untitled-5.jpg" />
     <Content Include="Content\includes\contact-form.php" />
+    <Content Include="Content\images\images\mastercard.png" />
+    <Content Include="Content\images\images\mestro.png" />
+    <Content Include="Content\images\images\paypal.png" />
+    <Content Include="Content\images\images\paypal2.png" />
     <Content Include="Content\rateit.css" />
     <Content Include="Content\star.gif" />
+    <Content Include="Content\images\images\visa.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -2778,6 +2786,7 @@
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\dataTables.bootstrap4.js" />
     <Content Include="Scripts\fastclick\fastclick.js" />
     <Content Include="Scripts\fastclick\fastclick.min.js" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
@@ -2889,6 +2898,7 @@
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <Content Include="Scripts\jquery.dataTables.js" />
     <Content Include="Scripts\jquery.rateit.js" />
     <Content Include="Scripts\jquery.rateit.min.js" />
     <Content Include="Scripts\jquery.rateit.min.js.map" />
@@ -3045,6 +3055,7 @@
     <Content Include="Views\Shared\_AdminPanel.cshtml" />
     <Content Include="Scripts\js\adminlte.js.map" />
     <Content Include="Views\AdminOrder\GetOrderByID.cshtml" />
+    <Content Include="Views\AdminOrder\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
