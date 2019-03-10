@@ -13,7 +13,8 @@ namespace CarAccessories.Controllers
         // GET: AdminOrder
         public ActionResult Index()
         {
-            return View();
+            var Orders = db.Orders.ToList();
+            return View(Orders);
         }
         [ActionName("GetOrder")]
         public ActionResult GetOrderByID(int id)
