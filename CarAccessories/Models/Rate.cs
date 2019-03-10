@@ -17,7 +17,7 @@ namespace CarAccessories.Models
         public string Customer_ID { get; set; }
         public int RateNumber { get; set; }
 
-        public Vendor Vendor { get; set; }
+        public VendorProduct VendorProduct { get; set; }
         public Customer Customer { get; set; }
     }
 }
