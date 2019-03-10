@@ -3042,6 +3042,7 @@
     <Content Include="Views\Home\ShowThisBrandModels.cshtml" />
     <Content Include="Views\Shared\_AdminPanel.cshtml" />
     <Content Include="Scripts\js\adminlte.js.map" />
+    <Content Include="Views\Home\ShowVendorDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

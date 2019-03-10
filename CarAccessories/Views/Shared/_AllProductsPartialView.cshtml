@@ -30,20 +30,6 @@
                     @*<a href="ProductDetailsView.cshtml" class="block2-name dis-block s-text3 p-b-5">@item.Name</a>*@
                     <div class="rateit" id="rateit11b" data-rateit-step="1">
                     </div>
-
-                    <script type="text/javascript">
-                            var tooltipvalues = ['bad', 'poor', 'ok', 'good', 'super'];
-                            $("#rateit11b").bind('over', function (event, value) { $(this).attr('title', tooltipvalues[value - 1]); });
-                    </script>
-
-                    <script type="text/javascript">
-                        $("#rateit11").bind('over', function (event, value) { $(this).attr('title', value); });
-                    </script> 
-
-                    <script type="text/javascript">
-                     var tooltipvalues = ['bad', 'poor', 'ok', 'good', 'super'];
-                     $("#rateit11b").bind('over', function (event, value) { $(this).attr('title', tooltipvalues[value-1]); });
-                    </script>
                     <br />
                     @if (item.Sale_price == 0)
                      {
