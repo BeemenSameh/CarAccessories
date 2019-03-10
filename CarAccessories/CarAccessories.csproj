@@ -184,10 +184,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201903091555158_asxc.cs" />
-    <Compile Include="Migrations\201903091555158_asxc.Designer.cs">
-      <DependentUpon>201903091555158_asxc.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Brand.cs" />
@@ -209,10 +205,12 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\images\images\american-express.png" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\images\cirrus.png" />
     <Content Include="Content\css\AdminPanel\adminlte.css" />
     <Content Include="Content\css\AdminPanel\adminlte.min.css" />
     <Content Include="Content\css\bootstrap-wysihtml5\bootstrap3-wysihtml5.all.js" />
@@ -2772,8 +2770,13 @@
     <Content Include="Content\images\thumb-item-03.jpg" />
     <Content Include="Content\images\Untitled-5.jpg" />
     <Content Include="Content\includes\contact-form.php" />
+    <Content Include="Content\images\images\mastercard.png" />
+    <Content Include="Content\images\images\mestro.png" />
+    <Content Include="Content\images\images\paypal.png" />
+    <Content Include="Content\images\images\paypal2.png" />
     <Content Include="Content\rateit.css" />
     <Content Include="Content\star.gif" />
+    <Content Include="Content\images\images\visa.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -3064,11 +3067,6 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201903091555158_asxc.resx">
-      <DependentUpon>201903091555158_asxc.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
