@@ -17,7 +17,7 @@ namespace CarAccessories.Controllers
             bool claimIdentity = User.Identity is ClaimsIdentity;
             ApplicationUser user = new ApplicationUser();
             List<OrderDetails> orders = new List<OrderDetails>();
-       
+
             if (claimIdentity)
             {
                 ClaimsIdentity claimsIdentity = User.Identity as ClaimsIdentity;
@@ -42,11 +42,8 @@ namespace CarAccessories.Controllers
             }
             return View(orders);
         }
-
-
-
         [HttpPost]
-        public ActionResult update(int[] num_product1)
+        public ActionResult update(int[] num_product1, int totalprice)
         {
             ApplicationUser user = new ApplicationUser();
             bool claimIdentity = User.Identity is ClaimsIdentity;
@@ -62,18 +59,16 @@ namespace CarAccessories.Controllers
                     context.Entry(user).Collection(i => i.Order).Load();
                 }
             }
-            List<Order> c = user.Order.ToList();
+            Order c = user.Order.FirstOrDefault(g => g.Isbuy == false);
+            List<OrderDetails> d = c.OrderDetails.ToList();
+            c.TotalPrice = totalprice;
+            context.Entry(c).Collection(o => o.OrderDetails).Load();
             for (int i = 0; i < num_product1.Length; i++)
             {
-                foreach (var item in c[i].OrderDetails)
-                {
-                    item.Quantity = num_product1[i];
-                }
-                
+                d[i].Quantity = num_product1[i];
             }
-            c.ForEach(cart => cart.Isbuy = true);
+            c.Isbuy = true;
             context.SaveChanges();
-
             return RedirectToAction("Index");
         }
 
