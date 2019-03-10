@@ -43,7 +43,7 @@
                                 </td>
                                 <td class="column-2">@item.VendorProduct.Product.Name</td>
                                 
-                                    <td class="column-3">@item.VendorProduct.Product.Price</td>
+                                 <td class="column-3">@item.VendorProduct.Price</td>
                                 
                                   
                               
@@ -54,7 +54,7 @@
                                             <i class="fs-12 fa fa-minus" aria-hidden="true"></i>
                                         </button>
 
-                                        <input class="size8 m-text18 t-center num-product number" type="number" name="num_product1[]" value="1">
+                                        <input class="size8 m-text18 t-center num-product number" type="number" name="num_product1[]" value="0" readonly>
 
                                         <button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2 but2">
                                             <i class="fs-12 fa fa-plus" aria-hidden="true"></i>
@@ -62,7 +62,7 @@
                                     </div>
 
                                 </td>
-                                <td id="Qunitity" class="column-5"></td>
+                                <td id="Qunitity" class="column-5">0</td>
                             </tr>
                         }
                     </table>
@@ -76,7 +76,8 @@
                             </button>
                         </div>
                     </div>
-                    <div style="background:yellow;width:150px;height:50px;margin-left:80%" id="total"></div>
+                    <b style="margin-left:80%;color:black;margin-bottom:50px">TotaPrice</b>
+                   <input style="background-color:bisque;width:150px;height:50px;margin-left:80%" id="total" value="0" name="totalprice">
                 </form>
             </div>
         </div>

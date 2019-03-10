@@ -201,17 +201,37 @@
         $('.video-mo-01').css('opacity','0');
     });
 
+    
     $('.but').each(function () {
         $(this).on('click', function () {
-            var res = $(this).parent().parent().prev().text() * $(this).parent().find('.number').val();
-            $(this).parent().parent().next().html(res);
+            
+            var cuurent = Number($(this).parent().find('.number').val());
+            var price = Number($(this).parent().parent().prev().text());
+            var befor = cuurent + 1;
+            if (befor > 2) {
+                var res = price * cuurent;
+                $(this).parent().parent().next().html(res);
+
+
+                $('#total').val(parseInt($('#total').val()) - parseInt(price) * parseInt(befor));
+                $('#total').val(parseInt($('#total').val()) + parseInt(res));
+            }
         });
     });
 
     $('.but2').each(function () {
         $(this).on('click', function () {
-            var res = $(this).parent().parent().prev().text() * $(this).parent().find('.number').val();
+           
+            var cuurent = Number($(this).parent().find('.number').val());
+            var price = Number($(this).parent().parent().prev().text());
+            var befor = cuurent - 1;
+
+            var res = price * cuurent;
             $(this).parent().parent().next().html(res);
+            
+
+            $('#total').val(parseInt($('#total').val()) - parseInt(price) * parseInt(befor));
+            $('#total').val(parseInt($('#total').val()) + parseInt(res));
         });
     });
 })(jQuery);

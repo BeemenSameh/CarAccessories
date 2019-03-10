@@ -80,10 +80,17 @@ namespace CarAccessories.Controllers
 
         public ActionResult GetProductsByCategoryId(int Cat_ID)
         {
-            List<Product> ProductsList = db.Categories.Where(i => i.ID == Cat_ID).Select(p => p.Products).FirstOrDefault().ToList();
+            Category Cat = db.Categories.Where(i => i.ID == Cat_ID).FirstOrDefault();
+            db.Entry(Cat).Collection(p => p.Products).Load();
             List<VendorProduct> VendorProductList = new List<VendorProduct>();
-            foreach (var pl in ProductsList)
+            foreach (var pl in Cat.Products)
             {
+                db.Entry(pl).Collection(p => p.VendorProducts).Load();
+                foreach (var VendorProducts in pl.VendorProducts)
+                {
+                    db.Entry(VendorProducts).Reference(p => p.Vendor).Load();
+                    db.Entry(VendorProducts).Reference(p => p.Product).Load();
+                }
                 VendorProductList.AddRange(pl.VendorProducts);
             }
             return PartialView("_GetProdByCatIdPartialView", VendorProductList);
@@ -100,10 +107,10 @@ namespace CarAccessories.Controllers
             return View("_ProductDetailsView", p);
         }
 
-        //public ActionResult ShowVendorDetails(int id)
-        //{
-
-        //}
+        public ActionResult ShowVendorDetails(int id)
+        {
+            return View();
+        }
 
     }
 }
