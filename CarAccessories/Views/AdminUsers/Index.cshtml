@@ -1,0 +1,81 @@
+﻿
+@model List<CarAccessories.Models.ApplicationUser>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminPanel.cshtml";
+}
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Data Table With Full Features</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>User Name</th>
+                                <th>Type</th>
+                                <th>PhoneNumber</th>
+                                <th>Email</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.Id</td>
+                                        <td>
+                                            @if (item.Type == "Customer")
+                                            {
+                                                @item.Customer.Name;
+                                            }
+                                            else if (item.Type == "Vendor")
+                                            {
+                                                @item.Seller.ComponyName;
+                                            }
+                                        </td>
+                                        <td>@item.Type</td>
+                                        <td>@item.PhoneNumber</td>
+                                        <td>@item.Email</td>
+                                        <td>
+                                            <a href="\AdminUsers\DeleteUser\@item.Id">Delete</a>
+                                        </td>
+                                    </tr>
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>ID</th>
+                                <th>User Name</th>
+                                <th>Type</th>
+                                <th>PhoneNumber</th>
+                                <th>Email</th>
+                                <th>Delete</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+    </div>
+</section>
+@section scripts{
+    <!-- DataTables -->
+    <script src="~/Scripts/jquery.dataTables.js"></script>
+    <script src="~/Scripts/dataTables.bootstrap4.js"></script>
+    <!-- page script -->
+    <script>
+        $(function () {
+            $("#example1").DataTable();
+        });
+    </script>
+}
+@section style{
+    <link rel="stylesheet" href="~/Content/dataTables.bootstrap4.css">
+}

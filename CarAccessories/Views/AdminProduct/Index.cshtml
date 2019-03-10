@@ -1,5 +1,5 @@
 ﻿
-@model List<CarAccessories.Models.Order>
+@model List<CarAccessories.Models.Product>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_AdminPanel.cshtml";
@@ -16,40 +16,43 @@
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>Order ID</th>
-                                <th>Customer Name</th>
-                                <th>Order Date</th>
-                                <th>Total Price</th>A
-                                <th>Show Details</th>
+                                
+                                <th>ID</th>
+                                <th>Product Name</th>
+                                <th>Quantity</th>
+                                <th>State</th>
+                                <th>Image</th>
+                                <th>Description</th>
+                                <th>Delete</th>
                             </tr>
                         </thead>
-
                         <tbody>
                             @foreach (var item in Model)
                             {
                                 <tr>
                                     <td>@item.ID</td>
                                     <td>
-                                        @item.Customer.Name
+                                      @item.Name
                                     </td>
-                                    <td>@item.OrderDate</td>
-                                    <td> @item.TotalPrice</td>
+                                    <td>@item.Quantity</td>
+                                    <td>@item.State</td>
+                                    <td><img src="~/Content/images/images/@item.Image" /></td>
+                                    <td>@item.MinDescription</td>
                                     <td>
-                                        <a href="\AdminOrder\GetOrderByID\@item.ID">show</a>
+                                        <a href="\AdminProduct\DeleteProduct\@item.ID" class="btn btn-danger">Delete</a>
                                     </td>
                                 </tr>
-
                             }
-
-
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>Order ID</th>
-                                <th>Customer Name</th>
-                                <th>Order Date</th>
-                                <th>Total Price</th>
-                                <th>Show Details</th>
+                                <th>ID</th>
+                                <th>Product Name</th>
+                                <th>Quantity</th>
+                                <th>State</th>
+                                <th>Image</th>
+                                <th>Description</th>
+                                <th>Delete</th>
                             </tr>
                         </tfoot>
                     </table>
@@ -71,5 +74,5 @@
     </script>
 }
 @section style{
- <link rel="stylesheet" href="~/Content/dataTables.bootstrap4.css">
-    }
+    <link rel="stylesheet" href="~/Content/dataTables.bootstrap4.css">
+}

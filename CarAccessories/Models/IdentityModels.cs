@@ -50,5 +50,7 @@ namespace CarAccessories.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<CarAccessories.Models.ApplicationUser> ApplicationUsers { get; set; }
     }
 }
