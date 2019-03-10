@@ -19,6 +19,5 @@ namespace CarAccessories.Models
 
         public ApplicationUser ApplicationUser { get; set; }
         public virtual ICollection<VendorProduct> VendorProduct { get; set; }
-        public virtual ICollection<Rate> Rates { get; set; }
     }
 }

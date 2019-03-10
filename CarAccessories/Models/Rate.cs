@@ -9,7 +9,7 @@ namespace CarAccessories.Models
     public class Rate
     {
         public int ID { set; get; }
-        [ForeignKey("Vendor")]
+        [ForeignKey("VendorProduct")]
         [Index("IX_UserVendor", 1, IsUnique = true)]
         public string Vendor_ID { get; set; }
         [ForeignKey("Customer")]
@@ -17,7 +17,7 @@ namespace CarAccessories.Models
         public string Customer_ID { get; set; }
         public int RateNumber { get; set; }
 
-        public Vendor Vendor { get; set; }
+        public VendorProduct VendorProduct { get; set; }
         public Customer Customer { get; set; }
     }
 }
