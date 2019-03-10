@@ -15,10 +15,11 @@ namespace CarAccessories.Controllers
         {
             return View();
         }
+        [ActionName("GetOrder")]
         public ActionResult GetOrderByID(int id)
         {
             var order = db.Orders.FirstOrDefault(ord => ord.ID == id);
-            return View(order);
+            return View("GetOrderByID", order);
         }
     }
 }
