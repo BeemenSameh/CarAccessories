@@ -207,7 +207,6 @@
     <Compile Include="Models\ViewModel\BrandsProducts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModel\OrderDetailsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -225,6 +224,7 @@
     <Content Include="Content\css\MyLogin.css" />
     <Content Include="Content\css\util.css" />
     <Content Include="Content\css\util.min.css" />
+    <Content Include="Content\dataTables.bootstrap4.css" />
     <Content Include="Content\delete.gif" />
     <Content Include="Content\fonts\elegant-font\html-css\fonts\ElegantIcons.svg" />
     <Content Include="Content\fonts\elegant-font\html-css\index.html" />
@@ -2782,6 +2782,7 @@
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\dataTables.bootstrap4.js" />
     <Content Include="Scripts\fastclick\fastclick.js" />
     <Content Include="Scripts\fastclick\fastclick.min.js" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
@@ -2893,6 +2894,7 @@
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <Content Include="Scripts\jquery.dataTables.js" />
     <Content Include="Scripts\jquery.rateit.js" />
     <Content Include="Scripts\jquery.rateit.min.js" />
     <Content Include="Scripts\jquery.rateit.min.js.map" />
@@ -3049,6 +3051,7 @@
     <Content Include="Views\Shared\_AdminPanel.cshtml" />
     <Content Include="Scripts\js\adminlte.js.map" />
     <Content Include="Views\AdminOrder\GetOrderByID.cshtml" />
+    <Content Include="Views\AdminOrder\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
