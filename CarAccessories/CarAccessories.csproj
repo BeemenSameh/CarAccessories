@@ -201,7 +201,6 @@
     <Compile Include="Models\VendorProduct.cs" />
     <Compile Include="Models\ViewModel\BrandModelsAndBrandProducts.cs" />
     <Compile Include="Models\ViewModel\BrandsProducts.cs" />
-    <Compile Include="Models\ViewModel\OrderDetailsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
