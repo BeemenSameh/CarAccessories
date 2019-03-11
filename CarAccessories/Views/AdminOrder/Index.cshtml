@@ -1,5 +1,4 @@
-﻿
-@model List<CarAccessories.Models.Order>
+﻿@model List<CarAccessories.Models.Order>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_AdminPanel.cshtml";
@@ -35,7 +34,7 @@
                                     <td>@item.OrderDate</td>
                                     <td> @item.TotalPrice</td>
                                     <td>
-                                        <a href="\AdminOrder\GetOrderByID\@item.ID">show</a>
+                                        <a href="\AdminOrder\GetOrder\@item.ID" class="btn btn-primary">show</a>
                                     </td>
                                 </tr>
 
