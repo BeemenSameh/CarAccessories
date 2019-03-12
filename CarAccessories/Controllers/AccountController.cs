@@ -481,5 +481,21 @@ namespace CarAccessories.Controllers
             }
         }
         #endregion
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult RegistAsCustomer()
+        {
+            return PartialView("_CustomerRegisterPartialView");
+        }
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult RegistAsVendor()
+        {
+            return PartialView("_VendorRegisterPartialView");
+        }
+
     }
+
+
 }
