@@ -5,55 +5,60 @@
     Layout = "~/Views/Shared/_AdminPanel.cshtml";
 }
 <div class="container">
-    <h2>DeleteProduct</h2>
+    <div id="UpdatePage">
+        <h2>DeleteProduct</h2>
 
-    <div style="margin-left:10px">
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Name)
-            </dt>
+        <div style="margin-left:10px">
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Name)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Image)
-            </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Image)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Image)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Image)
+                </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.MinDescription)
-            </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.MinDescription)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.MinDescription)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.MinDescription)
+                </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Quantity)
-            </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Quantity)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Quantity)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Quantity)
+                </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.State)
-            </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.State)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.State)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.State)
+                </dd>
 
-        </dl>
+            </dl>
+        </div>
+        <p>
+            @Ajax.ActionLink("Confirm", "ConfirmDeleteProduct", new { id = Model.ID }, new AjaxOptions { Confirm = "Are You Sure That You Want To Delete This Product?", UpdateTargetId = "UpdatePage", InsertionMode = InsertionMode.Replace }, new { @class = "btn  btn-danger" }) &nbsp;&nbsp;
+            @*@Html.ActionLink("Back", "Index","",new { @class="btn btn-default"})*@
+        </p>
     </div>
-    <p>
-        @Html.ActionLink("Confirm", "ConfirmDeleteProduct", new { id = Model.ID }, new { @class = "btn  btn-danger" }) &nbsp;&nbsp;
-        @Html.ActionLink("Back", "Index","",new { @class="btn btn-default"})
-    </p>
 </div>
+@section scripts{
+    @Scripts.Render("~/bundles/Ajax")
+    }

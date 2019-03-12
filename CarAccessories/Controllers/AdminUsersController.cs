@@ -22,6 +22,16 @@ namespace CarAccessories.Controllers
             }
             return View(users);
         }
+        public ActionResult GetAllUsers()
+        {
+            var users = db.Users.ToList();
+            foreach (var user in users)
+            {
+                db.Entry(user).Reference(c => c.Customer).Load();
+                db.Entry(user).Reference(sell => sell.Seller).Load();
+            }
+            return PartialView("_GetAllUsers", users);
+        }
         public ActionResult DeleteUser(string id)
         {
             var user = db.Users.FirstOrDefault(use => use.Id == id);
@@ -32,7 +42,7 @@ namespace CarAccessories.Controllers
             var user = db.Users.FirstOrDefault(use => use.Id == id);
             db.Users.Remove(user);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("GetAllUsers");
         }
     }
 }

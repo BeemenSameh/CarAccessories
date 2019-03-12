@@ -1706,6 +1706,8 @@
     <Content Include="Views\AdminProduct\Index.cshtml" />
     <Content Include="Views\AdminProduct\DeleteProduct.cshtml" />
     <Content Include="Views\AdminUsers\DeleteUser.cshtml" />
+    <Content Include="Views\AdminUsers\_GetAllUsers.cshtml" />
+    <Content Include="Views\AdminProduct\_GetAllProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
