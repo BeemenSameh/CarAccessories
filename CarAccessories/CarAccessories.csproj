@@ -185,6 +185,7 @@
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\SaleController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
+    <Compile Include="Controllers\VedorController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1555,6 +1556,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\js\adminlte.js" />
+    <Content Include="Scripts\js\demo.js" />
     <Content Include="Scripts\js\main.js" />
     <Content Include="Scripts\js\main.min.js" />
     <Content Include="Scripts\js\map-custom.js" />
@@ -1708,6 +1710,9 @@
     <Content Include="Views\AdminUsers\DeleteUser.cshtml" />
     <Content Include="Views\AdminUsers\_GetAllUsers.cshtml" />
     <Content Include="Views\AdminProduct\_GetAllProduct.cshtml" />
+    <Content Include="Views\Shared\_VendorLayout.cshtml" />
+    <Content Include="Views\Vedor\_VendorView.cshtml" />
+    <Content Include="Views\Vedor\_ProductsView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
