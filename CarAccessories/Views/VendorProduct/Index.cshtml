@@ -1,29 +1,31 @@
-﻿
-@model List<CarAccessories.Models.Product>
+﻿@model List<CarAccessories.Models.Product>
+
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_AdminPanel.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+
 <section class="content">
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Data Table With Full Features</h3>
+                    
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                
+
                                 <th>ID</th>
                                 <th>Product Name</th>
-                                <th>Quantity</th>
-                                <th>State</th>
+                                <th>state</th>
+                                <th>Model</th>
                                 <th>Image</th>
                                 <th>Description</th>
-                                <th>Delete</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
@@ -32,15 +34,14 @@
                                 <tr>
                                     <td>@item.ID</td>
                                     <td>
-                                      @item.Name
+                                        @item.Name
                                     </td>
-                                    
+
                                     <td>@item.State</td>
+                                    <td>@item.Model</td>
                                     <td><img src="~/Content/images/images/@item.Image" /></td>
                                     <td>@item.MinDescription</td>
-                                    <td>
-                                        <a href="\AdminProduct\DeleteProduct\@item.ID" class="btn btn-danger">Delete</a>
-                                    </td>
+                                    
                                 </tr>
                             }
                         </tbody>
@@ -48,11 +49,11 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Product Name</th>
-                                <th>Quantity</th>
-                                <th>State</th>
+                                <th>state</th>
+                                <th>Model</th>
                                 <th>Image</th>
                                 <th>Description</th>
-                                <th>Delete</th>
+                                
                             </tr>
                         </tfoot>
                     </table>
