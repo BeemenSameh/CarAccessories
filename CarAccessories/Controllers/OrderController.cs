@@ -46,7 +46,7 @@ namespace CarAccessories.Controllers
         public ActionResult update(int[] num_product1, int totalprice)
         {
             ApplicationUser user = new ApplicationUser();
-            
+
             bool claimIdentity = User.Identity is ClaimsIdentity;
             if (claimIdentity)
             {
@@ -58,34 +58,51 @@ namespace CarAccessories.Controllers
                     var userIdValue = userIdClaim.Value;
                     user = context.Users.Where(i => i.Id == userIdValue).FirstOrDefault();
                     context.Entry(user).Collection(i => i.Order).Load();
-                    
+
                 }
             }
             Order c = user.Order.FirstOrDefault(g => g.Isbuy == false);
             context.Entry(c).Reference(i => i.Customer).Load();
             List<OrderDetails> d = c.OrderDetails.ToList();
+            bool done = true;
             if (c.Customer.money > c.TotalPrice)
             {
                 c.TotalPrice = totalprice;
                 context.Entry(c).Collection(o => o.OrderDetails).Load();
                 for (int i = 0; i < num_product1.Length; i++)
                 {
-                    d[i].Quantity = num_product1[i];
+
+                    if (d[i].VendorProduct.Quantity >= num_product1[i])
+                    {
+                        d[i].Quantity = num_product1[i];
+                        d[i].VendorProduct.Quantity -= num_product1[i];
+                    }
+                    else
+                    {
+                        done = false;
+                        break;
+                    }
                 }
-                c.Isbuy = true;
-                context.SaveChanges();
-                return RedirectToAction("Index","Shop");
+                if (done)
+                {
+                    c.Isbuy = true;
+                    context.SaveChanges();
+                    return RedirectToAction("Index", "Shop");
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
             }
             else
             {
                 return RedirectToAction("Index");
-
-            }
             }
         }
-
-
     }
+
+
+}
 
 
 
