@@ -16,6 +16,11 @@ namespace CarAccessories.Controllers
             var products = db.Products.ToList();
             return View(products);
         }
+        public ActionResult GetAllProduct()
+        {
+            var products = db.Products.ToList();
+            return PartialView("_GetAllProduct",products);
+        }
         public ActionResult DeleteProduct(int id)
         {
             var prod = db.Products.FirstOrDefault(prd => prd.ID == id);
@@ -26,7 +31,7 @@ namespace CarAccessories.Controllers
             var prod = db.Products.FirstOrDefault(prd => prd.ID == id);
             db.Products.Remove(prod);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("GetAllProduct");
         }
     }
 }
