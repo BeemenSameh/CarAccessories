@@ -10,6 +10,7 @@ namespace CarAccessories.Models
         public int ID { get; set; }
         public int Price { get; set; }
         public double? Sale_price { get; set; }
+        public int Quantity { get; set; }
         public DateTime Insert_Date { get; set; } = DateTime.Now;
 
         public Vendor Vendor { get; set; }
