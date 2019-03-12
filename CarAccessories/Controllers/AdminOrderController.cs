@@ -14,6 +14,10 @@ namespace CarAccessories.Controllers
         public ActionResult Index()
         {
             var Orders = db.Orders.ToList();
+            foreach (var order in Orders)
+            {
+                db.Entry(order).Reference(cust => cust.Customer).Load();
+            }
             return View(Orders);
         }
         [ActionName("GetOrder")]

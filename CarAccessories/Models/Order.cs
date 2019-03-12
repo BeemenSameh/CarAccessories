@@ -9,7 +9,7 @@ namespace CarAccessories.Models
     public class Order
     {
         public int ID { get; set; }
-        public DateTime OrderDate { get; set; }
+        public DateTime OrderDate { get; set; } = DateTime.Now;
         public int TotalPrice { get; set; }
         public bool Isbuy { get; set; }
 

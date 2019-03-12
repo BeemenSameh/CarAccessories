@@ -1,0 +1,75 @@
+﻿@model CarAccessories.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "DeleteUser";
+    Layout = "~/Views/Shared/_AdminPanel.cshtml";
+}
+<div class="container">
+    <div id="UpdatePage">
+        <h2>DeleteUser</h2>
+        <div>
+            <hr />
+            <dl class="dl-horizontal">
+                @if (Model.Type == "Customer")
+            {
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Customer.Name)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Customer.Name)
+                    </dd>
+                }
+                else if (Model.Type == "Vendor")
+                {
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Seller.ComponyName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Seller.ComponyName)
+                    </dd>
+                }
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Type)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Type)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Email)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.PhoneNumber)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.UserName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.UserName)
+                </dd>
+
+            </dl>
+        </div>
+        <p>
+            @Ajax.ActionLink("Confirm", "ConfirmDeleteUser", new { id = Model.Id }, new AjaxOptions { Confirm = "Are You Sure You Want to Delete This User",UpdateTargetId="UpdatePage",InsertionMode=InsertionMode.Replace }, new { @class = "btn btn-danger" }) &nbsp;&nbsp;
+            @*@Html.ActionLink("Back", "Index", "", new { @class = "btn btn-default" })*@
+        </p>
+    </div>
+</div>
+@section scripts{
+    @Scripts.Render("~/bundles/Ajax")
+    }
