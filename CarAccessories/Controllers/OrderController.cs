@@ -46,6 +46,7 @@ namespace CarAccessories.Controllers
         public ActionResult update(int[] num_product1, int totalprice)
         {
             ApplicationUser user = new ApplicationUser();
+
             bool claimIdentity = User.Identity is ClaimsIdentity;
             if (claimIdentity)
             {
@@ -57,24 +58,52 @@ namespace CarAccessories.Controllers
                     var userIdValue = userIdClaim.Value;
                     user = context.Users.Where(i => i.Id == userIdValue).FirstOrDefault();
                     context.Entry(user).Collection(i => i.Order).Load();
+
                 }
             }
             Order c = user.Order.FirstOrDefault(g => g.Isbuy == false);
+            context.Entry(c).Reference(i => i.Customer).Load();
             List<OrderDetails> d = c.OrderDetails.ToList();
-            c.TotalPrice = totalprice;
-            context.Entry(c).Collection(o => o.OrderDetails).Load();
-            for (int i = 0; i < num_product1.Length; i++)
+            bool done = true;
+            if (c.Customer.money > c.TotalPrice)
             {
-                d[i].Quantity = num_product1[i];
+                c.TotalPrice = totalprice;
+                context.Entry(c).Collection(o => o.OrderDetails).Load();
+                for (int i = 0; i < num_product1.Length; i++)
+                {
+
+                    if (d[i].VendorProduct.Quantity >= num_product1[i])
+                    {
+                        d[i].Quantity = num_product1[i];
+                        d[i].VendorProduct.Quantity -= num_product1[i];
+                    }
+                    else
+                    {
+                        done = false;
+                        break;
+                    }
+                }
+                if (done)
+                {
+                    c.Isbuy = true;
+                    context.SaveChanges();
+                    return RedirectToAction("Index", "Shop");
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
             }
-            c.Isbuy = true;
-            context.SaveChanges();
-            return RedirectToAction("Index");
+            else
+            {
+                return RedirectToAction("Index");
+            }
         }
-
-
     }
+
+
 }
+
 
 
 

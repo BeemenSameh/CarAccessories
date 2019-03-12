@@ -1704,6 +1704,8 @@
     <Content Include="Views\Home\ShowVendorDetails.cshtml" />
     <Content Include="Views\AdminOrder\GetOrderByID.cshtml" />
     <Content Include="Views\AdminOrder\Index.cshtml" />
+    <Content Include="Views\Account\_CustomerRegisterPartialView.cshtml" />
+    <Content Include="Views\Account\_VendorRegisterPartialView.cshtml" />
     <Content Include="Views\AdminUsers\Index.cshtml" />
     <Content Include="Views\AdminProduct\Index.cshtml" />
     <Content Include="Views\AdminProduct\DeleteProduct.cshtml" />
