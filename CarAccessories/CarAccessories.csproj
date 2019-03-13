@@ -206,10 +206,17 @@
     <Compile Include="Models\VendorProduct.cs" />
     <Compile Include="Models\ViewModel\BrandModelsAndBrandProducts.cs" />
     <Compile Include="Models\ViewModel\BrandsProducts.cs" />
+    <Compile Include="Models\ViewModel\RegistAsVendorViewModel.cs" />
+    <Compile Include="Models\ViewModel\RegisterAsCustomerViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\noui\nouislider.css" />
+    <Content Include="Content\css\noui\nouislider.js" />
+    <Content Include="Content\css\noui\nouislider.min.css" />
+    <Content Include="Content\css\noui\nouislider.min.js" />
+    <Content Include="Content\css\sweetalert\sweetalert.min.js" />
     <Content Include="Content\images\images\american-express.png" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -1703,8 +1710,6 @@
     <Content Include="Views\Home\ShowVendorDetails.cshtml" />
     <Content Include="Views\AdminOrder\GetOrderByID.cshtml" />
     <Content Include="Views\AdminOrder\Index.cshtml" />
-    <Content Include="Views\Account\_CustomerRegisterPartialView.cshtml" />
-    <Content Include="Views\Account\_VendorRegisterPartialView.cshtml" />
     <Content Include="Views\AdminUsers\Index.cshtml" />
     <Content Include="Views\AdminProduct\Index.cshtml" />
     <Content Include="Views\AdminProduct\DeleteProduct.cshtml" />
@@ -1713,6 +1718,11 @@
     <Content Include="Views\AdminProduct\_GetAllProduct.cshtml" />
     <Content Include="Views\AddProductToVendor\Index.cshtml" />
     <Content Include="Views\AddProductToVendor\Addprice.cshtml" />
+    <Content Include="Views\VendorProduct\Index.cshtml" />
+    <Content Include="Views\_price.cshtml" />
+    <Content Include="Views\Shop\filterProductsByPrice.cshtml" />
+    <Content Include="Views\Account\RegistAsCustomer.cshtml" />
+    <Content Include="Views\Account\RegistAsVendor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

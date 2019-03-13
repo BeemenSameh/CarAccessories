@@ -76,9 +76,10 @@ namespace CarAccessories.Controllers
                             Product product = db.Products.Where(p => p.Name == ProductName).FirstOrDefault();
                             OrderDetails od = new OrderDetails
                             {
-                                Price = db.VendorProducts.Where(vp => vp.Product.Equals(product)).Select(vp => vp.Price).FirstOrDefault(),
+                                Price = db.VendorProducts.Where(vp => vp.Product.ID == product.ID).Select(vp => vp.Price).FirstOrDefault(),
                                 Quantity = 0
                             };
+                            db.Entry(od).Reference(vp => vp.VendorProduct).Load();
                             od.VendorProduct.Product = db.Products.Where(p => p.Name == ProductName).FirstOrDefault();
                             o.OrderDetails.Add(od);
                             db.SaveChanges();
@@ -98,6 +99,16 @@ namespace CarAccessories.Controllers
                 return Redirect("/Account/Register");
             }
 
+        }
+        public ActionResult filterProductsByPrice(int LowerPrice, int UpperPrice)
+        {
+            List<VendorProduct> price = db.VendorProducts.Where(v => v.Price == LowerPrice && v.Price == UpperPrice).ToList();
+            foreach (var i in price)
+            {
+                db.Entry(i).Reference(p => p.Product).Load();
+                db.Entry(i).Reference(p => p.Vendor).Load();
+            }
+            return PartialView("_AllProductsPartialView", price);
         }
     }
 }
