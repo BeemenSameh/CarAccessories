@@ -9,12 +9,14 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using CarAccessories.Models;
+using CarAccessories.Models.ViewModel;
 
 namespace CarAccessories.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
+        public ApplicationDbContext db = new ApplicationDbContext();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -163,7 +165,16 @@ namespace CarAccessories.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+
+                if(model.UserType== "Customer")
+                    {
+                        return RedirectToAction("RegistAsCustomer", user);
+                    }
+                else if(model.UserType== "Vendor")
+                    {
+                        return RedirectToAction("RegistAsVendor", user);
+                    }
+                    //return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
             }
@@ -172,6 +183,70 @@ namespace CarAccessories.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult RegistAsCustomer(ApplicationUser user)
+        {
+            RegisterAsCustomerViewModel c= new RegisterAsCustomerViewModel
+            {
+                UserId = user.Id,
+                customer = new Customer(),
+
+            };
+
+
+            return View(c);
+        }
+
+        [HttpPost]
+        public ActionResult RegistAsCustomer(RegisterAsCustomerViewModel m)
+        {
+            if (ModelState.IsValid)
+            {
+
+                m.customer.ID = m.UserId;
+                db.Customers.Add(m.customer);
+                db.SaveChanges();
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return View("RegistAsCustomer",m);
+            }
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult RegistAsVendor(ApplicationUser user)
+        {
+            RegistAsVendorViewModel v = new RegistAsVendorViewModel
+            {
+                UserId = user.Id,
+                vendor = new Vendor(),
+
+            };
+            return View(v);
+        }
+
+      
+
+        [HttpPost]
+        public ActionResult RegistAsVendor(RegistAsVendorViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+
+                vm.vendor.ID = vm.UserId;
+                vm.vendor.Accept = 0;
+                db.Sellers.Add(vm.vendor);
+                db.SaveChanges();
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return View("RegistAsVendor", vm);
+            }
+        }
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
@@ -482,18 +557,7 @@ namespace CarAccessories.Controllers
         }
         #endregion
 
-        [HttpGet]
-        [AllowAnonymous]
-        public ActionResult RegistAsCustomer()
-        {
-            return PartialView("_CustomerRegisterPartialView");
-        }
-        [HttpGet]
-        [AllowAnonymous]
-        public ActionResult RegistAsVendor()
-        {
-            return PartialView("_VendorRegisterPartialView");
-        }
+     
 
     }
 

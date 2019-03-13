@@ -3,6 +3,9 @@
     ViewBag.Title = "Register";
 }
 @Styles.Render("~/Content/css");
+@Styles.Render("~/bundles/MyLogCss");
+
+
 
 <div class="container" style="padding-bottom:50px">
     <br />
@@ -36,32 +39,14 @@
                         </div>
                     </div>
 
-                    <div class="row form-group">
-                        @Ajax.ActionLink("Customer Register", "RegistAsCustomer", "Account",null,
-                               new AjaxOptions()
-                               {
-                                   UpdateTargetId = "PartialRegister",
-                                   InsertionMode = InsertionMode.Replace,
-                                   HttpMethod = "Get"
-                               }
-                               , new {@class="col-md-6"}
-                               )
-                        @Ajax.ActionLink("Vendor Register", "RegistAsVendor", "Account",null,
-                               new AjaxOptions()
-                               {
-                                   UpdateTargetId = "PartialRegister",
-                                   InsertionMode = InsertionMode.Replace,
-                                   HttpMethod = "Get"
-                               }, new { @class = "col-md-6" }
-                               )
-                        @*<label class="radio-inline col-md"><input type="radio" name="UserType" value="Customer Register" checked> <b>Customer Register</b></label>
-                        <label class="radio-inline col-md"><input type="radio" name="UserType" value="Vendor Register"><b>Vendor Register</b></label>*@
-                    </div>
+                   <div class="row form-group">
+                       @Html.LabelFor(m => m.UserType, new { @class = "col-md-2 control-label" })
+                       <div class="col-md-10">
+                           <input type="radio" name="UserType" value="Customer" checked> <b>Customer Register</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                           <input type="radio" name="UserType" value="Vendor"><b>Vendor Register</b>
+                       </div>
 
-                    <div id="PartialRegister">
-                        @Html.Partial("_CustomerRegisterPartialView")
-                    </div>
-               
+               </div>
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
                             <input type="submit" value="Register" class="btn btn-primary fadeIn fourth" />
@@ -78,17 +63,6 @@
     @Scripts.Render("~/bundles/Ajax")
     @Scripts.Render("~/bundles/jqueryval");
     @Scripts.Render("~/bundles/bootstrap");
-   <script>
-       $('input[type=radio][name=UserType]').change(function () {
-           if (this.value == 'Customer Register') {
-              
-
-           }
-           else if (this.value == 'Vendor Register') {
-               @Html.Partial("_VendorRegisterPartialView");
-           }
-       });
-    </script>
 
 }
 

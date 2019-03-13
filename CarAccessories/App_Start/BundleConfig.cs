@@ -8,6 +8,8 @@ namespace CarAccessories
         // For more information on bundling, visit https://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
+            bundles.Add(new StyleBundle("~/bundles/MyLogCss").Include(
+                    "~/Content/css/MyLogin.css"));
             bundles.Add(new ScriptBundle("~/bundles/Ajax").Include(
                      "~/Scripts/jquery.unobtrusive-ajax.js"));
 
