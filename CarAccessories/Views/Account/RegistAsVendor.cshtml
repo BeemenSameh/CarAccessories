@@ -1,0 +1,61 @@
+﻿@model CarAccessories.Models.ViewModel.RegistAsVendorViewModel
+@{
+    ViewBag.Title = "RegistAsVendor";
+}
+@Styles.Render("~/Content/css");
+@Styles.Render("~/bundles/MyLogCss");
+<div class="container" style="padding-bottom:50px">
+    <br />
+    <div class="row">
+        <div class="col-md-5 centered">
+            <section id="loginForm">
+                @using (Html.BeginForm("RegistAsVendor", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    <h4 style="text-align:center">Register As Vendor</h4>
+                    <hr />
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
+
+                    @Html.HiddenFor(m => m.UserId, new { @class = "form-control" })
+                    @Html.HiddenFor(m => m.vendor.ID, new { @class = "form-control" })
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.vendor.ComponyName, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.vendor.ComponyName, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.vendor.Address, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.vendor.Address, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.vendor.PhoneNumber, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.vendor.PhoneNumber, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.vendor.Photo, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.vendor.Photo, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Register" class="btn btn-primary fadeIn fourth" />
+                        </div>
+                    </div>
+
+
+                }
+            </section>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/Ajax")
+    @Scripts.Render("~/bundles/jqueryval");
+    @Scripts.Render("~/bundles/bootstrap");
+}
