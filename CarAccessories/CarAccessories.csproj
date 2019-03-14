@@ -1723,6 +1723,7 @@
     <Content Include="Views\Shop\filterProductsByPrice.cshtml" />
     <Content Include="Views\Account\RegistAsCustomer.cshtml" />
     <Content Include="Views\Account\RegistAsVendor.cshtml" />
+    <Content Include="Views\Account\EditCustomerProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
