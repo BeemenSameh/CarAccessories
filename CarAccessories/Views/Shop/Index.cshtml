@@ -99,73 +99,27 @@
                         Filters
                     </h4>
 
-
                     <div class="filter-price p-t-22 p-b-50 bo3">
                         <div class="m-text15 p-b-17">
                             Price
                         </div>
 
                         <div class="wra-filter-bar">
-                            <div id="filter-bar" class="noUi-target noUi-ltr noUi-horizontal">
-
-                            </div>
+                            <div id="filter-bar"></div>
                         </div>
 
                         <div class="flex-sb-m flex-w p-t-16">
                             <div class="w-size11">
                                 <!-- Button -->
-                                <button id="priceFilter" class="flex-c-m size4 bg7 bo-rad-15 hov1 s-text14 trans-0-4">
+                                <button id="filterBtn" class="flex-c-m size4 bg7 bo-rad-15 hov1 s-text14 trans-0-4" >
                                     Filter
                                 </button>
                             </div>
 
                             <div class="s-text3 p-t-10 p-b-10">
-                                Range: $<span id="value-lower"></span> - $<span id="value-upper"></span>
+                                Range: $<span id="value-lower">0</span> - $<span id="value-upper">10000</span>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="filter-color p-t-22 p-b-50 bo3">
-                        <div class="m-text15 p-b-12">
-                            Color
-                        </div>
-
-                        <ul class="flex-w">
-                            <li class="m-r-10">
-                                <input class="checkbox-color-filter" id="color-filter1" type="checkbox" name="color-filter1">
-                                <label class="color-filter color-filter1" for="color-filter1"></label>
-                            </li>
-
-                            <li class="m-r-10">
-                                <input class="checkbox-color-filter" id="color-filter2" type="checkbox" name="color-filter2">
-                                <label class="color-filter color-filter2" for="color-filter2"></label>
-                            </li>
-
-                            <li class="m-r-10">
-                                <input class="checkbox-color-filter" id="color-filter3" type="checkbox" name="color-filter3">
-                                <label class="color-filter color-filter3" for="color-filter3"></label>
-                            </li>
-
-                            <li class="m-r-10">
-                                <input class="checkbox-color-filter" id="color-filter4" type="checkbox" name="color-filter4">
-                                <label class="color-filter color-filter4" for="color-filter4"></label>
-                            </li>
-
-                            <li class="m-r-10">
-                                <input class="checkbox-color-filter" id="color-filter5" type="checkbox" name="color-filter5">
-                                <label class="color-filter color-filter5" for="color-filter5"></label>
-                            </li>
-
-                            <li class="m-r-10">
-                                <input class="checkbox-color-filter" id="color-filter6" type="checkbox" name="color-filter6">
-                                <label class="color-filter color-filter6" for="color-filter6"></label>
-                            </li>
-
-                            <li class="m-r-10">
-                                <input class="checkbox-color-filter" id="color-filter7" type="checkbox" name="color-filter7">
-                                <label class="color-filter color-filter7" for="color-filter7"></label>
-                            </li>
-                        </ul>
                     </div>
 
                     <div class="search-product pos-relative bo4 of-hidden">
@@ -269,14 +223,14 @@
             console.log(nameProduct);
             $(this).on('click', function () {
                 $.ajax({
-                    url: "Shop/addCartDetailsToDataBase",
+                    url: "/Shop/addCartDetailsToDataBase",
                     method: "get",
                     data: { ProductName: nameProduct },
                     success: function (data) {
                         swal(nameProduct, "is added to cart !", "success");
                     },
                     error: function (date) {
-                        console.log("can't add product to cart");
+                        console.log(date);
                     }
                 });
             });
@@ -286,8 +240,48 @@
     <script type="text/javascript" src="~/Scripts/vendor/noui/nouislider.min.js"></script>
     <!--===============================================================================================-->
     <script src="~/Scripts/jquery.rateit.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/vendor/noui/nouislider.min.js"></script>
     <script type="text/javascript">
-        var tooltipvalues = ['bad', 'poor', 'ok', 'good', 'super'];
-        $("#rateit11b").bind('over', function (event, value) { $(this).attr('title', tooltipvalues[value - 1]); });
+        /*[ No ui ]
+        ===========================================================*/
+        var filterBar = document.getElementById('filter-bar');
+
+        noUiSlider.create(filterBar, {
+            start: [0, 10000],
+            connect: true,
+            range: {
+                'min': 0,
+                'max': 10000
+            }
+        });
+
+        var skipValues = [
+            document.getElementById('value-lower'),
+            document.getElementById('value-upper')
+        ];
+        var lower = document.getElementById('value-lower');
+        var upper = document.getElementById('value-upper');
+      
+        $('#filterBtn').on('click', function () {
+            $.ajax({
+                url: "Shop/filterProductsByPrice",
+                method: "get",
+                data: { LowerPrice: lower.textContent, UpperPrice: upper.textContent},
+                success: function (data) {
+                 console.log("success");
+                },
+                error: function (date) {
+                    console.log("failed");
+                }
+            });
+        });
+
+        filterBar.noUiSlider.on('update', function (values, handle) {
+            skipValues[handle].innerHTML = Math.round(values[handle]);
+        });
     </script>
+}
+
+@section style{
+    <link rel="stylesheet" type="text/css" href="~/Scripts/vendor/noui/nouislider.min.css">
 }
