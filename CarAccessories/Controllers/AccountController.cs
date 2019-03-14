@@ -149,34 +149,53 @@ namespace CarAccessories.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async  Task<ActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+
+                if (model.UserType == "Customer")
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-
-                if(model.UserType== "Customer")
+                    var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Type = "Customer" };
+                    var result = await UserManager.CreateAsync(user, model.Password);
+                    if (result.Succeeded)
                     {
-                        return RedirectToAction("RegistAsCustomer", user);
+                        return RedirectToAction("RegistAsCustomer",user);
                     }
-                else if(model.UserType== "Vendor")
-                    {
-                        return RedirectToAction("RegistAsVendor", user);
-                    }
-                    //return RedirectToAction("Index", "Home");
+                    AddErrors(result);
+
                 }
-                AddErrors(result);
+                else if (model.UserType == "Vendor")
+                {
+                    var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Type = "Vendor" };
+                    var result = await UserManager.CreateAsync(user, model.Password);
+                    return RedirectToAction("RegistAsVendor", new { user, model.Password });
+                }
+               
+            //    if (result.Succeeded)
+            //    {
+            //        await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    
+            //        // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+            //        // Send an email with this link
+            //        // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+            //        // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+            //        // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+
+            //    //if(model.UserType== "Customer")
+            //      //  {
+            //            //user.Type = "Customer";
+            //           // return RedirectToAction("RegistAsCustomer", user);
+            //        //}
+            //    //else if(model.UserType== "Vendor")
+            //       // {
+            //            //user.Type = "Vendor";
+            //           // return RedirectToAction("RegistAsVendor", user);
+            //        //}
+            //        //return RedirectToAction("Index", "Home");
+            //    }
+            //    AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form
@@ -187,7 +206,7 @@ namespace CarAccessories.Controllers
         [AllowAnonymous]
         public ActionResult RegistAsCustomer(ApplicationUser user)
         {
-            RegisterAsCustomerViewModel c= new RegisterAsCustomerViewModel
+              RegisterAsCustomerViewModel c= new RegisterAsCustomerViewModel
             {
                 UserId = user.Id,
                 customer = new Customer(),
@@ -199,7 +218,9 @@ namespace CarAccessories.Controllers
         }
 
         [HttpPost]
-        public ActionResult RegistAsCustomer(RegisterAsCustomerViewModel m)
+
+        [AllowAnonymous]
+        public  async Task<ActionResult> RegistAsCustomer(RegisterAsCustomerViewModel m)
         {
             if (ModelState.IsValid)
             {
@@ -207,12 +228,13 @@ namespace CarAccessories.Controllers
                 m.customer.ID = m.UserId;
                 db.Customers.Add(m.customer);
                 db.SaveChanges();
+                ApplicationUser user = db.Users.Where(i => i.Id == m.UserId).FirstOrDefault();
+                await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 return RedirectToAction("Index", "Home");
+                
+
             }
-            else
-            {
-                return View("RegistAsCustomer",m);
-            }
+            return View("RegistAsCustomer",m);
         }
 
         [HttpGet]
@@ -247,6 +269,48 @@ namespace CarAccessories.Controllers
                 return View("RegistAsVendor", vm);
             }
         }
+
+
+        [HttpGet]
+        public ActionResult EditCustomerProfile()
+        {
+           string LogedInUserId = User.Identity.GetUserId();
+           string CurrentUserType=db.Users.Where(i => i.Id == LogedInUserId).Select(t => t.Type).FirstOrDefault();
+            if (CurrentUserType == "Customer")
+            {
+                Customer c = db.Customers.Where(i => i.ID == LogedInUserId).FirstOrDefault();
+                RegisterAsCustomerViewModel cvm = new RegisterAsCustomerViewModel
+                {
+                    UserId = LogedInUserId,
+                    customer = c
+                };
+                return View("RegistAsCustomer", cvm);
+            }
+            else
+            {
+                return View("RegistAsVendor");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult EditCustomerProfile(RegisterAsCustomerViewModel cvm)
+        {
+            if (ModelState.IsValid)
+            {
+                Customer c = db.Customers.Where(i => i.ID == cvm.customer.ID).FirstOrDefault();
+                c.Name = cvm.customer.Name;
+                c.Address = cvm.customer.Address;
+                c.NationalID = cvm.customer.NationalID;
+                c.Photo = cvm.customer.Photo;
+                c.PhoneNumber = cvm.customer.PhoneNumber;
+                c.money = cvm.customer.money;
+                db.SaveChanges();
+                return RedirectToAction("Index", "Home");
+
+            }
+            return View("RegistAsCustomer", cvm);
+        }
+
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
