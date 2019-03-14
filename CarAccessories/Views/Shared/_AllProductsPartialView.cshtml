@@ -5,7 +5,7 @@
         <div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
             <!-- Block2 -->
             <div class="block2">
-                <div class="block2-img wrap-pic-w of-hidden pos-relative @(item.Sale_price == 0 ? "" : "block2-labelsale") @((DateTime.Now - item.Insert_Date).TotalDays <= 7 ? "block2-labelnew" : "")">
+                <div class="block2-img wrap-pic-w of-hidden pos-relative @(item.Sale_price == 0 || item.Sale_price == null ? "" : "block2-labelsale") @((DateTime.Now - item.Insert_Date).TotalDays <= 7 ? "block2-labelnew" : "")">
                     <img src="~/Content/images/images/@item.Product.Image" style="height:360px" alt="IMG-PRODUCT">
 
 
@@ -27,11 +27,10 @@
                 <div class="block2-txt p-t-20">
                     @Html.ActionLink(item.Product.Name, "ShowProductDetails", "Home", new { id = item.ID }, new { @class="block2-name dis-block s-text3 p-b-5"})
                     @Html.ActionLink(item.Vendor.ComponyName, "ShowVendorDetails", "Home", new { id = item.Vendor.ID }, new { @class = "block2-name dis-block s-text3 p-b-5" })
-                    @*<a href="ProductDetailsView.cshtml" class="block2-name dis-block s-text3 p-b-5">@item.Name</a>*@
                     <div class="rateit" id="rateit11b" data-rateit-step="1">
                     </div>
                     <br />
-                    @if (item.Sale_price == 0)
+                    @if (item.Sale_price == 0 || item.Sale_price == null)
                      {
                         <span class="block2-price m-text6 p-r-5">
                             $@item.Price

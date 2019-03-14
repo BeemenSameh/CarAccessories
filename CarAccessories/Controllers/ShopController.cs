@@ -30,7 +30,7 @@ namespace CarAccessories.Controllers
             }
             return View(b);
         }
-        
+
         public ActionResult GetAllProducts()
         {
             List<VendorProduct> AllVendorProductsList = db.VendorProducts.ToList();
@@ -42,7 +42,7 @@ namespace CarAccessories.Controllers
             return PartialView("_AllProductsPartialView", AllVendorProductsList);
         }
 
-        public ActionResult addCartDetailsToDataBase(string ProductName)
+        public ActionResult addCartDetailsToDataBase(string ProductName, string VendorName)
         {
             ClaimsIdentity claimsIdentity = User.Identity as ClaimsIdentity;
             if (claimsIdentity != null)
@@ -51,40 +51,73 @@ namespace CarAccessories.Controllers
                 if (userIdClaim != null)
                 {
                     var userIdValue = userIdClaim.Value;
-                    Customer c = db.Customers.Where(i => i.ID == userIdValue).FirstOrDefault();
+                    Customer c = db.Customers.FirstOrDefault(i => i.ID == userIdValue);
                     db.Entry(c).Collection(o => o.Orders).Load();
-                    foreach (var o in c.Orders)
+                    if (c.Orders.Count > 0)
                     {
-                        if (o.Isbuy == false)
+                        foreach (var o in c.Orders)
                         {
-                            Product product = db.Products.Where(p => p.Name == ProductName).FirstOrDefault();
-                            OrderDetails od = new OrderDetails
+                            if (o.Isbuy == false)
                             {
-                                Price = db.VendorProducts.Where(vp => vp.Product.Equals(product)).Select(vp => vp.Price).FirstOrDefault(),
-                                Quantity = 0
-                            };
-                            od.VendorProduct.Product = db.Products.Where(p => p.Name == ProductName).FirstOrDefault();
-                            o.OrderDetails.Add(od);
-                            db.SaveChanges();
-                            break;
+                                Product product = db.Products.Where(p => p.Name == ProductName).FirstOrDefault();
+                                Vendor Vendor = db.Sellers.Where(v => v.ComponyName == VendorName).FirstOrDefault();
+                                VendorProduct vendorProduct = db.VendorProducts.FirstOrDefault(vp => vp.Product.ID == product.ID && vp.Vendor.ID == Vendor.ID);
+                                OrderDetails od = new OrderDetails
+                                {
+                                    VendorProduct = vendorProduct,
+                                    Price = vendorProduct.Price,
+                                    Quantity = 0,
+                                };
+                                o.OrderDetails.Add(od);
+                                db.SaveChanges();
+                                break;
+                            }
+                            else
+                            {
+                                Order order = new Order
+                                {
+                                    Isbuy = false,
+                                    TotalPrice = 0,
+                                    Customer = c,
+                                    OrderDetails = new List<OrderDetails>()
+                                };
+                                Product product = db.Products.Where(p => p.Name == ProductName).FirstOrDefault();
+                                Vendor Vendor = db.Sellers.Where(v => v.ComponyName == VendorName).FirstOrDefault();
+                                VendorProduct vendorProduct = db.VendorProducts.FirstOrDefault(vp => vp.Product.ID == product.ID && vp.Vendor.ID == Vendor.ID);
+                                OrderDetails od = new OrderDetails
+                                {
+                                    VendorProduct = vendorProduct,
+                                    Price = vendorProduct.Price,
+                                    Quantity = 0,
+                                };
+                                order.OrderDetails.Add(od);
+                                db.Orders.Add(order);
+                                db.SaveChanges();
+                                break;
+                            }
                         }
-                        else
+                    }
+                    else
+                    {
+                        Order order = new Order
                         {
-                            Order order = new Order();
-                            order.Isbuy = false;
-                            order.OrderDetails = new List<OrderDetails>();
-                            Product product = db.Products.Where(p => p.Name == ProductName).FirstOrDefault();
-                            OrderDetails od = new OrderDetails
-                            {
-                                Price = db.VendorProducts.Where(vp => vp.Product.ID == product.ID).Select(vp => vp.Price).FirstOrDefault(),
-                                Quantity = 0
-                            };
-                            db.Entry(od).Reference(vp => vp.VendorProduct).Load();
-                            od.VendorProduct.Product = db.Products.Where(p => p.Name == ProductName).FirstOrDefault();
-                            o.OrderDetails.Add(od);
-                            db.SaveChanges();
-                            break;
-                        }
+                            Isbuy = false,
+                            TotalPrice = 0,
+                            Customer = c,
+                            OrderDetails = new List<OrderDetails>()
+                        };
+                        Product product = db.Products.Where(p => p.Name == ProductName).FirstOrDefault();
+                        Vendor Vendor = db.Sellers.Where(v => v.ComponyName == VendorName).FirstOrDefault();
+                        VendorProduct vendorProduct = db.VendorProducts.FirstOrDefault(vp => vp.Product.ID == product.ID && vp.Vendor.ID == Vendor.ID);
+                        OrderDetails od = new OrderDetails
+                        {
+                            VendorProduct = vendorProduct,
+                            Price = vendorProduct.Price,
+                            Quantity = 0,
+                        };
+                        order.OrderDetails.Add(od);
+                        db.Orders.Add(order);
+                        db.SaveChanges();
                     }
                     return View();
                 }

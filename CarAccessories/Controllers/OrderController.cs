@@ -15,7 +15,7 @@ namespace CarAccessories.Controllers
         public ActionResult Index()
         {
             bool claimIdentity = User.Identity is ClaimsIdentity;
-            ApplicationUser user = new ApplicationUser();
+            Customer customer = new Customer();
             List<OrderDetails> orders = new List<OrderDetails>();
 
             if (claimIdentity)
@@ -26,9 +26,9 @@ namespace CarAccessories.Controllers
                 if (userIdClaim != null)
                 {
                     var userIdValue = userIdClaim.Value;
-                    user = context.Users.Where(i => i.Id == userIdValue).FirstOrDefault();
-                    context.Entry(user).Collection(i => i.Order).Load();
-                    foreach (var i in user.Order)
+                    customer = context.Customers.Where(i => i.ID == userIdValue).FirstOrDefault();
+                    context.Entry(customer).Collection(i => i.Orders).Load();
+                    foreach (var i in customer.Orders)
                     {
                         context.Entry(i).Collection(c => c.OrderDetails).Load();
                         foreach (var OrderDetails in i.OrderDetails)
@@ -42,11 +42,11 @@ namespace CarAccessories.Controllers
             }
             return View(orders);
         }
+
         [HttpPost]
         public ActionResult update(int[] num_product1, int totalprice)
         {
-            ApplicationUser user = new ApplicationUser();
-
+            Customer customer = new Customer();
             bool claimIdentity = User.Identity is ClaimsIdentity;
             if (claimIdentity)
             {
@@ -56,12 +56,12 @@ namespace CarAccessories.Controllers
                 if (userIdClaim != null)
                 {
                     var userIdValue = userIdClaim.Value;
-                    user = context.Users.Where(i => i.Id == userIdValue).FirstOrDefault();
-                    context.Entry(user).Collection(i => i.Order).Load();
+                    customer = context.Customers.Where(i => i.ID == userIdValue).FirstOrDefault();
+                    context.Entry(customer).Collection(i => i.Orders).Load();
 
                 }
             }
-            Order c = user.Order.FirstOrDefault(g => g.Isbuy == false);
+            Order c = customer.Orders.FirstOrDefault(g => g.Isbuy == false);
             context.Entry(c).Reference(i => i.Customer).Load();
             List<OrderDetails> d = c.OrderDetails.ToList();
             bool done = true;
