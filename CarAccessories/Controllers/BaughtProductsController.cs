@@ -24,9 +24,9 @@ namespace CarAccessories.Controllers
                 {
                     var userIdValue = userIdClaim.Value;
 
-                    ApplicationUser user = db.Users.Where(i => i.Id == userIdValue).FirstOrDefault();
-                    db.Entry(user).Collection(c => c.Order).Load();
-                    foreach (var i in user.Order)
+                    Customer user = db.Customers.Where(i => i.ID == userIdValue).FirstOrDefault();
+                    db.Entry(user).Collection(c => c.Orders).Load();
+                    foreach (var i in user.Orders)
                     {
                         db.Entry(i).Collection(c => c.OrderDetails).Load();
                         foreach (var OrderDetails in i.OrderDetails)

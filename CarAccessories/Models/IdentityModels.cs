@@ -14,7 +14,6 @@ namespace CarAccessories.Models
 
         public virtual Vendor Seller { get; set; }
         public virtual Customer Customer { get; set; }
-        public virtual ICollection<Order> Order { get; set; }
         public virtual ICollection<Product> Product { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)

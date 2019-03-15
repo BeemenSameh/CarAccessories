@@ -1,5 +1,7 @@
 ﻿@model CarAccessories.Models.ViewModel.BrandsProducts
 @{
+    /**/
+
     ViewBag.Title = "Index";
 }
 
@@ -111,7 +113,7 @@
                         <div class="flex-sb-m flex-w p-t-16">
                             <div class="w-size11">
                                 <!-- Button -->
-                                <button id="filterBtn" class="flex-c-m size4 bg7 bo-rad-15 hov1 s-text14 trans-0-4" >
+                                <button id="filterBtn" class="flex-c-m size4 bg7 bo-rad-15 hov1 s-text14 trans-0-4">
                                     Filter
                                 </button>
                             </div>
@@ -219,13 +221,14 @@
     <script type="text/javascript">
 
         $('.block2-btn-addcart').each(function () {
-            var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
+            var nameProduct = $(this).parent().parent().parent().find('.block2-name').first().html();
+            var nameVendor = $(this).parent().parent().parent().find('.block2-name').eq(1).html();
             console.log(nameProduct);
             $(this).on('click', function () {
                 $.ajax({
                     url: "/Shop/addCartDetailsToDataBase",
                     method: "get",
-                    data: { ProductName: nameProduct },
+                    data: { ProductName: nameProduct, VendorName: nameVendor },
                     success: function (data) {
                         swal(nameProduct, "is added to cart !", "success");
                     },
@@ -261,12 +264,12 @@
         ];
         var lower = document.getElementById('value-lower');
         var upper = document.getElementById('value-upper');
-      
+
         $('#filterBtn').on('click', function () {
             $.ajax({
                 url: "Shop/filterProductsByPrice",
                 method: "get",
-                data: { LowerPrice: lower.textContent, UpperPrice: upper.textContent},
+                data: { LowerPrice: lower.textContent, UpperPrice: upper.textContent },
                 success: function (data) {
                     console.log("success");
                    

@@ -33,7 +33,6 @@ namespace CarAccessories.Controllers
                 db.Entry(orderdetails.VendorProduct).Reference(prod => prod.Product).Load();
                 db.Entry(orderdetails.VendorProduct).Reference(vend => vend.Vendor).Load();
                 db.Entry(orderdetails.VendorProduct.Vendor).Reference(au => au.ApplicationUser).Load();
-
             }
             return View("GetOrderByID", order);
         }
