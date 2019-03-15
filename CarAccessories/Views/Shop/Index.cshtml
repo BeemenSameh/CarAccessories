@@ -117,7 +117,7 @@
                             </div>
 
                             <div class="s-text3 p-t-10 p-b-10">
-                                Range: $<span id="value-lower">0</span> - $<span id="value-upper">10000</span>
+                                Range: $<input type="text" readonly  id="value-lower" value="0"> - $<input type="text" readonly id="value-upper" value="1000">
                             </div>
                         </div>
                     </div>
@@ -268,14 +268,16 @@
                 method: "get",
                 data: { LowerPrice: lower.textContent, UpperPrice: upper.textContent},
                 success: function (data) {
-                 console.log("success");
+                    console.log("success");
+                   
+                
                 },
                 error: function (date) {
                     console.log("failed");
                 }
             });
         });
-
+         
         filterBar.noUiSlider.on('update', function (values, handle) {
             skipValues[handle].innerHTML = Math.round(values[handle]);
         });

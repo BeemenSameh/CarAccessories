@@ -102,12 +102,14 @@ namespace CarAccessories.Controllers
         }
         public ActionResult filterProductsByPrice(int LowerPrice, int UpperPrice)
         {
-            List<VendorProduct> price = db.VendorProducts.Where(v => v.Price == LowerPrice && v.Price == UpperPrice).ToList();
+           
+            List<VendorProduct> price = db.VendorProducts.Where(v => v.Price >= LowerPrice && v.Price <= UpperPrice).ToList();
             foreach (var i in price)
             {
                 db.Entry(i).Reference(p => p.Product).Load();
                 db.Entry(i).Reference(p => p.Vendor).Load();
             }
+
             return PartialView("_AllProductsPartialView", price);
         }
     }
