@@ -405,11 +405,34 @@
     <script type="text/javascript" src="~/Scripts/vendor/lightbox2/js/lightbox.min.js"></script>
     <!--===============================================================================================-->
     <script type="text/javascript" src="~/Scripts/vendor/sweetalert/sweetalert.min.js"></script>
- 
+    <script src="~/Scripts/jquery.rateit.min.js"></script>
 
     <!--===============================================================================================-->
     <script src="~/Scripts/js/main.js"></script>
 
+   <script>
+        var tooltipvalues = ['bad', 'poor', 'ok', 'good', 'super'];
+        $(".rateit").bind('over', function (event, value) { $(this).attr('title', tooltipvalues[value - 1]); });
+        $('.rateit').each(function () {
+            $(this).on('click', function () {
+                var rate = $(this).rateit('value');
+                var VendorProdId = $(this).attr("data-vendorId");
+                console.log(rate);
+                $.ajax({
+                    url: "Rates/UserRateVendorProduct",
+                    method: "get",
+                    data: { rate: rate, VendorProdId: VendorProdId },
+                    success: function (data) {
+                        swal("This Prod", "is Rated by" + rate+"!", "success");
+                    },
+                    error: function (date) {
+                        console.log("Can't Rate product");
+                    }
+                });
+            });
+        });
+       // $('#rateit10').rateit('value')
+   </script>
     @RenderSection("scripts", required: false)
 
    
