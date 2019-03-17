@@ -260,7 +260,7 @@ namespace CarAccessories.Controllers
 
                 vm.vendor.ID = vm.UserId;
                 vm.vendor.Accept = 0;
-                db.Sellers.Add(vm.vendor);
+                db.Vendors.Add(vm.vendor);
                 db.SaveChanges();
                 return RedirectToAction("Index", "Home");
             }

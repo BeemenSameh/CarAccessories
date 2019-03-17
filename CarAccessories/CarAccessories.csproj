@@ -1728,7 +1728,7 @@
     <Content Include="Views\VendorProduct\_addProduct.cshtml" />
     <Content Include="Views\VendorProduct\_GetPartialProducts.cshtml" />
     <Content Include="Views\VendorProduct\_EditProduct.cshtml" />
-    <Content Include="Views\VendorProduct\_Details.cshtml" />
+    <Content Include="Views\Shared\_VendorDetails.cshtml" />
     <Content Include="Views\VendorProduct\_DeleteProduct.cshtml" />
     <Content Include="Views\AddProductToVendor\Index.cshtml" />
     <Content Include="Views\AddProductToVendor\Addprice.cshtml" />

@@ -23,7 +23,7 @@ namespace CarAccessories.Controllers
         {
             var user = db.Users.FirstOrDefault(use => use.Id == id);
             db.Entry(user).Reference(vendor => vendor.Vendor).Load();
-            return PartialView("_Details",user);
+            return PartialView("_VendorDetails",user);
         }
 
         // GET: Vedor/Create
