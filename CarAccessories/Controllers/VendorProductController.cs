@@ -47,7 +47,7 @@ namespace CarAccessories.Controllers
 
         }
 
-        // GET: Vedor/Edit/5
+        // GET: vendor/Edit/5
         public ActionResult EditProduct(string uid,int? pid)
         {
             ViewBag.ID = uid;
@@ -57,7 +57,7 @@ namespace CarAccessories.Controllers
             return PartialView("_EditProduct",product);
         }
 
-        // POST: Vedor/Edit/5
+        // POST: vendor/Edit/5
         [HttpPost]
         public ActionResult EditProduct(int id, Product product)
         {
@@ -77,7 +77,7 @@ namespace CarAccessories.Controllers
             }
         }
 
-        // GET: Vedor/Delete/5
+        // GET: vendor/Delete/5
         public ActionResult DeleteProduct(int id)
         {
             Product product = db.Products.Find(id);
@@ -85,7 +85,7 @@ namespace CarAccessories.Controllers
             return PartialView("_DeleteProduct", product);
         }
 
-        // POST: Vedor/Delete/5
+        // POST: vendor/Delete/5
         [HttpPost]
         public ActionResult DeleteProduct(int id, FormCollection collection)
         {
