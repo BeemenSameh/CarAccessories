@@ -186,6 +186,7 @@
     <Compile Include="Controllers\SaleController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
     <Compile Include="Controllers\VedorController.cs" />
+    <Compile Include="Controllers\VendorProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1715,6 +1716,14 @@
     <Content Include="Views\Shared\_VendorLayout.cshtml" />
     <Content Include="Views\Vedor\_VendorView.cshtml" />
     <Content Include="Views\Vedor\_ProductsView.cshtml" />
+    <Content Include="Views\Vedor\Index.cshtml" />
+    <Content Include="Views\Vedor\GetAllProducts.cshtml" />
+    <Content Include="Views\VendorProduct\GetProducts.cshtml" />
+    <Content Include="Views\VendorProduct\_addProduct.cshtml" />
+    <Content Include="Views\VendorProduct\_GetPartialProducts.cshtml" />
+    <Content Include="Views\VendorProduct\_EditProduct.cshtml" />
+    <Content Include="Views\VendorProduct\_Details.cshtml" />
+    <Content Include="Views\VendorProduct\_DeleteProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

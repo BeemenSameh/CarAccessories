@@ -1,0 +1,20 @@
+﻿@section data{
+@model CarAccessories.Models.ApplicationUser
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_VendorLayout.cshtml";
+}
+
+<div class="container">
+
+<div class="user-block">
+    <img class="profile-user-img img-fluid img-circle" src="~/Content/images/images/@Model.Vendor.Photo" alt="KatKooty Company">
+    <span class="username">
+        <a href="#">@Model.Vendor.ComponyName</a>
+    </span>
+</div>
+
+<h2>@Model.Vendor.ComponyName</h2>
+
+</div>
+}

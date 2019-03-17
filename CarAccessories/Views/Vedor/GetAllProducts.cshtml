@@ -1,0 +1,62 @@
+﻿@model CarAccessories.Models.ApplicationUser
+@{
+    ViewBag.Title = "GetAllProducts";
+    Layout = "~/Views/Shared/_VendorLayout.cshtml";
+}
+
+
+
+<div class="card">
+    <div class="card-header">
+        @Html.ActionLink("ADD", "addProduct", null, new { @class = "btn btn-success", style = "margin-bottom:4px;display:block" })
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <table id="example1" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Product ID</th>
+                    <th>Name</th>
+                    <th>Image</th>
+                    <th>Description</th>
+                    <th>Category</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var product in Model.Vendor.VendorProduct)
+                {
+                    <tr>
+                        <td>@product.Product.ID</td>
+                        <td>@product.Product.Name</td>
+                        <td><img class="w-auto h-auto" alt="@product.Product.Image" src="~/Content/images/images/@product.Product.Image"></td>
+                        <td>@product.Product.MinDescription</td>
+                        <td>@product.Product.Category.Name</td>
+                        <td>@product.Quantity</td>
+                        <td>@product.Price</td>
+                        <td>
+                            @Html.ActionLink("EDIT", "EditProduct", null, new { @class = "btn btn-warning", style = "margin-bottom:4px;display:block" })
+                            @Html.ActionLink("DELETE", "DeleteProduct", null, new { @class = "btn btn-danger", style = "margin-bottom:4px;display:block" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th >Product ID</th>
+                    <th>Name</th>
+                    <th>Image</th>
+                    <th>Description</th>
+                    <th>Category</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <!-- /.card-body -->
+</div>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CarAccessories.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,82 +9,37 @@ namespace CarAccessories.Controllers
 {
     public class VedorController : Controller
     {
+        ApplicationDbContext db = new ApplicationDbContext();
         // GET: Vedor
-        public ActionResult Index()
+        public ActionResult Index(string id)
         {
-            return View();
+            var user = db.Users.FirstOrDefault(use => use.Id == id);
+            db.Entry(user).Reference(vendor => vendor.Vendor).Load();
+            return View(user);
         }
 
         // GET: Vedor/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(string id)
         {
-            return View();
+            var user = db.Users.FirstOrDefault(use => use.Id == id);
+            db.Entry(user).Reference(vendor => vendor.Vendor).Load();
+            return PartialView("_Details",user);
         }
 
         // GET: Vedor/Create
-        public ActionResult Create()
+        
+        //Get Products
+        public ActionResult GetAllProducts(string id)
         {
-            return View();
-        }
-
-        // POST: Vedor/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
+            var user = db.Users.FirstOrDefault(use => use.Id == id);
+            db.Entry(user).Reference(vendor => vendor.Vendor).Load();
+            db.Entry(user.Vendor).Collection(prod => prod.VendorProduct).Load();
+            foreach (var VP in user.Vendor.VendorProduct)
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                db.Entry(VP).Reference(prod => prod.Product).Load();
+                db.Entry(VP.Product).Reference(cat => cat.Category).Load();
             }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Vedor/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Vedor/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Vedor/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Vedor/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return View(user);
         }
     }
 }

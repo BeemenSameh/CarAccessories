@@ -1,5 +1,4 @@
 ﻿<!DOCTYPE html>
-
 <html>
 <head>
     <meta charset="utf-8">
@@ -21,7 +20,6 @@
         <!-- Content Wrapper. Contains page content -->
     <div class="container-fluid">
         <div>
-            <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
                     <div class="row">
@@ -30,29 +28,7 @@
                             <!-- Profile Image -->
                             <div class="card card-primary card-outline">
                                 <div class="card-body box-profile">
-                                    <div class="text-center">
-                                        <img class="profile-user-img img-fluid img-circle"
-                                             src="../../dist/img/user4-128x128.jpg"
-                                             alt="User profile picture">
-                                    </div>
-
-                                    <h3 class="profile-username text-center">Vendor Name</h3>
-
-                                    <p class="text-muted text-center">Company Name</p>
-
-                                    <ul class="list-group list-group-unbordered mb-3">
-                                        <li class="list-group-item">
-                                            <b>Rate</b> <a class="float-right">1,322</a>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <b>Orders Delivered</b> <a class="float-right">543</a>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <b>Products</b> <a class="float-right">13,287</a>
-                                        </li>
-                                    </ul>
-
-                                    <a href="#" class="btn btn-primary btn-block"><b>Details</b></a>
+                                    @RenderSection("data", false);
                                 </div>
                                 <!-- /.card-body -->
                             </div>
@@ -60,43 +36,14 @@
                             <!-- About Me Box -->
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">Personal Info</h3>
+                                    <h3 class="card-title">Company Info</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
-                                    <strong><i class="fa fa-book mr-1"></i> Education</strong>
-
-                                    <p class="text-muted">
-                                        B.S. in Computer Science from the University of Tennessee at Knoxville
-                                    </p>
-
-                                    <hr>
-
-                                    <strong><i class="fa fa-map-marker mr-1"></i> Location</strong>
-
-                                    <p class="text-muted">Malibu, California</p>
-
-                                    <hr>
-
-                                    <strong><i class="fa fa-pencil mr-1"></i> Skills</strong>
-
-                                    <p class="text-muted">
-                                        <span class="tag tag-danger">UI Design</span>
-                                        <span class="tag tag-success">Coding</span>
-                                        <span class="tag tag-info">Javascript</span>
-                                        <span class="tag tag-warning">PHP</span>
-                                        <span class="tag tag-primary">Node.js</span>
-                                    </p>
-
-                                    <hr>
-
-                                    <strong><i class="fa fa-file-text-o mr-1"></i> Notes</strong>
-
-                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+                                    @RenderSection("info", false);
                                 </div>
-                                <!-- /.card-body -->
+                                <!-- /.card -->
                             </div>
-                            <!-- /.card -->
                         </div>
                         <!-- /.col -->
                         <div class="col-md-9">
@@ -110,134 +57,7 @@
                                 </div><!-- /.card-header -->
                                 <div class="card-body">
                                     <div class="tab-content">
-                                        <div class="active tab-pane" id="activity">
-                                            <!-- Post -->
-                                            <section class="content">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <div class="card">
-                                                            <div class="card-header">
-                                                                <h3 class="card-title">Data Table With Full Features</h3>
-                                                            </div>
-                                                            <!-- /.card-header -->
-                                                            <div class="card-body">
-                                                                <table id="example1" class="table table-bordered table-striped">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>Product ID</th>
-                                                                            <th>Name</th>
-                                                                            <th>Image</th>
-                                                                            <th>Description</th>
-                                                                            <th>Quantity</th>
-                                                                            <th>State</th>
-                                                                            <th>Actions</th>
-                                                                        </tr>
-                                                                    </thead>
-
-                                                                    <tbody></tbody>
-                                                                    <tfoot>
-                                                                        <tr>
-                                                                            <th>Product ID</th>
-                                                                            <th>Name</th>
-                                                                            <th>Image</th>
-                                                                            <th>Description</th>
-                                                                            <th>Quantity</th>
-                                                                            <th>State</th>
-                                                                            <th>Actions</th>
-                                                                        </tr>
-                                                                    </tfoot>
-                                                                </table>
-                                                            </div>
-                                                            <!-- /.card-body -->
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </section>
-
-                                            <!-- /.tab-pane -->
-                                        </div>
-
-
-                                        <div class="tab-pane" id="add">
-                                            <form class="form-horizontal">
-                                                <div class="form-group">
-                                                    <label for="Name" class="col-sm-2 control-label">Name</label>
-
-                                                    <div class="col-sm-10">
-                                                        <input type="text" class="form-control" id="Name" placeholder="Name">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="Image" class="col-sm-2 control-label">Image</label>
-
-                                                    <div class="col-sm-10">
-                                                        <input type="text" class="form-control" id="Image" placeholder="Image">&nbsp;&nbsp;
-                                                        <input type="button" class="btn btn-default" value="Browse">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="Quantity" class="col-sm-2 control-label">Quantity</label>
-
-                                                    <div class="col-sm-10">
-                                                        <input type="number" class="form-control" id="Quantity" placeholder="Quantity">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="Description" class="col-sm-2 control-label">Description</label>
-
-                                                    <div class="col-sm-10">
-                                                        <textarea class="form-control" id="Description" placeholder="Description"></textarea>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="State" class="col-sm-2 control-label">State</label>
-
-                                                    <div class="col-sm-10">
-                                                        <input type="text" class="form-control" id="State" placeholder="State">
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <div class="col-sm-offset-2 col-sm-10">
-                                                        <button type="submit" class="btn btn-danger">ADD</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-
-                                        <div class="tab-pane" id="settings">
-                                            <form class="form-horizontal">
-                                                <div class="form-group">
-                                                    <label for="Name" class="col-sm-2 control-label">Company Name</label>
-
-                                                    <div class="col-sm-10">
-                                                        <input type="text" class="form-control" id="Name" placeholder="Name">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="Location" class="col-sm-2 control-label">Location</label>
-
-                                                    <div class="col-sm-10">
-                                                        <input type="text" class="form-control" id="Location" placeholder="Location">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="Image" class="col-sm-2 control-label">Image</label>
-
-                                                    <div class="col-sm-10">
-                                                        <input type="text" class="form-control" id="Image" placeholder="Image">
-                                                        <button type="button" class="btn btn-default">Browse</button>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <div class="col-sm-offset-2 col-sm-10">
-                                                        <button type="submit" class="btn btn-danger">Update</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <!-- /.tab-pane -->
+                                        @RenderBody();
                                     </div>
                                     <!-- /.tab-content -->
                                 </div><!-- /.card-body -->
@@ -251,9 +71,8 @@
             </section>
             <!-- /.content -->
         </div>
-        <!-- /.content-wrapper -->
-        <!-- /.control-sidebar -->
     </div>
+
     <!-- jQuery -->
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
@@ -264,13 +83,28 @@
     </script>
     <!-- Bootstrap 4 -->
     <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    <!--DataTable-->
+    <script src="../../plugins/datatables/jquery.dataTables.js"></script>
+    <script src="../../plugins/datatables/dataTables.bootstrap4.js"></script>
     <!-- FastClick -->
     <script src="~/Scripts/fastclick/fastclick.min.js"></script>
     <!-- AdminLTE App -->
     <script src="~/Scripts/js/adminlte.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="~/Scripts/js/demo.js"></script>
-
+    <script>
+        $(function () {
+          $("#example1").DataTable();
+          $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false
+          });
+        });
+    </script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
