@@ -186,7 +186,7 @@
     <Compile Include="Controllers\RatesController.cs" />
     <Compile Include="Controllers\SaleController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
-    <Compile Include="Controllers\VedorController.cs" />
+    <Compile Include="Controllers\VendorController.cs" />
     <Compile Include="Controllers\VendorProductController.cs" />
     <Compile Include="Controllers\AddProductToVendorController.cs" />
     <Compile Include="Global.asax.cs">
@@ -1721,10 +1721,10 @@
     <Content Include="Views\AdminUsers\_GetAllUsers.cshtml" />
     <Content Include="Views\AdminProduct\_GetAllProduct.cshtml" />
     <Content Include="Views\Shared\_VendorLayout.cshtml" />
-    <Content Include="Views\Vedor\_VendorView.cshtml" />
-    <Content Include="Views\Vedor\_ProductsView.cshtml" />
-    <Content Include="Views\Vedor\Index.cshtml" />
-    <Content Include="Views\Vedor\GetAllProducts.cshtml" />
+    <Content Include="Views\Vendor\_VendorView.cshtml" />
+    <Content Include="Views\Vendor\_ProductsView.cshtml" />
+    <Content Include="Views\Vendor\Index.cshtml" />
+    <Content Include="Views\Vendor\GetAllProducts.cshtml" />
     <Content Include="Views\VendorProduct\GetProducts.cshtml" />
     <Content Include="Views\VendorProduct\_addProduct.cshtml" />
     <Content Include="Views\VendorProduct\_GetPartialProducts.cshtml" />
