@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
 
@@ -11,15 +12,28 @@ namespace CarAccessories.Controllers
     {
         ApplicationDbContext db = new ApplicationDbContext();
         // GET: VendorProduct
-        public ActionResult GetProducts(string id)
+        public ActionResult GetProducts()
         {
-            var user = db.Users.FirstOrDefault(use => use.Id == id);
-            db.Entry(user).Reference(vendor => vendor.Vendor).Load();
-            db.Entry(user.Vendor).Collection(prod => prod.VendorProduct).Load();
-            foreach (var VP in user.Vendor.VendorProduct)
+            var user = new Vendor();
+            bool claimIdentity = User.Identity is ClaimsIdentity;
+            if (claimIdentity)
             {
-                db.Entry(VP).Reference(prod => prod.Product).Load();
-                db.Entry(VP.Product).Reference(cat => cat.Category).Load();
+                ClaimsIdentity claimsIdentity = User.Identity as ClaimsIdentity;
+                var userIdClaim = claimsIdentity.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+
+                if (userIdClaim != null)
+                {
+                    var userIdValue = userIdClaim.Value;
+                    user = db.Vendors.Where(i => i.ID == userIdValue).FirstOrDefault();
+
+                    //db.Entry(user).Reference(vendor => vendor.Vendor).Load();
+                    db.Entry(user).Collection(prod => prod.VendorProduct).Load();
+                    foreach (var VP in user.VendorProduct)
+                    {
+                        db.Entry(VP).Reference(prod => prod.Product).Load();
+                        db.Entry(VP.Product).Reference(cat => cat.Category).Load();
+                    }
+                }
             }
             return View(user);
         }
