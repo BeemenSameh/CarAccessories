@@ -60,7 +60,7 @@ namespace CarAccessories.Controllers
                             if (o.Isbuy == false)
                             {
                                 Product product = db.Products.Where(p => p.Name == ProductName).FirstOrDefault();
-                                Vendor Vendor = db.Sellers.Where(v => v.ComponyName == VendorName).FirstOrDefault();
+                                Vendor Vendor = db.Vendors.Where(v => v.ComponyName == VendorName).FirstOrDefault();
                                 VendorProduct vendorProduct = db.VendorProducts.FirstOrDefault(vp => vp.Product.ID == product.ID && vp.Vendor.ID == Vendor.ID);
                                 OrderDetails od = new OrderDetails
                                 {
@@ -82,7 +82,7 @@ namespace CarAccessories.Controllers
                                     OrderDetails = new List<OrderDetails>()
                                 };
                                 Product product = db.Products.Where(p => p.Name == ProductName).FirstOrDefault();
-                                Vendor Vendor = db.Sellers.Where(v => v.ComponyName == VendorName).FirstOrDefault();
+                                Vendor Vendor = db.Vendors.Where(v => v.ComponyName == VendorName).FirstOrDefault();
                                 VendorProduct vendorProduct = db.VendorProducts.FirstOrDefault(vp => vp.Product.ID == product.ID && vp.Vendor.ID == Vendor.ID);
                                 OrderDetails od = new OrderDetails
                                 {
@@ -107,7 +107,7 @@ namespace CarAccessories.Controllers
                             OrderDetails = new List<OrderDetails>()
                         };
                         Product product = db.Products.Where(p => p.Name == ProductName).FirstOrDefault();
-                        Vendor Vendor = db.Sellers.Where(v => v.ComponyName == VendorName).FirstOrDefault();
+                        Vendor Vendor = db.Vendors.Where(v => v.ComponyName == VendorName).FirstOrDefault();
                         VendorProduct vendorProduct = db.VendorProducts.FirstOrDefault(vp => vp.Product.ID == product.ID && vp.Vendor.ID == Vendor.ID);
                         OrderDetails od = new OrderDetails
                         {

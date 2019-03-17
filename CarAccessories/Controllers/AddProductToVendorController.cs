@@ -41,7 +41,7 @@ namespace CarAccessories.Controllers
                 if (userIdClaim != null)
                 {
                     var userIdValue = userIdClaim.Value;
-                    user = db.Sellers.Where(i => i.ID == userIdValue).FirstOrDefault();
+                    user = db.Vendors.Where(i => i.ID == userIdValue).FirstOrDefault();
                 }
             }
             vendorproduct.Product = product;
