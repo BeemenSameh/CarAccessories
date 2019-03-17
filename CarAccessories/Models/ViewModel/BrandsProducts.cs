@@ -7,8 +7,8 @@ namespace CarAccessories.Models.ViewModel
 {
     public class BrandsProducts
     {
-        public List<Brand> Brands;
-        public List<VendorProduct> VendorProducts;
-        public List<Category> CategoriesList;
+        public List<Brand> Brands { get; set; }
+        public List<VendorProduct> VendorProducts { get; set; }
+        public List<Category> CategoriesList { get; set; }
     }
 }

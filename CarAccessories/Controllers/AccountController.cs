@@ -9,12 +9,14 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using CarAccessories.Models;
+using CarAccessories.Models.ViewModel;
 
 namespace CarAccessories.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
+        public ApplicationDbContext db = new ApplicationDbContext();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -147,29 +149,166 @@ namespace CarAccessories.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async  Task<ActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                if (model.UserType == "Customer")
+                {
+                    var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Type = "Customer" };
+                    var result = await UserManager.CreateAsync(user, model.Password);
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("RegistAsCustomer",user);
+                    }
+                    AddErrors(result);
+
                 }
-                AddErrors(result);
+                else if (model.UserType == "Vendor")
+                {
+                    var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Type = "Vendor" };
+                    var result = await UserManager.CreateAsync(user, model.Password);
+                    return RedirectToAction("RegistAsVendor", new { user, model.Password });
+                }
+               
+            //    if (result.Succeeded)
+            //    {
+            //        await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    
+            //        // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+            //        // Send an email with this link
+            //        // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+            //        // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+            //        // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+
+            //    //if(model.UserType== "Customer")
+            //      //  {
+            //            //user.Type = "Customer";
+            //           // return RedirectToAction("RegistAsCustomer", user);
+            //        //}
+            //    //else if(model.UserType== "Vendor")
+            //       // {
+            //            //user.Type = "Vendor";
+            //           // return RedirectToAction("RegistAsVendor", user);
+            //        //}
+            //        //return RedirectToAction("Index", "Home");
+            //    }
+            //    AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult RegistAsCustomer(ApplicationUser user)
+        {
+              RegisterAsCustomerViewModel c= new RegisterAsCustomerViewModel
+            {
+                UserId = user.Id,
+                customer = new Customer(),
+
+            };
+
+
+            return View(c);
+        }
+
+        [HttpPost]
+
+        [AllowAnonymous]
+        public  async Task<ActionResult> RegistAsCustomer(RegisterAsCustomerViewModel m)
+        {
+            if (ModelState.IsValid)
+            {
+
+                m.customer.ID = m.UserId;
+                db.Customers.Add(m.customer);
+                db.SaveChanges();
+                ApplicationUser user = db.Users.Where(i => i.Id == m.UserId).FirstOrDefault();
+                await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                return RedirectToAction("Index", "Home");
+                
+
+            }
+            return View("RegistAsCustomer",m);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult RegistAsVendor(ApplicationUser user)
+        {
+            RegistAsVendorViewModel v = new RegistAsVendorViewModel
+            {
+                UserId = user.Id,
+                vendor = new Vendor(),
+
+            };
+            return View(v);
+        }
+
+      
+
+        [HttpPost]
+        public ActionResult RegistAsVendor(RegistAsVendorViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+
+                vm.vendor.ID = vm.UserId;
+                vm.vendor.Accept = 0;
+                db.Sellers.Add(vm.vendor);
+                db.SaveChanges();
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return View("RegistAsVendor", vm);
+            }
+        }
+
+
+        [HttpGet]
+        public ActionResult EditCustomerProfile()
+        {
+           string LogedInUserId = User.Identity.GetUserId();
+           string CurrentUserType=db.Users.Where(i => i.Id == LogedInUserId).Select(t => t.Type).FirstOrDefault();
+            if (CurrentUserType == "Customer")
+            {
+                Customer c = db.Customers.Where(i => i.ID == LogedInUserId).FirstOrDefault();
+                RegisterAsCustomerViewModel cvm = new RegisterAsCustomerViewModel
+                {
+                    UserId = LogedInUserId,
+                    customer = c
+                };
+                return View("RegistAsCustomer", cvm);
+            }
+            else
+            {
+                return View("RegistAsVendor");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult EditCustomerProfile(RegisterAsCustomerViewModel cvm)
+        {
+            if (ModelState.IsValid)
+            {
+                Customer c = db.Customers.Where(i => i.ID == cvm.customer.ID).FirstOrDefault();
+                c.Name = cvm.customer.Name;
+                c.Address = cvm.customer.Address;
+                c.NationalID = cvm.customer.NationalID;
+                c.Photo = cvm.customer.Photo;
+                c.PhoneNumber = cvm.customer.PhoneNumber;
+                c.money = cvm.customer.money;
+                db.SaveChanges();
+                return RedirectToAction("Index", "Home");
+
+            }
+            return View("RegistAsCustomer", cvm);
         }
 
         //
@@ -482,18 +621,7 @@ namespace CarAccessories.Controllers
         }
         #endregion
 
-        [HttpGet]
-        [AllowAnonymous]
-        public ActionResult RegistAsCustomer()
-        {
-            return PartialView("_CustomerRegisterPartialView");
-        }
-        [HttpGet]
-        [AllowAnonymous]
-        public ActionResult RegistAsVendor()
-        {
-            return PartialView("_VendorRegisterPartialView");
-        }
+     
 
     }
 

@@ -31,13 +31,6 @@ namespace WebApplication1.Controllers
             return View(b);
         }
 
-        //public ActionResult GetProductsByCatId(int Category_ID)
-        //{
-        //    List<Product> ProductsList = db.Products.Where(i => i.Category.ID == Category_ID).Where(p=>p.Sale_price!=0).ToList();
-        //    return PartialView("_GetProdByCatIdPartialView", ProductsList);
-
-        //}
-
         public ActionResult GetAllProducts()
         {
             List<VendorProduct> AllVendorProductsList = db.VendorProducts.Where(p=>p.Sale_price!=0).ToList();
