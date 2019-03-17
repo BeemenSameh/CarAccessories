@@ -7,10 +7,10 @@ using System.Web.Mvc;
 
 namespace CarAccessories.Controllers
 {
-    public class VedorController : Controller
+    public class VendorController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
-        // GET: Vedor
+        // GET: vendor
         public ActionResult Index(string id)
         {
             var user = db.Users.FirstOrDefault(use => use.Id == id);
@@ -18,7 +18,7 @@ namespace CarAccessories.Controllers
             return View(user);
         }
 
-        // GET: Vedor/Details/5
+        // GET: vendor/Details/5
         public ActionResult Details(string id)
         {
             var user = db.Users.FirstOrDefault(use => use.Id == id);
@@ -26,7 +26,7 @@ namespace CarAccessories.Controllers
             return PartialView("_VendorDetails",user);
         }
 
-        // GET: Vedor/Create
+        // GET: vendor/Create
         
         //Get Products
         public ActionResult GetAllProducts(string id)

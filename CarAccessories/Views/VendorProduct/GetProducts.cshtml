@@ -1,4 +1,4 @@
-﻿@model CarAccessories.Models.ApplicationUser
+﻿@model CarAccessories.Models.Vendor
 @{
     ViewBag.Title = "GetProducts";
     Layout = "~/Views/Shared/_VendorLayout.cshtml";
@@ -6,7 +6,7 @@
 
 <div class="card" id="add">
     <div class="card-header">
-        @Ajax.ActionLink("ADD","addProduct", new { id = Model.Id},new AjaxOptions { UpdateTargetId = "add",InsertionMode=InsertionMode.Replace}, new { @class = "btn btn-success", style = "margin-bottom:4px;display:block" })
+        @Ajax.ActionLink("ADD","addProduct", new { id = Model.ID},new AjaxOptions { UpdateTargetId = "add",InsertionMode=InsertionMode.Replace}, new { @class = "btn btn-success", style = "margin-bottom:4px;display:block" })
     </div>
     <!-- /.card-header -->
     <div class="card-body">
@@ -25,7 +25,7 @@
             </thead>
 
             <tbody>
-                @foreach (var product in Model.Vendor.VendorProduct)
+                @foreach (var product in Model.VendorProduct)
                 {
                     <tr>
                         <td>@product.Product.ID</td>
@@ -36,7 +36,7 @@
                         <td>@product.Quantity</td>
                         <td>@product.Price</td>
                         <td>
-                            @Ajax.ActionLink("EDIT", "EditProduct", new { uid = Model.Id,pid = product.Product.ID},new AjaxOptions {UpdateTargetId="add", InsertionMode=InsertionMode.Replace }, new { @class = "btn btn-warning", style = "margin-bottom:4px;display:block" })
+                            @Ajax.ActionLink("EDIT", "EditProduct", new { pid = product.Product.ID},new AjaxOptions {UpdateTargetId="add", InsertionMode=InsertionMode.Replace }, new { @class = "btn btn-warning", style = "margin-bottom:4px;display:block" })
                             @Ajax.ActionLink("DELETE", "DeleteProduct", new { pid = product.Product.ID },new AjaxOptions { UpdateTargetId="add",InsertionMode=InsertionMode.Replace}, new { @class = "btn btn-danger", style = "margin-bottom:4px;display:block" })
                         </td>
                     </tr>
