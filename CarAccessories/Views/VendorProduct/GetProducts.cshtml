@@ -37,7 +37,7 @@
                         <td>@product.Price</td>
                         <td>
                             @Ajax.ActionLink("EDIT", "EditProduct", new { uid = Model.Id,pid = product.Product.ID},new AjaxOptions {UpdateTargetId="add", InsertionMode=InsertionMode.Replace }, new { @class = "btn btn-warning", style = "margin-bottom:4px;display:block" })
-                            @Ajax.ActionLink("DELETE", "DeleteProduct", new { pid = product.Product.ID }, new { @class = "btn btn-danger", style = "margin-bottom:4px;display:block" })
+                            @Ajax.ActionLink("DELETE", "DeleteProduct", new { pid = product.Product.ID },new AjaxOptions { UpdateTargetId="add",InsertionMode=InsertionMode.Replace}, new { @class = "btn btn-danger", style = "margin-bottom:4px;display:block" })
                         </td>
                     </tr>
                 }

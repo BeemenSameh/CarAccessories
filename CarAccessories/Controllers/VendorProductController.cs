@@ -82,7 +82,7 @@ namespace CarAccessories.Controllers
         {
             Product product = db.Products.Find(id);
 
-            return View("_DeleteProduct", product);
+            return PartialView("_DeleteProduct", product);
         }
 
         // POST: Vedor/Delete/5
