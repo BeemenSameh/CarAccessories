@@ -28,7 +28,7 @@
                         <div class="card">
                             <div class="card-header">
 
-                                @Ajax.ActionLink("All", "GetAllProducts", "Sale", new { @class = "card-link", href = "#collapseOne" },
+                                @Ajax.ActionLink("All", "GetAllProducts", "Shop", new { @class = "card-link", href = "#collapseOne" },
                                new AjaxOptions()
                                {
                                    UpdateTargetId = "SelectedCategory",
@@ -55,7 +55,7 @@
                                             @foreach (var m in item.Models)
                                             {
                                                 <li>
-                                                    @Ajax.ActionLink(m.ModelName, "GetProductsByModelId", "Sale", new { Model_ID = m.ID },
+                                                    @Ajax.ActionLink(m.ModelName, "GetProductsByModelId", "Shop", new { Model_ID = m.ID },
                                                 new AjaxOptions()
                                                 {
                                                     UpdateTargetId = "SelectedCategory",
@@ -82,7 +82,7 @@
                         @foreach (var item in Model.CategoriesList)
                         {
                             <li class="p-t-4">
-                                @Ajax.ActionLink(item.Name, "GetProductsByCategoryId", "Sale", new { Cat_ID = item.ID },
+                                @Ajax.ActionLink(item.Name, "GetProductsByCategoryId", "Shop", new { Cat_ID = item.ID },
                                new AjaxOptions()
                                {
                                    UpdateTargetId = "SelectedCategory",

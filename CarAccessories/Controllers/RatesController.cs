@@ -20,16 +20,28 @@ namespace CarAccessories.Controllers
         {
             Rate r = new Rate();
             r.Customer_ID = User.Identity.GetUserId();
+          Rate existRate = db.Rates.Where(u => u.Customer_ID == r.Customer_ID).Where(v => v.VendorProduct_ID == VendorProdId).FirstOrDefault();
+            if(existRate==null)
+            {
+                r.RateNumber = rate;
+                r.VendorProduct_ID = VendorProdId;
+
+                db.Rates.Add(r);
+                db.SaveChanges();
+                return View();
+            }
+            else
+            {
+                existRate.RateNumber = rate;
+                db.SaveChanges();
+                return View();
+            }
+
 
              
            
            
-            r.RateNumber = rate;
-            r.VendorProduct_ID = VendorProdId;
-          
-            db.Rates.Add(r);
-            db.SaveChanges();
-            return View();
+            
         }
         // GET: Rates
         public ActionResult Index()
