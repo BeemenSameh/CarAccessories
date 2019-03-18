@@ -183,6 +183,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\RatesController.cs" />
     <Compile Include="Controllers\SaleController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
     <Compile Include="Controllers\VendorController.cs" />
@@ -1738,6 +1739,12 @@
     <Content Include="Views\Account\RegistAsCustomer.cshtml" />
     <Content Include="Views\Account\RegistAsVendor.cshtml" />
     <Content Include="Views\Account\EditCustomerProfile.cshtml" />
+    <Content Include="Views\Rates\Create.cshtml" />
+    <Content Include="Views\Rates\Delete.cshtml" />
+    <Content Include="Views\Rates\Details.cshtml" />
+    <Content Include="Views\Rates\Edit.cshtml" />
+    <Content Include="Views\Rates\Index.cshtml" />
+    <Content Include="Views\Rates\UserRateVendorProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

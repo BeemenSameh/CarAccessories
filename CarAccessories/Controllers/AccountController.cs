@@ -169,7 +169,11 @@ namespace CarAccessories.Controllers
                 {
                     var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Type = "Vendor" };
                     var result = await UserManager.CreateAsync(user, model.Password);
-                    return RedirectToAction("RegistAsVendor", new { user, model.Password });
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("RegistAsVendor", user);
+                    }
+                    AddErrors(result);
                 }
                
             //    if (result.Succeeded)
@@ -253,7 +257,8 @@ namespace CarAccessories.Controllers
       
 
         [HttpPost]
-        public ActionResult RegistAsVendor(RegistAsVendorViewModel vm)
+        [AllowAnonymous]
+        public async Task<ActionResult> RegistAsVendor(RegistAsVendorViewModel vm)
         {
             if (ModelState.IsValid)
             {
@@ -262,7 +267,10 @@ namespace CarAccessories.Controllers
                 vm.vendor.Accept = 0;
                 db.Vendors.Add(vm.vendor);
                 db.SaveChanges();
+                ApplicationUser user = db.Users.Where(i => i.Id == vm.UserId).FirstOrDefault();
+                await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 return RedirectToAction("Index", "Home");
+              
             }
             else
             {
