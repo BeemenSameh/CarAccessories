@@ -28,14 +28,14 @@
                         <div class="card">
                             <div class="card-header">
 
-                                @Ajax.ActionLink("All", "GetAllProducts", "Shop", new {@class="card-link"  ,href="#collapseOne" },
-                   new AjaxOptions()
-                   {
-                       UpdateTargetId = "SelectedCategory",
-                       InsertionMode = InsertionMode.Replace,
-                       HttpMethod = "Get"
-                   }
-                   )
+                                @Ajax.ActionLink("All", "GetAllProducts", "Sale", new { @class = "card-link", href = "#collapseOne" },
+                               new AjaxOptions()
+                               {
+                                   UpdateTargetId = "SelectedCategory",
+                                   InsertionMode = InsertionMode.Replace,
+                                   HttpMethod = "Get"
+                               }
+                               )
 
                             </div>
 
@@ -55,15 +55,16 @@
                                             @foreach (var m in item.Models)
                                             {
                                                 <li>
-                                                    @Ajax.ActionLink(m.ModelName, "GetProductsByModelId", "Home", new { Model_ID = m.ID },
-                                        new AjaxOptions()
-                                        {
-                                            UpdateTargetId = "SelectedCategory",
-                                            InsertionMode = InsertionMode.Replace,
-                                            HttpMethod = "Get"
-                                        }
-                                         )
+                                                    @Ajax.ActionLink(m.ModelName, "GetProductsByModelId", "Sale", new { Model_ID = m.ID },
+                                                new AjaxOptions()
+                                                {
+                                                    UpdateTargetId = "SelectedCategory",
+                                                    InsertionMode = InsertionMode.Replace,
+                                                    HttpMethod = "Get"
+                                                }
+                                                 )
                                                 </li>
+                                                <br />
 
                                             }
                                         </ul>
@@ -81,7 +82,7 @@
                         @foreach (var item in Model.CategoriesList)
                         {
                             <li class="p-t-4">
-                                @Ajax.ActionLink(item.Name, "GetProductsByCategoryId", "Home", new { Cat_ID = item.ID },
+                                @Ajax.ActionLink(item.Name, "GetProductsByCategoryId", "Sale", new { Cat_ID = item.ID },
                                new AjaxOptions()
                                {
                                    UpdateTargetId = "SelectedCategory",

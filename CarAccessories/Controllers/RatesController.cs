@@ -15,12 +15,18 @@ namespace CarAccessories.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        [Authorize]
         public ActionResult UserRateVendorProduct(int rate,int VendorProdId)
         {
             Rate r = new Rate();
+            r.Customer_ID = User.Identity.GetUserId();
+
+             
+           
+           
             r.RateNumber = rate;
             r.VendorProduct_ID = VendorProdId;
-            r.Customer_ID = User.Identity.GetUserId();
+          
             db.Rates.Add(r);
             db.SaveChanges();
             return View();
