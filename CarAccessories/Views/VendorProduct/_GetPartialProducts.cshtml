@@ -1,6 +1,6 @@
-﻿@model CarAccessories.Models.ApplicationUser
+﻿@model CarAccessories.Models.Vendor
 <div class="card-header">
-    @Ajax.ActionLink("ADD", "addProduct", new { id = Model.Id }, new AjaxOptions { UpdateTargetId = "add", InsertionMode = InsertionMode.Replace }, new { @class = "btn btn-success", style = "margin-bottom:4px;display:block" })
+    @Ajax.ActionLink("ADD", "addProduct", new { id = Model.ID }, new AjaxOptions { UpdateTargetId = "add", InsertionMode = InsertionMode.Replace }, new { @class = "btn btn-success", style = "margin-bottom:4px;display:block" })
 </div>
 <div class="card-body">
     <table id="example1" class="table table-bordered table-striped">
@@ -18,7 +18,7 @@
         </thead>
 
         <tbody>
-            @foreach (var product in Model.Vendor.VendorProduct)
+            @foreach (var product in Model.VendorProduct)
             {
                 <tr>
                     <td>@product.Product.ID</td>

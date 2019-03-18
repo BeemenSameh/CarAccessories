@@ -6,11 +6,12 @@
     </div>
 </div>
 <form class="form-horizontal">
+    @Html.HiddenFor(m=>m.ID)
     <div class="form-group">
         <label for="Name" class="col-sm-2 control-label">Name</label>
 
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="Name" placeholder="Name" value="@Model.Name">
+            <input type="text" class="form-control" id="Name" placeholder="Name" name="Name" value="@Model.Name">
         </div>
     </div>
     <div class="form-group">
@@ -18,29 +19,43 @@
 
         <div class="col-sm-10">
             <div> <img src="~/Content/images/images/@Model.Image" /></div>
-            <input type="text" class="form-control" id="Image" placeholder="Image">&nbsp;&nbsp;
+            <input type="text" class="form-control" id="Image" name="Image" placeholder="Image">&nbsp;&nbsp;
             <input type="button" class="btn btn-default" value="Browse">
         </div>
     </div>
+
     <div class="form-group">
+        <label for="Model" class="col-sm-2 control-label">Category</label>
+
+        <div class="col-sm-10">
+            <select>
+                @foreach (var item in ViewBag.category)
+                {
+                    <option value="@item.ID">@item.Name</option>
+                }
+            </select>
+        </div>
+    </div>
+
+    @*<div class="form-group">
         <label for="Quantity" class="col-sm-2 control-label">Quantity</label>
 
         <div class="col-sm-10">
             <input type="number" class="form-control" id="Quantity" placeholder="Quantity" value="@Model.">
         </div>
-    </div>
+    </div>*@
     <div class="form-group">
         <label for="Description" class="col-sm-2 control-label">Description</label>
 
         <div class="col-sm-10">
-            <textarea class="form-control" id="Description" placeholder="Description">@Model.MinDescription</textarea>
+            <textarea class="form-control" id="Description" name="MinDescription" placeholder="Description">@Model.MinDescription</textarea>
         </div>
     </div>
     <div class="form-group">
         <label for="State" class="col-sm-2 control-label">State</label>
 
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="State" placeholder="State" value="@Model.State">
+            <input type="text" class="form-control" id="State" name="State" placeholder="State" value="@Model.State">
         </div>
     </div>
 
@@ -59,10 +74,10 @@
 
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-danger">Update</button>
+            <button type="submit" class="btn btn-warning">Update</button>
         </div>
         <div class="col-sm-offset-2 col-sm-10">
-            @Ajax.ActionLink("Back", "GetPartialProducts", new { id = ViewBag.ID }, new AjaxOptions { UpdateTargetId = "add", InsertionMode = InsertionMode.Replace }, new { @class = "btn btn-default" })
+            @Ajax.ActionLink("Back", "GetPartialProducts", null, new AjaxOptions { UpdateTargetId = "add", InsertionMode = InsertionMode.Replace }, new { @class = "btn btn-default" })
         </div>
     </div>
 </form>

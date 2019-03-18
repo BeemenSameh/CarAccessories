@@ -1,10 +1,8 @@
 ﻿@model List<CarAccessories.Models.Product>
-
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 
 <section class="content">
     <div class="row">
@@ -18,14 +16,12 @@
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-
                                 <th>ID</th>
                                 <th>Product Name</th>
                                 <th>state</th>
                                 <th>Model</th>
                                 <th>Image</th>
                                 <th>Description</th>
-                                
                             </tr>
                         </thead>
                         <tbody>
@@ -36,13 +32,11 @@
                                     <td>
                                         @item.Name
                                     </td>
-
                                     <td>@item.State</td>
                                     <td>@item.Model</td>
                                     <td><img src="~/Content/images/images/@item.Image" /></td>
                                     <td>@item.MinDescription</td>
                                     <td><a href="~/AddProductToVendor/Addprice/@item.ID" class="btn btn-success"> Add product to me</a></td>
-                                    
                                 </tr>
                             }
                         </tbody>

@@ -1,1 +1,14 @@
-﻿
+﻿@model CarAccessories.Models.Product
+
+@using (Html.BeginForm()) { 
+<div class="card" style="width:400px">
+    <img class="card-img-top" src="~/Content/images/images/@Model.Image" alt="product" style="width:100%">
+    <div class="card-body">
+        <h4 class="card-title">@Model.Name</h4>
+        <p class="card-text">@Model.MinDescription</p>
+        <p class="card-text">@Model.State</p>
+        <p class="card-text">@Model.Category.Name</p>
+        <input type="submit" value="Confirm" class="btn btn-danger" />
+    </div>
+</div>
+}
