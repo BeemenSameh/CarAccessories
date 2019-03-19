@@ -1,0 +1,91 @@
+﻿@model CarAccessories.Models.Vendor
+@{
+    ViewBag.Title = "GetProducts";
+    Layout = "~/Views/Shared/_VendorLayout.cshtml";
+}
+<div class="card-header p-2">
+    <ul class="nav nav-pills">
+        <li class="nav-item">@Ajax.ActionLink("Products", "GetPartialProducts", "VendorProduct", null,
+                            new AjaxOptions {
+                                UpdateTargetId = "section", InsertionMode = InsertionMode.Replace
+                            },
+                            new { @class = "nav-link active" })</li>
+        <li class="nav-item">@Ajax.ActionLink("Orders", "Index", "VendorOrder", null,
+                            new AjaxOptions {
+                                UpdateTargetId = "section", InsertionMode = InsertionMode.Replace
+                            },
+                            new { @class = "nav-link" })
+        </li>
+        <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Models</a></li>
+
+    </ul>
+</div><!-- /.card-header -->
+<div class="active tab-pane" id="section">
+    <!-- Post -->
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+                <div class="card" id="add">
+                    <div class="card-header">
+                        @Ajax.ActionLink("ADD", "addProduct", new { id = Model.ID }, new AjaxOptions { UpdateTargetId = "add", InsertionMode = InsertionMode.Replace }, new { @class = "btn btn-success", style = "margin-bottom:4px;display:block" })
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Product ID</th>
+                                    <th>Name</th>
+                                    <th>Image</th>
+                                    <th>Description</th>
+                                    <th>Category</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach (var product in Model.VendorProduct)
+                                {
+                                    <tr>
+                                        <td>@product.Product.ID</td>
+                                        <td>@product.Product.Name</td>
+                                        <td><img class="w-auto h-auto" alt="@product.Product.Image" src="~/Content/images/images/@product.Product.Image"></td>
+                                        <td>@product.Product.MinDescription</td>
+                                        <td>@product.Product.Category.Name</td>
+                                        <td>@product.Quantity</td>
+                                        <td>@product.Price</td>
+                                        <td>
+                                            @Ajax.ActionLink("EDIT", "EditProduct", new { id = product.Product.ID }, new AjaxOptions { UpdateTargetId = "add", InsertionMode = InsertionMode.Replace }, new { @class = "btn btn-warning", style = "margin-bottom:4px;display:block" })
+                                            @Ajax.ActionLink("DELETE", "DeleteProduct", new { id = product.Product.ID }, new AjaxOptions { UpdateTargetId = "add", InsertionMode = InsertionMode.Replace, Confirm = "Are You Sure You Want To Delete That Product?" }, new { @class = "btn btn-danger", style = "margin-bottom:4px;display:block" })
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Product ID</th>
+                                    <th>Name</th>
+                                    <th>Image</th>
+                                    <th>Description</th>
+                                    <th>Category</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/Ajax");
+}
+
+

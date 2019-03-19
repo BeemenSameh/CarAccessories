@@ -183,8 +183,12 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\RatesController.cs" />
     <Compile Include="Controllers\SaleController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
+    <Compile Include="Controllers\VendorController.cs" />
+    <Compile Include="Controllers\VendorOrderController.cs" />
+    <Compile Include="Controllers\VendorProductController.cs" />
     <Compile Include="Controllers\AddProductToVendorController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1589,6 +1593,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\js\adminlte.js" />
+    <Content Include="Scripts\js\demo.js" />
     <Content Include="Scripts\js\main.js" />
     <Content Include="Scripts\js\main.min.js" />
     <Content Include="Scripts\js\map-custom.js" />
@@ -1742,6 +1747,17 @@
     <Content Include="Views\AdminUsers\DeleteUser.cshtml" />
     <Content Include="Views\AdminUsers\_GetAllUsers.cshtml" />
     <Content Include="Views\AdminProduct\_GetAllProduct.cshtml" />
+    <Content Include="Views\Shared\_VendorLayout.cshtml" />
+    <Content Include="Views\Vendor\_VendorView.cshtml" />
+    <Content Include="Views\Vendor\_ProductsView.cshtml" />
+    <Content Include="Views\Vendor\Index.cshtml" />
+    <Content Include="Views\Vendor\GetAllProducts.cshtml" />
+    <Content Include="Views\VendorProduct\GetProducts.cshtml" />
+    <Content Include="Views\VendorProduct\_addProduct.cshtml" />
+    <Content Include="Views\VendorProduct\_GetPartialProducts.cshtml" />
+    <Content Include="Views\VendorProduct\_EditProduct.cshtml" />
+    <Content Include="Views\Shared\_VendorDetails.cshtml" />
+    <Content Include="Views\VendorProduct\_DeleteProduct.cshtml" />
     <Content Include="Views\AddProductToVendor\Index.cshtml" />
     <Content Include="Views\AddProductToVendor\Addprice.cshtml" />
     <Content Include="Views\VendorProduct\Index.cshtml" />
@@ -1750,6 +1766,15 @@
     <Content Include="Views\Account\RegistAsCustomer.cshtml" />
     <Content Include="Views\Account\RegistAsVendor.cshtml" />
     <Content Include="Views\Account\EditCustomerProfile.cshtml" />
+    <Content Include="Views\Rates\Create.cshtml" />
+    <Content Include="Views\Rates\Delete.cshtml" />
+    <Content Include="Views\Rates\Details.cshtml" />
+    <Content Include="Views\Rates\Edit.cshtml" />
+    <Content Include="Views\Rates\Index.cshtml" />
+    <Content Include="Views\Rates\UserRateVendorProduct.cshtml" />
+    <Content Include="Views\Vendor\_VendorInfo.cshtml" />
+    <Content Include="Views\Vendor\_EditProfile.cshtml" />
+    <Content Include="Views\VendorOrder\_VendorOrders.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

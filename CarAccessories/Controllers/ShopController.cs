@@ -60,7 +60,7 @@ namespace CarAccessories.Controllers
                             if (o.Isbuy == false)
                             {
                                 Product product = db.Products.Where(p => p.Name == ProductName).FirstOrDefault();
-                                Vendor Vendor = db.Sellers.Where(v => v.ComponyName == VendorName).FirstOrDefault();
+                                Vendor Vendor = db.Vendors.Where(v => v.ComponyName == VendorName).FirstOrDefault();
                                 VendorProduct vendorProduct = db.VendorProducts.FirstOrDefault(vp => vp.Product.ID == product.ID && vp.Vendor.ID == Vendor.ID);
                                 OrderDetails od = new OrderDetails
                                 {
@@ -82,7 +82,7 @@ namespace CarAccessories.Controllers
                                     OrderDetails = new List<OrderDetails>()
                                 };
                                 Product product = db.Products.Where(p => p.Name == ProductName).FirstOrDefault();
-                                Vendor Vendor = db.Sellers.Where(v => v.ComponyName == VendorName).FirstOrDefault();
+                                Vendor Vendor = db.Vendors.Where(v => v.ComponyName == VendorName).FirstOrDefault();
                                 VendorProduct vendorProduct = db.VendorProducts.FirstOrDefault(vp => vp.Product.ID == product.ID && vp.Vendor.ID == Vendor.ID);
                                 OrderDetails od = new OrderDetails
                                 {
@@ -107,7 +107,7 @@ namespace CarAccessories.Controllers
                             OrderDetails = new List<OrderDetails>()
                         };
                         Product product = db.Products.Where(p => p.Name == ProductName).FirstOrDefault();
-                        Vendor Vendor = db.Sellers.Where(v => v.ComponyName == VendorName).FirstOrDefault();
+                        Vendor Vendor = db.Vendors.Where(v => v.ComponyName == VendorName).FirstOrDefault();
                         VendorProduct vendorProduct = db.VendorProducts.FirstOrDefault(vp => vp.Product.ID == product.ID && vp.Vendor.ID == Vendor.ID);
                         OrderDetails od = new OrderDetails
                         {
@@ -133,6 +133,39 @@ namespace CarAccessories.Controllers
             }
 
         }
+
+        public ActionResult GetProductsByModelId(int Model_ID)
+        {
+            //{  ? p.Price == f : p.Sale_price == f}
+            List<VendorProduct> VendorProductList = db.VendorProducts.Where(i => i.Product.Model.ID == Model_ID).ToList();
+            foreach (var v in VendorProductList)
+            {
+                db.Entry(v).Reference(p => p.Product).Load();
+                db.Entry(v).Reference(p => p.Vendor).Load();
+            }
+
+            return PartialView("_GetProdByCatIdPartialView", VendorProductList);
+
+        }
+
+        public ActionResult GetProductsByCategoryId(int Cat_ID)
+        {
+            Category Cat = db.Categories.Where(i => i.ID == Cat_ID).FirstOrDefault();
+            db.Entry(Cat).Collection(p => p.Products).Load();
+            List<VendorProduct> VendorProductList = new List<VendorProduct>();
+            foreach (var pl in Cat.Products)
+            {
+                db.Entry(pl).Collection(p => p.VendorProducts).Load();
+                foreach (var VendorProducts in pl.VendorProducts)
+                {
+                    db.Entry(VendorProducts).Reference(p => p.Vendor).Load();
+                    db.Entry(VendorProducts).Reference(p => p.Product).Load();
+                }
+                VendorProductList.AddRange(pl.VendorProducts);
+            }
+            return PartialView("_GetProdByCatIdPartialView", VendorProductList);
+        }
+
         public ActionResult filterProductsByPrice(int LowerPrice, int UpperPrice)
         {
            

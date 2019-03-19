@@ -12,7 +12,7 @@ namespace CarAccessories.Models
     {
         public string Type { get; set; }
 
-        public virtual Vendor Seller { get; set; }
+        public virtual Vendor Vendor { get; set; }
         public virtual Customer Customer { get; set; }
         public virtual ICollection<Product> Product { get; set; }
 
@@ -38,7 +38,7 @@ namespace CarAccessories.Models
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<VendorProduct> VendorProducts { get; set; }
         public virtual DbSet<Description> Descriptions { get; set; }
-        public virtual DbSet<Vendor> Sellers { get; set; }
+        public virtual DbSet<Vendor> Vendors { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Rate> Rates { get; set; }

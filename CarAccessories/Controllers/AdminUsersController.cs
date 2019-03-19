@@ -18,7 +18,7 @@ namespace CarAccessories.Controllers
             foreach (var user in users)
             {
                 db.Entry(user).Reference(c => c.Customer).Load();
-                db.Entry(user).Reference(sell => sell.Seller).Load();
+                db.Entry(user).Reference(sell => sell.Vendor).Load();
             }
             return View(users);
         }
@@ -28,7 +28,7 @@ namespace CarAccessories.Controllers
             foreach (var user in users)
             {
                 db.Entry(user).Reference(c => c.Customer).Load();
-                db.Entry(user).Reference(sell => sell.Seller).Load();
+                db.Entry(user).Reference(sell => sell.Vendor).Load();
             }
             return PartialView("_GetAllUsers", users);
         }

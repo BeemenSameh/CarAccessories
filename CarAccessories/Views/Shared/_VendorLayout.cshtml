@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width" />
+    <title>Vendor Profile</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/Content\fonts\font-awesome-4.7.0\css\font-awesome.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/Content/css/AdminPanel/adminlte.min.css">
+    <!-- bootstrap wysihtml5 - text editor -->
+    <link rel="stylesheet" href="~/Content/css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    @RenderSection("style", required: false)
+</head>
+<body class="hold-transition sidebar-mini">
+        <!-- Content Wrapper. Contains page content -->
+    <div class="container-fluid">
+        <div>
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-3">
+
+                            <!-- Profile Image -->
+                            <div class="card card-primary card-outline">
+                                <div class="card-body box-profile">
+                                    @{ 
+                                        Html.RenderAction("Details", "Vendor");
+                                    }
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                            <!-- About Me Box -->
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Company Info</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    @{
+                                        Html.RenderAction("VendorDetails", "Vendor");
+                                    }
+                                </div>
+                                <!-- /.card -->
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-md-9">
+                            <div class="card">
+                               
+                                <div class="card-body">
+                                    <div class="tab-content">
+                                        @RenderBody();
+                                    </div>
+                                    <!-- /.tab-content -->
+                                </div><!-- /.card-body -->
+                            </div>
+                            <!-- /.nav-tabs-custom -->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+        $.widget.bridge('uibutton', $.ui.button)
+    </script>
+    <!-- Bootstrap 4 -->
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    <!--DataTable-->
+    <script src="~/Scripts/jquery.dataTables.js"></script>
+    <script src="~/Scripts/dataTables.bootstrap4.js"></script>
+    <!-- FastClick -->
+    <script src="~/Scripts/fastclick/fastclick.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/Scripts/js/adminlte.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="~/Scripts/js/demo.js"></script>
+    <script>
+        $(function () {
+          $("#example1").DataTable();
+          $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false
+          });
+        });
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+@*
+        <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Products</a></li>
+    <li class="nav-item"><a class="nav-link" href="#order" data-toggle="tab">Orders</a></li>
+    <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Models</a></li>
+*@

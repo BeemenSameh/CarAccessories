@@ -1,0 +1,26 @@
+﻿@model CarAccessories.Models.Vendor
+    
+    <div class="text-center">
+    <img class="profile-user-img img-fluid img-circle"
+         src="~/Content/images/images/@Model.Photo"
+         alt="@Model.ComponyName">
+</div>
+
+<h3 class="profile-username text-center">@Model.ComponyName</h3>
+
+<p class="text-muted text-center">Company Name</p>
+
+<ul class="list-group list-group-unbordered mb-3">
+    <li class="list-group-item">
+        <b>Rate</b> <a class="float-right">1,322</a>
+    </li>
+    <li class="list-group-item">
+        <b>Orders Delivered</b> <a class="float-right">543</a>
+    </li>
+    <li class="list-group-item">
+        <b>Products</b> <a class="float-right">13,287</a>
+    </li>
+</ul>
+
+@*<a href="/Vendor/EditProfile" class="btn btn-primary btn-block"><b>Update</b></a>*@
+ @Ajax.ActionLink("Update", "EditProfile", "Vendor",new AjaxOptions { UpdateTargetId="add",InsertionMode=InsertionMode.Replace},new { @class= "btn btn-primary btn-block" })  

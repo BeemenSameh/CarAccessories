@@ -1,12 +1,13 @@
 ﻿@model List<CarAccessories.Models.VendorProduct>
 <!-- Product -->
+<link href="~/Content/rateit.css" rel="stylesheet" />
 <div class="row">
     @foreach (var item in Model)
     {
         <div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
             <!-- Block2 -->
             <div class="block2">
-                <div class="block2-img wrap-pic-w of-hidden pos-relative  @(item.Sale_price == 0 ? "" : "block2-labelsale") @((DateTime.Now - item.Insert_Date).TotalDays <= 7 ? "block2-labelnew" : "")">
+                <div class="block2-img wrap-pic-w of-hidden pos-relative  @(item.Sale_price == 0 || item.Sale_price == null? "" : "block2-labelsale") @((DateTime.Now - item.Insert_Date).TotalDays <= 7 ? "block2-labelnew" : "")">
                     <img src="~/Content/images/images/@item.Product.Image"  style="height:360px" alt="IMG-PRODUCT">
 
                     <div class="block2-overlay trans-0-4">
@@ -28,12 +29,12 @@
                     @Html.ActionLink(item.Product.Name, "ShowProductDetails", "Home", new { id = item.ID }, new { @class = "block2-name dis-block s-text3 p-b-5" })
                     @Html.ActionLink(item.Vendor.ComponyName, "ShowVendorDetails", "Home", new { id = item.Vendor.ID }, new { @class = "block2-name dis-block s-text3 p-b-5" })
                     @*<a href="ProductDetailsView.cshtml" class="block2-name dis-block s-text3 p-b-5">@item.Name</a>*@
-                    <div class="rateit" id="rateit11b" data-rateit-step="1">    
+                    <div class="rateit" id="rateit10" data-rateit-step="1" data-vendorId=@item.ID>
                     </div>
                     <br />
                    
                     <br />
-                    @if (item.Sale_price == 0)
+                    @if (item.Sale_price == 0 || item.Sale_price == null)
                     {
                         <span class="block2-price m-text6 p-r-5">
                             $@item.Price
@@ -58,3 +59,30 @@
 
     }
 </div>
+<script src="~/Scripts/jquery.rateit.min.js"></script>
+<script>
+    var tooltipvalues = ['bad', 'poor', 'ok', 'good', 'super'];
+    $(".rateit").bind('over', function (event, value) { $(this).attr('title', tooltipvalues[value - 1]); });
+    $('.rateit').each(function () {
+        $(this).on('click', function () {
+            var rate = $(this).rateit('value');
+            var VendorProdId = $(this).attr("data-vendorId");
+            console.log(rate);
+            $.ajax({
+                url: "Rates/UserRateVendorProduct",
+                method: "get",
+                data: { rate: rate, VendorProdId: VendorProdId },
+                success: function (data) {
+                    swal("This Prod", "is Rated by" + rate + "!", "success");
+                },
+                error: function (date) {
+                    console.log("Can't Rate product");
+                }
+            });
+        });
+    });
+       // $('#rateit10').rateit('value')
+</script>
+
+
+
