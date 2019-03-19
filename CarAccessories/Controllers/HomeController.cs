@@ -45,19 +45,7 @@ namespace CarAccessories.Controllers
             return View(b);
         }
 
-        public ActionResult GetProductsByModelId(int Model_ID)
-        {
-            //{  ? p.Price == f : p.Sale_price == f}
-            List<VendorProduct> VendorProductList = db.VendorProducts.Where(i => i.Product.Model.ID == Model_ID).ToList();
-            foreach (var v in VendorProductList)
-            {
-                db.Entry(v).Reference(p => p.Product).Load();
-                db.Entry(v).Reference(p => p.Vendor).Load();
-            }
-
-            return PartialView("_GetProdByCatIdPartialView", VendorProductList);
-
-        }
+       
 
 
 
@@ -78,23 +66,7 @@ namespace CarAccessories.Controllers
         //    return PartialView("_AllProductsPartialView", ProductList);
         //}
 
-        public ActionResult GetProductsByCategoryId(int Cat_ID)
-        {
-            Category Cat = db.Categories.Where(i => i.ID == Cat_ID).FirstOrDefault();
-            db.Entry(Cat).Collection(p => p.Products).Load();
-            List<VendorProduct> VendorProductList = new List<VendorProduct>();
-            foreach (var pl in Cat.Products)
-            {
-                db.Entry(pl).Collection(p => p.VendorProducts).Load();
-                foreach (var VendorProducts in pl.VendorProducts)
-                {
-                    db.Entry(VendorProducts).Reference(p => p.Vendor).Load();
-                    db.Entry(VendorProducts).Reference(p => p.Product).Load();
-                }
-                VendorProductList.AddRange(pl.VendorProducts);
-            }
-            return PartialView("_GetProdByCatIdPartialView", VendorProductList);
-        }
+        
 
         public ActionResult ShowProductDetails(int id)
         {
