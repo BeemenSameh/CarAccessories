@@ -106,7 +106,6 @@ namespace CarAccessories.Controllers
 
             return HttpNotFound();
         }
-
         
         public ActionResult GetPartialProducts()
         {

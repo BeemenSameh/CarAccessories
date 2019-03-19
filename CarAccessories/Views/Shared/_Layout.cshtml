@@ -88,6 +88,10 @@
                                     @Html.ActionLink("Sale", "Index", "Sale")
                                 </li>
 
+                                <li>
+                                    @Html.ActionLink("Profile", "GetProducts", "VendorProduct")
+                                </li>
+
                                 if (Request.IsAuthenticated)
                                 {
                                     <li>

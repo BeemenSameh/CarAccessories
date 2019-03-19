@@ -1,0 +1,37 @@
+﻿@model ICollection<CarAccessories.Models.OrderDetails>
+    <div class="row">
+    <div class="col-12 table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Qty</th>
+                    <th>Product</th>
+                    <th>Image</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                   
+                        <tr>
+                            <td>@item.Quantity</td>
+                            <td>@item.VendorProduct.Product.Name</td>
+                            <td><img src="~/Content/images/images/@item.VendorProduct.Product.Image" /></td>
+                            <td>@item.VendorProduct.Product.MinDescription</td>
+                            <td>$@(item.Price * item.Quantity)</td>
+                        </tr>
+                    
+
+                }
+
+            </tbody>
+        </table>
+    </div>
+    <!-- /.col -->
+</div>
+
+
+
+

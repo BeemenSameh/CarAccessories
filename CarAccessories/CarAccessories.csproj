@@ -187,6 +187,7 @@
     <Compile Include="Controllers\SaleController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
     <Compile Include="Controllers\VendorController.cs" />
+    <Compile Include="Controllers\VendorOrderController.cs" />
     <Compile Include="Controllers\VendorProductController.cs" />
     <Compile Include="Controllers\AddProductToVendorController.cs" />
     <Compile Include="Global.asax.cs">
@@ -1745,6 +1746,9 @@
     <Content Include="Views\Rates\Edit.cshtml" />
     <Content Include="Views\Rates\Index.cshtml" />
     <Content Include="Views\Rates\UserRateVendorProduct.cshtml" />
+    <Content Include="Views\Vendor\_VendorInfo.cshtml" />
+    <Content Include="Views\Vendor\_EditProfile.cshtml" />
+    <Content Include="Views\VendorOrder\_VendorOrders.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

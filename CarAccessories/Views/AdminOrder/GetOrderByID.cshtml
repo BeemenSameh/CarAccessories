@@ -29,6 +29,7 @@
                                     <address>
                                         @foreach (var item in Model.OrderDetails)
                                         {
+                                           
                                             <strong>@item.VendorProduct.Vendor.ComponyName, Inc.</strong>
                                             <small>@item.VendorProduct.Vendor.Address</small>
                                             <small>@item.VendorProduct.Vendor.ApplicationUser.Email</small>

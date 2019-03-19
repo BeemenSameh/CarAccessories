@@ -1,12 +1,12 @@
-﻿@model CarAccessories.Models.ApplicationUser
+﻿@model CarAccessories.Models.Vendor
     
     <div class="text-center">
     <img class="profile-user-img img-fluid img-circle"
-         src="~/Content/images/images/@Model.Vendor.Photo"
-         alt="@Model.Vendor.ComponyName">
+         src="~/Content/images/images/@Model.Photo"
+         alt="@Model.ComponyName">
 </div>
 
-<h3 class="profile-username text-center">@Model.Vendor.ComponyName</h3>
+<h3 class="profile-username text-center">@Model.ComponyName</h3>
 
 <p class="text-muted text-center">Company Name</p>
 
@@ -22,5 +22,5 @@
     </li>
 </ul>
 
-<a href="#" class="btn btn-primary btn-block"><b>Update</b></a>
-    
+@*<a href="/Vendor/EditProfile" class="btn btn-primary btn-block"><b>Update</b></a>*@
+ @Ajax.ActionLink("Update", "EditProfile", "Vendor",new AjaxOptions { UpdateTargetId="add",InsertionMode=InsertionMode.Replace},new { @class= "btn btn-primary btn-block" })  
