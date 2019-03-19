@@ -28,11 +28,16 @@ namespace CarAccessories.Controllers
                     var userIdValue = userIdClaim.Value;
                     user = db.Vendors.Where(i => i.ID == userIdValue).FirstOrDefault();
 
-                    var orderDetails = (from vend in db.VendorProducts
-                                        where vend.Vendor.ID == user.ID
-                                        select vend.OrderDetails).FirstOrDefault();
-                    ordetail = orderDetails;
-                    //db.Entry()
+                    //var orderDetails = (from vend in db.VendorProducts
+                    //                    where vend.Vendor.ID == user.ID
+                    //                    select vend.OrderDetails).ToList();
+
+                    //var vendor = (from vend in db.VendorProducts
+                    //                    where vend.Vendor.ID == user.ID
+                    //                    select vend.OrderDetails).ToList();
+
+                    //ordetail = orderDetails;
+                    ////db.Entry()
                     //foreach (var OD in orderDetails)
                     //{
                     //    db.Entry(OD).Collection(o=>o).ToLoad();
@@ -65,7 +70,7 @@ namespace CarAccessories.Controllers
             //    }
             //    //db.Entry(order).Reference(cust => cust.Customer).Load();
             //}
-            return PartialView("_VendorOrders",ordetail);
+            return PartialView("_VendorOrders",user);
         }
     }
 }

@@ -52,13 +52,7 @@
                         <!-- /.col -->
                         <div class="col-md-9">
                             <div class="card">
-                                <div class="card-header p-2">
-                                    <ul class="nav nav-pills">
-                                        <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Products</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="#add" data-toggle="tab">Orders</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Models</a></li>
-                                    </ul>
-                                </div><!-- /.card-header -->
+                               
                                 <div class="card-body">
                                     <div class="tab-content">
                                         @RenderBody();
@@ -88,8 +82,8 @@
     <!-- Bootstrap 4 -->
     <script src="~/Scripts/bootstrap.bundle.min.js"></script>
     <!--DataTable-->
-    <script src="../../plugins/datatables/jquery.dataTables.js"></script>
-    <script src="../../plugins/datatables/dataTables.bootstrap4.js"></script>
+    <script src="~/Scripts/jquery.dataTables.js"></script>
+    <script src="~/Scripts/dataTables.bootstrap4.js"></script>
     <!-- FastClick -->
     <script src="~/Scripts/fastclick/fastclick.min.js"></script>
     <!-- AdminLTE App -->
@@ -113,3 +107,8 @@
 </body>
 </html>
 
+@*
+        <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Products</a></li>
+    <li class="nav-item"><a class="nav-link" href="#order" data-toggle="tab">Orders</a></li>
+    <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Models</a></li>
+*@

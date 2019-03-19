@@ -37,9 +37,9 @@ namespace CarAccessories.Controllers
             }
             return View(user);
         }
-        public ActionResult addProduct(string id)
+        public ActionResult addProduct()
         {
-            ViewBag.ID = id;
+            //ViewBag.ID = id;
             var Models = db.Models.ToList();
             ViewBag.Model = Models;
             return PartialView("_addProduct",new Product());
@@ -54,7 +54,7 @@ namespace CarAccessories.Controllers
             {
                 db.Products.Add(product);
                 db.SaveChanges();
-                return RedirectToAction("GetAllProducts");
+                return RedirectToAction("GetProducts");
             }
 
             else { return View(product); }

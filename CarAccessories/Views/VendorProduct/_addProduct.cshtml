@@ -5,7 +5,7 @@
         <h3 class="card-title">ADD Product</h3>
     </div>
 </div>
-    <form class="form-horizontal">
+    <form class="form-horizontal" action="\VendorProduct\addProduct" method="post">
         <div class="form-group">
             <label for="Name" class="col-sm-2 control-label">Name</label>
 
@@ -62,7 +62,7 @@
                 <button type="submit" class="btn btn-danger">ADD</button>
             </div>
             <div class="col-sm-offset-2 col-sm-10">
-                @Ajax.ActionLink("Back", "GetPartialProducts", new { id=ViewBag.ID},new AjaxOptions { UpdateTargetId="add",InsertionMode=InsertionMode.Replace},new { @class="btn btn-default"})
+                @Ajax.ActionLink("Back", "GetPartialProducts", null,new AjaxOptions { UpdateTargetId="add",InsertionMode=InsertionMode.Replace},new { @class="btn btn-default"})
             </div>
         </div>
     </form>
