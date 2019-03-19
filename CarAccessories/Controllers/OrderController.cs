@@ -70,9 +70,10 @@ namespace CarAccessories.Controllers
             {
                 c.TotalPrice = totalprice;
                 context.Entry(c).Collection(o => o.OrderDetails).Load();
+               
                 for (int i = 0; i < num_product1.Length; i++)
                 {
-
+                    context.Entry(d[i]).Reference(j => j.VendorProduct).Load();
                     if (d[i].VendorProduct.Quantity >= num_product1[i])
                     {
                         d[i].Quantity = num_product1[i];

@@ -1,4 +1,4 @@
-﻿@model CarAccessories.Models.ApplicationUser
+﻿@model List<CarAccessories.Models.OrderDetails>
 @{
     ViewBag.Title = "Index";
 }
@@ -10,9 +10,9 @@
         });
     </script>
 }
-<section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url(/Content/images/heading-pages-01.jpg);">
+<section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url(/Content/images/images/drec.jpg);">
     <h2 class="l-text2 t-center">
-        Cart
+       Order
     </h2>
 </section>
 <!-- Cart -->
@@ -24,36 +24,35 @@
                 <table class="table-shopping-cart">
                     <tr class="table-head">
                         <th class="column-1"></th>
-                        <th class="column-2">Product</th>
+                        <th class="column-3">Product</th>
                         <th class="column-3">Price</th>
-                        <th class="column-4 p-l-70">Quantity</th>
-                        <th class="column-5">Total</th>
+                        <th class="column-3 " >Quantity</th>
+                        <th class="column-3">Total</th>
                     </tr>
-                    @foreach (var order in Model.Order)
+                    @foreach (var order in Model)
                     {
-                        if (order.Isbuy == true)
-                        {
-                            foreach (var orderDetails in order.OrderDetails)
-                            {
+                        
                                 <tr class="table-row">
                                     <td class="column-1">
                                         <div class="cart-img-product b-rad-4 o-f-hidden">
-                                            <img src="~/Content/images/images/@orderDetails.VendorProduct.Product.Image" alt="IMG-PRODUCT">
+                                            <img src="~/Content/images/images/@order.VendorProduct.Product.Image" alt="IMG-PRODUCT">
                                         </div>
                                     </td>
-                                    <td class="column-2">@orderDetails.VendorProduct.Product.Name</td>
+                                    <td class="column-3">@order.VendorProduct.Product.Name</td>
                                    
         
-                                        <td class="column-3"> @orderDetails.VendorProduct.Quantity</td>
+                                        <td class="column-3"> @order.VendorProduct.Price</td>
                                    
-                                        <td class="column-4">
-                                            @orderDetails.VendorProduct.Quantity
+                                        <td class="column-3">
+                                            @order.Quantity
                                         </td>
-                                        <td class="column-5"> @(@orderDetails.VendorProduct.Quantity * @orderDetails.VendorProduct.Quantity)</td>
+                                       
+                                        
+                                        <td class="column-3"> @(@order.VendorProduct.Price * @order.Quantity)</td>
                                     </tr>
                                 }
-                        }
-                    }
+                        
+                    
                 </table>
             </div>
         </div>

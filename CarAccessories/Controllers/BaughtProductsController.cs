@@ -11,11 +11,12 @@ namespace CarAccessories.Controllers
     public class BaughtProductsController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
-        List<Product> ProductList = new List<Product>();
+       // List<Product> ProductList = new List<Product>();
        // GET: BaughtProducts
         public ActionResult Index()
         {
             var claimsIdentity = User.Identity as ClaimsIdentity;
+            List<OrderDetails> orders = new List<OrderDetails>();
             if (claimsIdentity != null)
             {
                 var userIdClaim = claimsIdentity.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
@@ -35,9 +36,9 @@ namespace CarAccessories.Controllers
                             db.Entry(OrderDetails.VendorProduct).Reference(c => c.Product).Load();
                         }
 
-                    
                     }
-                return View(user);
+                    orders.AddRange(db.OrderDetails.Where(c => c.Order.Isbuy ==true));
+                    return View(orders);
                }
                 else
                 {
