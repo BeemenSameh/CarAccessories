@@ -12,16 +12,26 @@ namespace CarAccessories.Controllers
     public class BaughtProductsController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
-        List<Product> ProductList = new List<Product>();
+       // List<Product> ProductList = new List<Product>();
        // GET: BaughtProducts
         public ActionResult Index()
-        { 
+        {
+            var claimsIdentity = User.Identity as ClaimsIdentity;
+            List<OrderDetails> orders = new List<OrderDetails>();
+            if (claimsIdentity != null)
+            {
+                var userIdClaim = claimsIdentity.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
 
-                  var userIdValue = User.Identity.GetUserId();
-                  Customer user = db.Customers.Where(i => i.ID == userIdValue).FirstOrDefault();
-                    
-                        db.Entry(user).Collection(c => c.Orders).Load();
-                        foreach (var i in user.Orders)
+                if (userIdClaim != null)
+                {
+                    var userIdValue = userIdClaim.Value;
+
+                    Customer user = db.Customers.Where(i => i.ID == userIdValue).FirstOrDefault();
+                    db.Entry(user).Collection(c => c.Orders).Load();
+                    foreach (var i in user.Orders)
+                    {
+                        db.Entry(i).Collection(c => c.OrderDetails).Load();
+                        foreach (var OrderDetails in i.OrderDetails)
                         {
                             db.Entry(i).Collection(c => c.OrderDetails).Load();
                             foreach (var OrderDetails in i.OrderDetails)
@@ -33,12 +43,13 @@ namespace CarAccessories.Controllers
 
                         }
 
-                    
-                    return View(user);
-               //}
-               // else
-               // {
-               //     return Redirect("/Account/Login");
+                    }
+                    orders.AddRange(db.OrderDetails.Where(c => c.Order.Isbuy ==true));
+                    return View(orders);
+               }
+                else
+                {
+                    return Redirect("/Account/Login");
 
                // }
 

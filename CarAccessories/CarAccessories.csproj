@@ -187,6 +187,7 @@
     <Compile Include="Controllers\SaleController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
     <Compile Include="Controllers\VendorController.cs" />
+    <Compile Include="Controllers\VendorOrderController.cs" />
     <Compile Include="Controllers\VendorProductController.cs" />
     <Compile Include="Controllers\AddProductToVendorController.cs" />
     <Compile Include="Global.asax.cs">
@@ -220,6 +221,15 @@
     <Content Include="Content\css\noui\nouislider.min.css" />
     <Content Include="Content\css\noui\nouislider.min.js" />
     <Content Include="Content\css\sweetalert\sweetalert.min.js" />
+    <Content Include="Content\images\1-980255.jpg" />
+    <Content Include="Content\images\1128840_orig.jpg" />
+    <Content Include="Content\images\1200px-Torx-Bits_T15-T20-T25-T30.jpg" />
+    <Content Include="Content\images\9f5e065712a1fc9bf1dac741d815dfeb.jpg" />
+    <Content Include="Content\images\drec.jpg" />
+    <Content Include="Content\images\images\1-980255.jpg" />
+    <Content Include="Content\images\images\1128840_orig.jpg" />
+    <Content Include="Content\images\images\1200px-Torx-Bits_T15-T20-T25-T30.jpg" />
+    <Content Include="Content\images\images\9f5e065712a1fc9bf1dac741d815dfeb.jpg" />
     <Content Include="Content\images\images\american-express.png" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -1397,15 +1407,26 @@
     <Content Include="Content\images\images\asfour.jpg" />
     <Content Include="Content\images\images\checken.jpg" />
     <Content Include="Content\images\images\Crow.jpg" />
+    <Content Include="Content\images\images\drec.jpg" />
     <Content Include="Content\images\images\duck.jpeg" />
     <Content Include="Content\images\images\Falcon.jpg" />
     <Content Include="Content\images\images\Hoopoe.jpg" />
+    <Content Include="Content\images\images\images.jpg" />
+    <Content Include="Content\images\images\is.jpg" />
+    <Content Include="Content\images\images\is2.jpg" />
+    <Content Include="Content\images\images\item_L_6793222_4466349.jpg" />
+    <Content Include="Content\images\images\item_XL_10202403_12660550.jpg" />
+    <Content Include="Content\images\images\item_XL_11374615_15886432.jpg" />
+    <Content Include="Content\images\images\item_XL_7169013_5315847.jpg" />
     <Content Include="Content\images\images\katkot.jpg" />
     <Content Include="Content\images\images\Ostrich.jpg" />
     <Content Include="Content\images\images\papan.jpg" />
     <Content Include="Content\images\images\peacock.jpg" />
     <Content Include="Content\images\images\Penguin.jpg" />
     <Content Include="Content\images\images\Pigeon.jpg" />
+    <Content Include="Content\images\images\pl18587179-mechanical_custom_control_cable_accessories_auto_parts_connections_ball_bearings.jpg" />
+    <Content Include="Content\images\is.jpg" />
+    <Content Include="Content\images\is2.jpg" />
     <Content Include="Content\images\item-01.jpg" />
     <Content Include="Content\images\item-02.jpg" />
     <Content Include="Content\images\item-03.jpg" />
@@ -1429,6 +1450,9 @@
     <Content Include="Content\images\item-cart-04.jpg" />
     <Content Include="Content\images\item-cart-05.jpg" />
     <Content Include="Content\images\item-cart-06.jpg" />
+    <Content Include="Content\images\item_XL_10202403_12660550.jpg" />
+    <Content Include="Content\images\item_XL_11374615_15886432.jpg" />
+    <Content Include="Content\images\item_XL_7169013_5315847.jpg" />
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\master-slide-01.jpg" />
     <Content Include="Content\images\master-slide-02.jpg" />
@@ -1438,6 +1462,7 @@
     <Content Include="Content\images\master-slide-06.jpg" />
     <Content Include="Content\images\master-slide-07.jpg" />
     <Content Include="Content\images\master-slide-08.jpg" />
+    <Content Include="Content\images\pl18587179-mechanical_custom_control_cable_accessories_auto_parts_connections_ball_bearings.jpg" />
     <Content Include="Content\images\product-detail-01.jpg" />
     <Content Include="Content\images\product-detail-02.jpg" />
     <Content Include="Content\images\product-detail-03.jpg" />
@@ -1547,6 +1572,8 @@
     <Content Include="Content\fonts\themify\Themify IconFonts 5-23-2014.json" />
     <Content Include="Content\css\AdminPanel\adminlte.css.map" />
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Content\images\Google Chrome.lnk" />
+    <Content Include="Content\images\images\Google Chrome.lnk" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -1729,7 +1756,7 @@
     <Content Include="Views\VendorProduct\_addProduct.cshtml" />
     <Content Include="Views\VendorProduct\_GetPartialProducts.cshtml" />
     <Content Include="Views\VendorProduct\_EditProduct.cshtml" />
-    <Content Include="Views\VendorProduct\_Details.cshtml" />
+    <Content Include="Views\Shared\_VendorDetails.cshtml" />
     <Content Include="Views\VendorProduct\_DeleteProduct.cshtml" />
     <Content Include="Views\AddProductToVendor\Index.cshtml" />
     <Content Include="Views\AddProductToVendor\Addprice.cshtml" />
@@ -1746,6 +1773,9 @@
     <Content Include="Views\Rates\Index.cshtml" />
     <Content Include="Views\Rates\UserRateVendorProduct.cshtml" />
     <Content Include="Views\Shared\_AllProductsPartialView.cshtml" />
+    <Content Include="Views\Vendor\_VendorInfo.cshtml" />
+    <Content Include="Views\Vendor\_EditProfile.cshtml" />
+    <Content Include="Views\VendorOrder\_VendorOrders.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

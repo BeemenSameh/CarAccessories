@@ -291,7 +291,7 @@ namespace CarAccessories.Controllers
                 db.SaveChanges();
                 ApplicationUser user = db.Users.Where(i => i.Id == vm.UserId).FirstOrDefault();
                 await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("GetProducts", "VendorProduct");
               
             }
             else

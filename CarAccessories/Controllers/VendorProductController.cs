@@ -37,9 +37,9 @@ namespace CarAccessories.Controllers
             }
             return View(user);
         }
-        public ActionResult addProduct(string id)
+        public ActionResult addProduct()
         {
-            ViewBag.ID = id;
+            //ViewBag.ID = id;
             var Models = db.Models.ToList();
             ViewBag.Model = Models;
             return PartialView("_addProduct",new Product());
@@ -54,7 +54,7 @@ namespace CarAccessories.Controllers
             {
                 db.Products.Add(product);
                 db.SaveChanges();
-                return RedirectToAction("GetAllProducts");
+                return RedirectToAction("GetProducts");
             }
 
             else { return View(product); }
@@ -62,12 +62,14 @@ namespace CarAccessories.Controllers
         }
 
         // GET: vendor/Edit/5
-        public ActionResult EditProduct(string uid,int? pid)
+        public ActionResult EditProduct(int id)
         {
-            ViewBag.ID = uid;
+            var cats = db.Categories.ToList();
+            ViewBag.category = cats;
+            //ViewBag.ID = uid;
             var Models = db.Models.ToList();
             ViewBag.Model = Models;
-            Product product = db.Products.FirstOrDefault(prod => prod.ID == pid);
+            Product product = db.Products.FirstOrDefault(prod => prod.ID == id);
             return PartialView("_EditProduct",product);
         }
 
@@ -95,35 +97,40 @@ namespace CarAccessories.Controllers
         public ActionResult DeleteProduct(int id)
         {
             Product product = db.Products.Find(id);
+            if(product != null)
+            {
+                db.Products.Remove(product);
+                db.SaveChanges();
+                return RedirectToAction("GetPartialProducts");
+            }
 
-            return PartialView("_DeleteProduct", product);
+            return HttpNotFound();
         }
-
-        // POST: vendor/Delete/5
-        [HttpPost]
-        public ActionResult DeleteProduct(int id, FormCollection collection)
+        
+        public ActionResult GetPartialProducts()
         {
-            try
+            var user = new Vendor();
+            bool claimIdentity = User.Identity is ClaimsIdentity;
+            if (claimIdentity)
             {
-                // TODO: Add delete logic here
+                ClaimsIdentity claimsIdentity = User.Identity as ClaimsIdentity;
+                var userIdClaim = claimsIdentity.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
 
-                return RedirectToAction("Index");
+                if (userIdClaim != null)
+                {
+                    var userIdValue = userIdClaim.Value;
+                    user = db.Vendors.Where(i => i.ID == userIdValue).FirstOrDefault();
+
+                    //db.Entry(user).Reference(vendor => vendor.Vendor).Load();
+                    db.Entry(user).Collection(prod => prod.VendorProduct).Load();
+                    foreach (var VP in user.VendorProduct)
+                    {
+                        db.Entry(VP).Reference(prod => prod.Product).Load();
+                        db.Entry(VP.Product).Reference(cat => cat.Category).Load();
+                    }
+                }
             }
-            catch
-            {
-                return View();
-            }
-        }
-        public ActionResult GetPartialProducts(string id)
-        {
-            var user = db.Users.FirstOrDefault(use => use.Id == id);
-            db.Entry(user).Reference(vendor => vendor.Vendor).Load();
-            db.Entry(user.Vendor).Collection(prod => prod.VendorProduct).Load();
-            foreach (var VP in user.Vendor.VendorProduct)
-            {
-                db.Entry(VP).Reference(prod => prod.Product).Load();
-                db.Entry(VP.Product).Reference(cat => cat.Category).Load();
-            }
+
             return PartialView("_GetPartialProducts", user);
         }
     }

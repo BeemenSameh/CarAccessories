@@ -1,0 +1,36 @@
+﻿@model CarAccessories.Models.Vendor
+<div class="tab-pane" id="order">
+    <div class="row">
+        <div class="col-12 table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Qty</th>
+                        <th>Product</th>
+                        <th>Image</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.VendorProduct)
+                    {
+
+                        <tr>
+                            <td>@item.Quantity</td>
+                            <td>@item.Product.Name</td>
+                            <td><img src="~/Content/images/images/@item.Product.Image" /></td>
+                            <td>@item.Product.MinDescription</td>
+                            <td>$@item.Price </td>
+                        </tr>
+
+
+                    }
+
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+
+    </div>
