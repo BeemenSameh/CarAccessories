@@ -15,6 +15,7 @@ namespace CarAccessories.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        
         [Authorize]
         public ActionResult UserRateVendorProduct(int rate,int VendorProdId)
         {
@@ -28,20 +29,23 @@ namespace CarAccessories.Controllers
 
                 db.Rates.Add(r);
                 db.SaveChanges();
-                return View();
+                //  return View();
+
+                return Json(true,JsonRequestBehavior.AllowGet);
             }
             else
             {
                 existRate.RateNumber = rate;
                 db.SaveChanges();
-                return View();
+                return Json(true, JsonRequestBehavior.AllowGet);
+
             }
 
 
-             
-           
-           
-            
+
+
+
+
         }
         // GET: Rates
         public ActionResult Index()

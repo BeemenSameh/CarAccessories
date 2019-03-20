@@ -29,11 +29,9 @@
                     @Html.ActionLink(item.Product.Name, "ShowProductDetails", "Home", new { id = item.ID }, new { @class = "block2-name dis-block s-text3 p-b-5" })
                     @Html.ActionLink(item.Vendor.ComponyName, "ShowVendorDetails", "Home", new { id = item.Vendor.ID }, new { @class = "block2-name dis-block s-text3 p-b-5" })
                     @*<a href="ProductDetailsView.cshtml" class="block2-name dis-block s-text3 p-b-5">@item.Name</a>*@
-                    <div class="rateit" id="rateit10" data-rateit-step="1" data-vendorId=@item.ID>
-                    </div>
-                    <br />
-                   
-                    <br />
+                    @if (@User.Identity.IsAuthenticated)
+                    {<div class="rateit" id="rateit10" data-rateit-step="1" data-vendorId=@item.ID></div><br />}
+
                     @if (item.Sale_price == 0 || item.Sale_price == null)
                     {
                         <span class="block2-price m-text6 p-r-5">
@@ -59,6 +57,7 @@
 
     }
 </div>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
 <script src="~/Scripts/jquery.rateit.min.js"></script>
 <script>
     var tooltipvalues = ['bad', 'poor', 'ok', 'good', 'super'];
@@ -72,10 +71,17 @@
                 url: "Rates/UserRateVendorProduct",
                 method: "get",
                 data: { rate: rate, VendorProdId: VendorProdId },
-                success: function (data) {
+                //dataType:"json",
+                success: function (c) {
+                    //if (c != null) {
+                    //    alert(c)
                     swal("This Prod", "is Rated by" + rate + "!", "success");
+                    //} else
+                    //    console.log("Can't Rate product");
+
+                    //location.href("/Account/Login");
                 },
-                error: function (date) {
+                error: function () {
                     console.log("Can't Rate product");
                 }
             });
@@ -84,5 +90,37 @@
        // $('#rateit10').rateit('value')
 </script>
 
+@*@section scripts{
+    <script src="~/Scripts/jquery.rateit.min.js"></script>
+    <script>
+        var tooltipvalues = ['bad', 'poor', 'ok', 'good', 'super'];
+        $(".rateit").bind('over', function (event, value) { $(this).attr('title', tooltipvalues[value - 1]); });
+        $('.rateit').each(function () {
+            $(this).on('click', function () {
+                var rate = $(this).rateit('value');
+                var VendorProdId = $(this).attr("data-vendorId");
+                console.log(rate);
+                $.ajax({
+                    url: "Rates/UserRateVendorProduct",
+                    method: "get",
+                    data: { rate: rate, VendorProdId: VendorProdId },
+                    //dataType:"json",
+                    success: function (c) {
+                        //if (c != null) {
+                        //    alert(c)
+                        swal("This Prod", "is Rated by" + rate + "!", "success");
+                        //} else
+                        //    console.log("Can't Rate product");
 
+                        //location.href("/Account/Login");
+                    },
+                    error: function () {
+                        console.log("Can't Rate product");
+                    }
+                });
+            });
+        });
+       // $('#rateit10').rateit('value')
+    </script>
+}*@
 

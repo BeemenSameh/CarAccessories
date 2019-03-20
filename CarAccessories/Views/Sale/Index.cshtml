@@ -15,6 +15,9 @@
 <!-- Content page -->
 <section class="bgwhite p-t-55 p-b-65">
     <div class="container">
+        <script>
+            $("lnkAll").
+        </script>
         <div class="row">
             <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
                 <div class="leftbar p-r-20 p-r-0-sm ">
@@ -27,7 +30,7 @@
                         <div class="card">
                             <div class="card-header">
 
-                                @Ajax.ActionLink("All", "GetAllProducts", "Sale", new { @class = "card-link", href = "#collapseOne" },
+                                @Ajax.ActionLink("All", "GetAllProducts", "Sale", new { @class = "card-link", href = "#collapseOne", id="lnkAll" },
                                new AjaxOptions()
                                {
                                    UpdateTargetId = "SelectedCategory",
@@ -137,9 +140,12 @@
                 </div>
 
                 <!-- Product -->
-
+               
                 <div id="SelectedCategory">
-                    @Html.Partial("_AllProductsPartialView", Model.VendorProducts)
+                   @* @Html.Partial("_AllProductsPartialView", Model.VendorProducts)*@
+                    @*@{Html.RenderAction("GetAllProducts","Sale");}*@
+
+                    
 
                 </div>
                 <div class="row">
@@ -186,10 +192,10 @@
                 url: "Shop/addCartDetailsToDataBase",
                 method: "get",
                 data: { ProductName: nameProduct },
-                success: function (data) {
+                success: function () {
                     swal(nameProduct, "is added to cart !", "success");
                 },
-                error: function (date) {
+                error: function () {
                     console.log("can't add product to cart");
                 }
             });

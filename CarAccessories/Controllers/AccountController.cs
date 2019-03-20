@@ -19,6 +19,7 @@ namespace CarAccessories.Controllers
         public ApplicationDbContext db = new ApplicationDbContext();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        
 
         public AccountController()
         {
@@ -210,7 +211,7 @@ namespace CarAccessories.Controllers
         [AllowAnonymous]
         public ActionResult RegistAsCustomer(ApplicationUser user)
         {
-              RegisterAsCustomerViewModel c= new RegisterAsCustomerViewModel
+            RegisterAsCustomerViewModel c= new RegisterAsCustomerViewModel
             {
                 UserId = user.Id,
                 customer = new Customer(),
@@ -224,11 +225,21 @@ namespace CarAccessories.Controllers
         [HttpPost]
 
         [AllowAnonymous]
-        public  async Task<ActionResult> RegistAsCustomer(RegisterAsCustomerViewModel m)
+        public  async Task<ActionResult> RegistAsCustomer(RegisterAsCustomerViewModel m, HttpPostedFileBase Photo)
         {
             if (ModelState.IsValid)
             {
-
+                if (Photo != null)
+                {
+                    string pic = System.IO.Path.GetFileName(Photo.FileName);
+                    string path = System.IO.Path.Combine(Server.MapPath("~/Content/images/RegisterPic"), pic);
+                    Photo.SaveAs(path);
+                    m.customer.Photo = Photo.FileName;
+                }
+                else
+                {
+                    m.customer.Photo = "user.png";
+                }
                 m.customer.ID = m.UserId;
                 db.Customers.Add(m.customer);
                 db.SaveChanges();
@@ -258,11 +269,22 @@ namespace CarAccessories.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<ActionResult> RegistAsVendor(RegistAsVendorViewModel vm)
+        public async Task<ActionResult> RegistAsVendor(RegistAsVendorViewModel vm,HttpPostedFileBase Photo)
         {
             if (ModelState.IsValid)
             {
-
+               
+                if (Photo != null)
+                {
+                    string pic = System.IO.Path.GetFileName(Photo.FileName);
+                    string path = System.IO.Path.Combine(Server.MapPath("~/Content/images/RegisterPic"),pic);
+                    Photo.SaveAs(path); 
+                   vm.vendor.Photo = Photo.FileName;
+                }
+                else
+                {
+                    vm.vendor.Photo = "user.png";
+                }
                 vm.vendor.ID = vm.UserId;
                 vm.vendor.Accept = 0;
                 db.Vendors.Add(vm.vendor);
@@ -282,7 +304,7 @@ namespace CarAccessories.Controllers
         [HttpGet]
         public ActionResult EditCustomerProfile()
         {
-           string LogedInUserId = User.Identity.GetUserId();
+            string LogedInUserId = User.Identity.GetUserId();
            string CurrentUserType=db.Users.Where(i => i.Id == LogedInUserId).Select(t => t.Type).FirstOrDefault();
             if (CurrentUserType == "Customer")
             {
@@ -292,31 +314,42 @@ namespace CarAccessories.Controllers
                     UserId = LogedInUserId,
                     customer = c
                 };
-                return View("RegistAsCustomer", cvm);
+                return View(cvm);
             }
             else
             {
-                return View("RegistAsVendor");
+                return View("EditCustomerProfile");
             }
         }
 
         [HttpPost]
-        public ActionResult EditCustomerProfile(RegisterAsCustomerViewModel cvm)
+        public ActionResult EditCustomerProfile(RegisterAsCustomerViewModel cvm, HttpPostedFileBase Photo)
         {
             if (ModelState.IsValid)
             {
                 Customer c = db.Customers.Where(i => i.ID == cvm.customer.ID).FirstOrDefault();
+                if (Photo != null)
+                {
+                    string pic = System.IO.Path.GetFileName(Photo.FileName);
+                    string path = System.IO.Path.Combine(Server.MapPath("~/Content/images/RegisterPic"), pic);
+                    Photo.SaveAs(path);
+                    c.Photo = Photo.FileName;
+                }
+                else
+                {
+                    c.Photo = "user.png";
+                }
+               
                 c.Name = cvm.customer.Name;
                 c.Address = cvm.customer.Address;
                 c.NationalID = cvm.customer.NationalID;
-                c.Photo = cvm.customer.Photo;
                 c.PhoneNumber = cvm.customer.PhoneNumber;
                 c.money = cvm.customer.money;
                 db.SaveChanges();
                 return RedirectToAction("Index", "Home");
 
             }
-            return View("RegistAsCustomer", cvm);
+            return View(cvm);
         }
 
         //
