@@ -12,19 +12,13 @@ namespace CarAccessories.Controllers
     public class BaughtProductsController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
-       // List<Product> ProductList = new List<Product>();
-       // GET: BaughtProducts
+        // List<Product> ProductList = new List<Product>();
+        // GET: BaughtProducts
         public ActionResult Index()
         {
-            var claimsIdentity = User.Identity as ClaimsIdentity;
+           
             List<OrderDetails> orders = new List<OrderDetails>();
-            if (claimsIdentity != null)
-            {
-                var userIdClaim = claimsIdentity.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
-
-                if (userIdClaim != null)
-                {
-                    var userIdValue = userIdClaim.Value;
+                    var userIdValue = User.Identity.GetUserId();
 
                     Customer user = db.Customers.Where(i => i.ID == userIdValue).FirstOrDefault();
                     db.Entry(user).Collection(c => c.Orders).Load();
@@ -34,33 +28,20 @@ namespace CarAccessories.Controllers
                         foreach (var OrderDetails in i.OrderDetails)
                         {
                             db.Entry(i).Collection(c => c.OrderDetails).Load();
-                            foreach (var OrderDetails in i.OrderDetails)
+                            foreach (var Orderdetails in i.OrderDetails)
                             {
-                                db.Entry(OrderDetails).Reference(c => c.VendorProduct).Load();
-                                db.Entry(OrderDetails.VendorProduct).Reference(c => c.Product).Load();
+                                db.Entry(Orderdetails).Reference(c => c.VendorProduct).Load();
+                                db.Entry(Orderdetails.VendorProduct).Reference(c => c.Product).Load();
                             }
 
 
                         }
 
                     }
-                    orders.AddRange(db.OrderDetails.Where(c => c.Order.Isbuy ==true));
+                    orders.AddRange(db.OrderDetails.Where(c => c.Order.Isbuy == true));
                     return View(orders);
-               }
-                else
-                {
-                    return Redirect("/Account/Login");
-
-               // }
-
-
-            //}
-            //else
-            //{
-            //    return Redirect("/Account/Register");
-            //}
-
+                }
+              
+            }
         }
-          
-    }
-}
+    
