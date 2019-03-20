@@ -1441,6 +1441,7 @@
     <Content Include="Content\images\product-detail-01.jpg" />
     <Content Include="Content\images\product-detail-02.jpg" />
     <Content Include="Content\images\product-detail-03.jpg" />
+    <Content Include="Content\images\RegisterPic\user.png" />
     <Content Include="Content\images\shop-item-09.jpg" />
     <Content Include="Content\images\thumb-item-01.jpg" />
     <Content Include="Content\images\thumb-item-02.jpg" />
@@ -1703,7 +1704,6 @@
     <Content Include="Scripts\vendor\slick\slick.scss" />
     <Content Include="Views\Order\Index.cshtml" />
     <Content Include="Views\BaughtProducts\Index.cshtml" />
-    <Content Include="Views\Shared\_AllProductsPartialView.cshtml" />
     <Content Include="Views\Shared\_GetProdByCatIdPartialView.cshtml" />
     <Content Include="Views\Shared\_ProductDetailsView.cshtml" />
     <Content Include="Views\Shop\Index.cshtml" />
@@ -1745,6 +1745,7 @@
     <Content Include="Views\Rates\Edit.cshtml" />
     <Content Include="Views\Rates\Index.cshtml" />
     <Content Include="Views\Rates\UserRateVendorProduct.cshtml" />
+    <Content Include="Views\Shared\_AllProductsPartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

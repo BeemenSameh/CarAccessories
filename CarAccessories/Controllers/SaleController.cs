@@ -40,6 +40,7 @@ namespace WebApplication1.Controllers
                 db.Entry(i).Reference(p => p.Vendor).Load();
             }
             return PartialView("_AllProductsPartialView", AllVendorProductsList);
+           
         }
 
         public ActionResult GetProductsByModelId(int Model_ID)

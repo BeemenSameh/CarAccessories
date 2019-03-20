@@ -1,4 +1,4 @@
-﻿@model CarAccessories.Models.ApplicationUser
+﻿@model CarAccessories.Models.Customer
 @{
     ViewBag.Title = "Index";
 }
@@ -29,7 +29,7 @@
                         <th class="column-4 p-l-70">Quantity</th>
                         <th class="column-5">Total</th>
                     </tr>
-                    @foreach (var order in Model.Order)
+                    @foreach (var order in Model.Orders)
                     {
                         if (order.Isbuy == true)
                         {
