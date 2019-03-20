@@ -16,8 +16,17 @@
                             },
                             new { @class = "nav-link" })
         </li>
-        <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Models</a></li>
-
+        <li class="nav-item">
+            @Ajax.ActionLink("Add Model", "AddModel", "VendorOrder", null,
+                     new AjaxOptions { UpdateTargetId = "section", InsertionMode = InsertionMode.Replace },
+                     new { @class = "nav-link" })
+        </li>
+        <li class="nav-item">
+            @Ajax.ActionLink("Add Brand", "AddBrand", "VendorOrder", null,
+                     new AjaxOptions { UpdateTargetId = "section", InsertionMode = InsertionMode.Replace },
+                     new { @class = "nav-link" })
+        </li>
+        @*<li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Models</a></li>*@
     </ul>
 </div><!-- /.card-header -->
 <div class="active tab-pane" id="section">
@@ -57,7 +66,7 @@
                                         <td>@product.Quantity</td>
                                         <td>@product.Price</td>
                                         <td>
-                                            @Ajax.ActionLink("EDIT", "EditProduct", new { id = product.Product.ID }, new AjaxOptions { UpdateTargetId = "add", InsertionMode = InsertionMode.Replace }, new { @class = "btn btn-warning", style = "margin-bottom:4px;display:block" })
+                                            @Ajax.ActionLink("EDIT", "EditProduct", new { id = product.Product.ID }, new AjaxOptions { UpdateTargetId = "add", InsertionMode = InsertionMode.Replace,HttpMethod= "Get"}, new { @class = "btn btn-warning", style = "margin-bottom:4px;display:block" })
                                             @Ajax.ActionLink("DELETE", "DeleteProduct", new { id = product.Product.ID }, new AjaxOptions { UpdateTargetId = "add", InsertionMode = InsertionMode.Replace, Confirm = "Are You Sure You Want To Delete That Product?" }, new { @class = "btn btn-danger", style = "margin-bottom:4px;display:block" })
                                         </td>
                                     </tr>
@@ -78,11 +87,11 @@
                         </table>
                     </div>
                     <!-- /.card-body -->
-                </div>
-                </div>
-            </div>
-        </section>
-    </div>
+                  </div>
+               </div>
+           </div>
+      </section>
+  </div>
 
 @section scripts{
     @Scripts.Render("~/bundles/Ajax");
