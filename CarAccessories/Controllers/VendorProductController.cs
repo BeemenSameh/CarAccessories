@@ -1,4 +1,5 @@
 ﻿using CarAccessories.Models;
+using CarAccessories.Models.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,25 +40,40 @@ namespace CarAccessories.Controllers
         }
         public ActionResult addProduct()
         {
-            //ViewBag.ID = id;
-            var Models = db.Models.ToList();
-            ViewBag.Model = Models;
-            return PartialView("_addProduct",new Product());
+            //var Models = db.Models.ToList();
+            //var Cats = db.Categories.ToList();
+
+            ProductCategoryModelVM ProductCatModelVM = new ProductCategoryModelVM()
+            {
+                Models = db.Models.ToList(),
+                Categories = db.Categories.ToList()
+            };
+
+            return PartialView("_addProduct", ProductCatModelVM);
         }
 
         
         [HttpPost]
-        public ActionResult addProduct(Product product)
+        public ActionResult addProduct(ProductCategoryModelVM ProductCatModelVM)
         {
             // TODO: Add insert logic here
             if (ModelState.IsValid == true)
             {
+                var product = new Product()
+                {
+                    Name = ProductCatModelVM.Name,
+                    Category = ProductCatModelVM.Category,
+                    Model = ProductCatModelVM.Model,
+                    Image = ProductCatModelVM.Image,
+                    MinDescription = ProductCatModelVM.MinDescription,
+                    State = ProductCatModelVM.State
+                };
                 db.Products.Add(product);
                 db.SaveChanges();
                 return RedirectToAction("GetProducts");
             }
 
-            else { return View(product); }
+            else { return View("_addProduct", ProductCatModelVM); }
 
         }
 

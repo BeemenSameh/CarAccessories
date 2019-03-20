@@ -210,6 +210,7 @@
     <Compile Include="Models\VendorProduct.cs" />
     <Compile Include="Models\ViewModel\BrandModelsAndBrandProducts.cs" />
     <Compile Include="Models\ViewModel\BrandsProducts.cs" />
+    <Compile Include="Models\ViewModel\ProductCategoryModelVM.cs" />
     <Compile Include="Models\ViewModel\RegistAsVendorViewModel.cs" />
     <Compile Include="Models\ViewModel\RegisterAsCustomerViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1775,6 +1776,8 @@
     <Content Include="Views\Vendor\_VendorInfo.cshtml" />
     <Content Include="Views\Vendor\_EditProfile.cshtml" />
     <Content Include="Views\VendorOrder\_VendorOrders.cshtml" />
+    <Content Include="Views\VendorOrder\_AddBrand.cshtml" />
+    <Content Include="Views\VendorOrder\_AddModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

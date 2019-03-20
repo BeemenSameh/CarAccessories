@@ -27,30 +27,6 @@ namespace CarAccessories.Controllers
                 {
                     var userIdValue = userIdClaim.Value;
                     user = db.Vendors.Where(i => i.ID == userIdValue).FirstOrDefault();
-
-                    //var orderDetails = (from vend in db.VendorProducts
-                    //                    where vend.Vendor.ID == user.ID
-                    //                    select vend.OrderDetails).ToList();
-
-                    //var vendor = (from vend in db.VendorProducts
-                    //                    where vend.Vendor.ID == user.ID
-                    //                    select vend.OrderDetails).ToList();
-
-                    //ordetail = orderDetails;
-                    ////db.Entry()
-                    //foreach (var OD in orderDetails)
-                    //{
-                    //    db.Entry(OD).Collection(o=>o).ToLoad();
-                    //    //ordetail = OD;
-                    //    //db.Entry(order).Collection()
-                    //    foreach (var item in OD)
-                    //    {
-                    //        //db.Entry(item)
-                    //    }
-                    //}
-
-
-                            //db.Entry(user).Reference(vendor => vendor.Vendor).Load();
                             db.Entry(user).Collection(prod => prod.VendorProduct).Load();
                     foreach (var VP in user.VendorProduct)
                     {
@@ -59,18 +35,43 @@ namespace CarAccessories.Controllers
                     }
                 }
             }
-          
-            //var Orders = db.Orders.ToList();
-            //foreach (var order in Orders)
-            //{
-            //    foreach (var vp in order.OrderDetails)
-            //    {
-            //        db.Entry(vp).Reference(i => i.VendorProduct).Load();
-            //        db.Entry(vp.VendorProduct).Reference(p => p.Vendor).Load();
-            //    }
-            //    //db.Entry(order).Reference(cust => cust.Customer).Load();
-            //}
             return PartialView("_VendorOrders",user);
+        }
+
+        public ActionResult AddModel()
+        {
+            var Brands = db.Brands.ToList();
+            ViewBag.Brand = Brands;
+            return PartialView("_AddModel",new Model());
+        }
+
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult AddModel(Model Model)
+        {
+            if (ModelState.IsValid==true)
+            {
+                return RedirectToAction("addProduct", "VendorProduct");
+            }
+            return PartialView("_AddModel",Model);
+        }
+
+        public ActionResult AddBrand()
+        {
+            return PartialView("_AddBrand", new Brand());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddBrand(Brand Brand)
+        {
+            if (ModelState.IsValid == true)
+            {
+                db.Brands.Add(Brand);
+                db.SaveChanges();
+                return RedirectToAction("addModel");
+            }
+            return PartialView("_AddBrand", Brand);
         }
     }
 }

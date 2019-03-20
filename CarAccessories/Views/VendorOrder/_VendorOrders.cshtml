@@ -28,7 +28,11 @@
                     }
 
                 </tbody>
+         
             </table>
+            <div class="col-sm-offset-2 col-sm-10">
+                @Ajax.ActionLink("Back", "GetPartialProducts","VendorProduct", null, new AjaxOptions { UpdateTargetId = "add", InsertionMode = InsertionMode.Replace }, new { @class = "btn btn-default" })
+            </div>
         </div>
         <!-- /.col -->
     </div>
