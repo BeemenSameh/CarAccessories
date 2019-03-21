@@ -70,7 +70,7 @@
 
 <!-- Banner -->
 <section class="banner bgwhite p-t-40 p-b-40">
-    <div class="container">
+    <div class="container" style="background-color: #f2f2f2;padding:50px" >
         <div class="row">
             @for (int i = 0; i < (Model.Brands.Count / 2) + 1; i++)
             {
@@ -79,7 +79,7 @@
                     {
                         <!-- block1 -->
                         <div class="block1 hov-img-zoom pos-relative m-b-30">
-                            <img src="~/Content/images/images/@Model.Brands[2 * i + j].Image" style="height:360px" alt="IMG-BENNER">
+                            <img src="~/Content/images/images/@Model.Brands[2 * i + j].Image"  alt="IMG-BENNER">
 
                             <div class="block1-wrapbtn w-size2">
                                 <!-- Button -->
