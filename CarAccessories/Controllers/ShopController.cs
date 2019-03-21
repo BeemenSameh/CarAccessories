@@ -38,6 +38,7 @@ namespace CarAccessories.Controllers
             {
                 db.Entry(i).Reference(p => p.Product).Load();
                 db.Entry(i).Reference(p => p.Vendor).Load();
+                db.Entry(i).Collection(p => p.Rates).Load();
             }
             return PartialView("_AllProductsPartialView", AllVendorProductsList);
         }

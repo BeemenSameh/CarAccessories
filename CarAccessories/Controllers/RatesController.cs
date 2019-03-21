@@ -47,6 +47,25 @@ namespace CarAccessories.Controllers
 
 
         }
+
+        public string RateVenProd(int VendorProdId)
+        {
+            int RateSum = 0;
+            List<Rate> Rates = db.Rates.Where(i => i.VendorProduct_ID == VendorProdId).ToList();
+            foreach(var item in Rates)
+            {
+                RateSum += item.RateNumber;
+            }
+            // int RateAverage = RateSum / Rates.Count;
+            if (Rates.Count != 0)
+            {
+                //return Json(new { RateAvg = (RateSum / Rates.Count).ToString(), DivId = VendorProdId });
+                return (RateSum / Rates.Count).ToString();
+            }
+            else return 0.ToString();
+                //return  Json(new { RateAvg =0.ToString(), DivId = VendorProdId });
+           // return Json(true, JsonRequestBehavior.AllowGet);
+        }
         // GET: Rates
         public ActionResult Index()
         {
