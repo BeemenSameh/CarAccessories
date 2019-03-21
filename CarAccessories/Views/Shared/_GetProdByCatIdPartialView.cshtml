@@ -30,7 +30,7 @@
                     @Html.ActionLink(item.Vendor.ComponyName, "ShowVendorDetails", "Home", new { id = item.Vendor.ID }, new { @class = "block2-name dis-block s-text3 p-b-5" })
                     @*<a href="ProductDetailsView.cshtml" class="block2-name dis-block s-text3 p-b-5">@item.Name</a>*@
                     @if (@User.Identity.IsAuthenticated)
-                    {<div class="rateit" id="rateit10" data-rateit-step="1" data-vendorId=@item.ID></div><br />}
+                    {<div class="rateit" id=@item.ID data-rateit-step="1" data-vendorId=@item.ID ></div><br />}
 
                     @if (item.Sale_price == 0 || item.Sale_price == null)
                     {
@@ -60,67 +60,76 @@
 <script src="~/Scripts/jquery-1.10.2.js"></script>
 <script src="~/Scripts/jquery.rateit.min.js"></script>
 <script>
-    var tooltipvalues = ['bad', 'poor', 'ok', 'good', 'super'];
-    $(".rateit").bind('over', function (event, value) { $(this).attr('title', tooltipvalues[value - 1]); });
-    $('.rateit').each(function () {
-        $(this).on('click', function () {
-            var rate = $(this).rateit('value');
-            var VendorProdId = $(this).attr("data-vendorId");
-            console.log(rate);
-            $.ajax({
-                url: "Rates/UserRateVendorProduct",
-                method: "get",
-                data: { rate: rate, VendorProdId: VendorProdId },
-                //dataType:"json",
-                success: function (c) {
-                    //if (c != null) {
-                    //    alert(c)
-                    swal("This Prod", "is Rated by" + rate + "!", "success");
-                    //} else
-                    //    console.log("Can't Rate product");
+     $(document).ready(function () {
+         $('.rateit').each(function () {
+             //$(this).rateit('value', '3');
+             var VendorProdId = $(this).attr("data-vendorId");
 
-                    //location.href("/Account/Login");
-                },
-                error: function () {
-                    console.log("Can't Rate product");
-                }
-            });
-        });
-    });
-       // $('#rateit10').rateit('value')
+             $.ajax({
+                 url: "Rates/RateVenProd",
+                 method: "get",
+                 data: { VendorProdId: VendorProdId },
+                 contentType: "application/json; charset=utf-8",
+                 dataType: "json",
+                 success: function (res) {
+                     console.log(res);
+                     $('#' + VendorProdId).rateit('value', res);
+                 },
+                 error: function () {
+                     console.log("Can't Rate product");
+                 }
+             });
+         });
+     });
+     var tooltipvalues = ['bad', 'poor', 'ok', 'good', 'super'];
+     $(".rateit").bind('over', function (event, value) { $(this).attr('title', tooltipvalues[value - 1]); });
+     $('.rateit').each(function () {
+         $(this).on('click', function () {
+             //debugger;
+             $(this).show(1000);
+             console.log(this);
+             var rate = $(this).rateit('value');
+             var VendorProdId = $(this).attr("data-vendorId");
+             console.log(rate);
+             $.ajax({
+                 url: "Rates/UserRateVendorProduct",
+                 method: "get",
+                 data: { rate: rate, VendorProdId: VendorProdId },
+                 //dataType:"json",
+                 success: function (c) {
+                     //if (c != null) {
+                     //    alert(c)
+                     swal("This Prod", "is Rated by" + rate + "!", "success");
+                     $('.rateit').each(function () {
+                         var VendorProdId = $(this).attr("data-vendorId");
+                         $.ajax({
+                             url: "Rates/RateVenProd",
+                             method: "get",
+                             data: { VendorProdId: VendorProdId },
+                             contentType: "application/json; charset=utf-8",
+                             dataType: "json",
+                             success: function (res) {
+                                 console.log(res);
+                                 $('#' + VendorProdId).rateit('value', res);
+                             },
+                             error: function () {
+                                 console.log("Can't Rate product");
+                             }
+                         });
+                     });
+                     //} else
+                     //    console.log("Can't Rate product");
+
+                     //location.href("/Account/Login");
+                 },
+                 error: function () {
+                     console.log("Can't Rate product");
+                 }
+             });
+         });
+     });
+           // $('#rateit10').rateit('value')
+
 </script>
 
-@*@section scripts{
-    <script src="~/Scripts/jquery.rateit.min.js"></script>
-    <script>
-        var tooltipvalues = ['bad', 'poor', 'ok', 'good', 'super'];
-        $(".rateit").bind('over', function (event, value) { $(this).attr('title', tooltipvalues[value - 1]); });
-        $('.rateit').each(function () {
-            $(this).on('click', function () {
-                var rate = $(this).rateit('value');
-                var VendorProdId = $(this).attr("data-vendorId");
-                console.log(rate);
-                $.ajax({
-                    url: "Rates/UserRateVendorProduct",
-                    method: "get",
-                    data: { rate: rate, VendorProdId: VendorProdId },
-                    //dataType:"json",
-                    success: function (c) {
-                        //if (c != null) {
-                        //    alert(c)
-                        swal("This Prod", "is Rated by" + rate + "!", "success");
-                        //} else
-                        //    console.log("Can't Rate product");
-
-                        //location.href("/Account/Login");
-                    },
-                    error: function () {
-                        console.log("Can't Rate product");
-                    }
-                });
-            });
-        });
-       // $('#rateit10').rateit('value')
-    </script>
-}*@
 

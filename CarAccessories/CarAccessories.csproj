@@ -236,6 +236,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\images\bmw.png" />
+    <Content Include="Content\images\images\chev.jpg" />
     <Content Include="Content\images\images\cirrus.png" />
     <Content Include="Content\css\AdminPanel\adminlte.css" />
     <Content Include="Content\css\AdminPanel\adminlte.min.css" />
@@ -1412,6 +1414,7 @@
     <Content Include="Content\images\images\duck.jpeg" />
     <Content Include="Content\images\images\Falcon.jpg" />
     <Content Include="Content\images\images\Hoopoe.jpg" />
+    <Content Include="Content\images\images\hundai.png" />
     <Content Include="Content\images\images\images.jpg" />
     <Content Include="Content\images\images\is.jpg" />
     <Content Include="Content\images\images\is2.jpg" />
@@ -1419,7 +1422,9 @@
     <Content Include="Content\images\images\item_XL_10202403_12660550.jpg" />
     <Content Include="Content\images\images\item_XL_11374615_15886432.jpg" />
     <Content Include="Content\images\images\item_XL_7169013_5315847.jpg" />
+    <Content Include="Content\images\images\Jaguar-logo-2012-1920x1080.png" />
     <Content Include="Content\images\images\katkot.jpg" />
+    <Content Include="Content\images\images\Kia-Logo-min.png" />
     <Content Include="Content\images\images\Ostrich.jpg" />
     <Content Include="Content\images\images\papan.jpg" />
     <Content Include="Content\images\images\peacock.jpg" />

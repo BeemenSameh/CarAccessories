@@ -33,7 +33,7 @@
                                 @Html.ActionLink(item.Vendor.ComponyName, "ShowVendorDetails", "Home", new { id = item.Vendor.ID }, new { @class = "block2-name dis-block s-text3 p-b-5" })
 
                                 @if (@User.Identity.IsAuthenticated)
-                                {<div class="rateit" id="rateit10" data-rateit-step="1" data-vendorId=@item.ID></div><br />}
+                                {<div class="rateit" id=@item.ID data-rateit-step="1" data-vendorId=@item.ID ></div><br />}
 
                                 @if (item.Sale_price == 0 || item.Sale_price == null)
                                 {
@@ -66,6 +66,27 @@
   <script src="~/Scripts/jquery-1.10.2.js"></script>
 <script src="~/Scripts/jquery.rateit.min.js"></script>
     <script>
+        $(document).ready(function () {
+            $('.rateit').each(function () {
+                //$(this).rateit('value', '3');
+                var VendorProdId = $(this).attr("data-vendorId");
+
+                $.ajax({
+                    url: "Rates/RateVenProd",
+                    method: "get",
+                    data: { VendorProdId: VendorProdId},
+                   contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (res) {
+                        console.log(res);
+                        $('#'+VendorProdId).rateit('value', res);
+                    },
+                    error: function () {
+                        console.log("Can't Rate product");
+                    }
+                });
+            });
+        });
         var tooltipvalues = ['bad', 'poor', 'ok', 'good', 'super'];
         $(".rateit").bind('over', function (event, value) { $(this).attr('title', tooltipvalues[value - 1]); });
         $('.rateit').each(function () {
@@ -85,6 +106,23 @@
                         //if (c != null) {
                         //    alert(c)
                         swal("This Prod", "is Rated by" + rate + "!", "success");
+                        $('.rateit').each(function () {
+                            var VendorProdId = $(this).attr("data-vendorId");
+                            $.ajax({
+                                url: "Rates/RateVenProd",
+                                method: "get",
+                                data: { VendorProdId: VendorProdId },
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                success: function (res) {
+                                    console.log(res);
+                                    $('#' + VendorProdId).rateit('value', res);
+                                },
+                                error: function () {
+                                    console.log("Can't Rate product");
+                                }
+                            });
+                        });
                         //} else
                         //    console.log("Can't Rate product");
 
@@ -97,5 +135,6 @@
             });
         });
            // $('#rateit10').rateit('value')
+      
     </script>
 

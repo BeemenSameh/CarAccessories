@@ -10,5 +10,6 @@ namespace CarAccessories.Models.ViewModel
         public List<Model> ModelsList { get; set; }
         public List<VendorProduct> VendorProductList { get; set; }
         public List<Category> CategoriesList { get; set; }
+        public int BrandId { get; set; }
     }
 }

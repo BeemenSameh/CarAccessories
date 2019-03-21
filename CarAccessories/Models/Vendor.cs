@@ -20,6 +20,7 @@ namespace CarAccessories.Models
         public int Accept { get; set; }
         [Required]
         [StringLength(14)]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "PhoneNumber must be numeric")]
         public string PhoneNumber { get; set; }
 
         public ApplicationUser ApplicationUser { get; set; }
