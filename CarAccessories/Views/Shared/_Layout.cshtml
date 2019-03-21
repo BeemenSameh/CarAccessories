@@ -87,10 +87,6 @@
                                     @Html.ActionLink("Sale", "Index", "Sale")
                                 </li>
 
-                                <li>
-                                    @Html.ActionLink("Profile", "GetProducts", "VendorProduct")
-                                </li>
-
                                 if (Request.IsAuthenticated)
                                 {
                                     <li>
@@ -99,6 +95,10 @@
 
                                     <li>
                                         @Html.ActionLink("PaidProducts", "Index", "BaughtProducts")
+                                    </li>
+
+                                    <li>
+                                        @Html.ActionLink("Profile", "GetProducts", "VendorProduct")
                                     </li>
                                 }
                             }
