@@ -8,26 +8,13 @@ using System.Web.Mvc;
 
 namespace CarAccessories.Controllers
 {
-    [Authorize]
     public class VendorController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
         // GET: vendor
-        public ActionResult Index()
+        public ActionResult Index(string id)
         {
-            var user = new ApplicationUser();
-            bool claimIdentity = User.Identity is ClaimsIdentity;
-            if (claimIdentity)
-            {
-                ClaimsIdentity claimsIdentity = User.Identity as ClaimsIdentity;
-                var userIdClaim = claimsIdentity.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
-
-                if (userIdClaim != null)
-                {
-                    var userIdValue = userIdClaim.Value;
-                    user = db.Users.Where(i => i.Id == userIdValue).FirstOrDefault();
-                }
-            }
+            var user = db.Users.FirstOrDefault(use => use.Id == id);
             db.Entry(user).Reference(vendor => vendor.Vendor).Load();
             return View(user);
         }
