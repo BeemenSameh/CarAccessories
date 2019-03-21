@@ -33,7 +33,8 @@ namespace CarAccessories.Controllers
             {
                 ModelsList = db.Models.Where(m => m.Brand.ID == BrandId).ToList(),
                 VendorProductList = db.VendorProducts.Where(p => p.Product.Model.Brand.ID == BrandId).ToList(),
-                CategoriesList = db.Categories.ToList()
+                CategoriesList = db.Categories.ToList(),
+                BrandId= BrandId
             };
             foreach (var VendorProductList in b.VendorProductList)
             {
@@ -41,6 +42,10 @@ namespace CarAccessories.Controllers
                 db.Entry(VendorProductList.Product).Reference(m => m.Model).Load();
                 db.Entry(VendorProductList.Product.Model).Reference(br => br.Brand).Load();
                 db.Entry(VendorProductList).Reference(p => p.Vendor).Load();
+            }
+            foreach(var m in b.ModelsList)
+            {
+                db.Entry(m).Reference(br => br.Brand).Load();
             }
             return View(b);
         }

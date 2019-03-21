@@ -32,7 +32,7 @@
 
                     <ul class="p-b-54">
                         <li class="p-t-4">
-                            @Ajax.ActionLink("All", "GetAllProducts", "Home", new { BrandId = Model.ModelsList[0].Brand.ID },
+                            @Ajax.ActionLink("All", "GetAllProducts", "Home", new { BrandId = Model.BrandId},
 
 
                                new AjaxOptions()
@@ -47,7 +47,7 @@
                         {
                             <li class="p-t-4">
                                 @*<a href="/GetSelectedCatProd/@item.ID" class="s-text13">@item.Name</a>*@
-                                @Ajax.ActionLink(item.ModelName, "GetProductsByModelId", "Home", new { Model_ID = item.ID },
+                                @Ajax.ActionLink(item.ModelName, "GetProductsByModelId", "Shop", new { Model_ID = item.ID },
                                new AjaxOptions()
                                {
                                    UpdateTargetId = "SelectedModelProducts",
@@ -72,7 +72,7 @@
                         {
                             <li class="p-t-4">
                                 @*<a href="/GetSelectedCatProd/@item.ID" class="s-text13">@item.Name</a>*@
-                                @Ajax.ActionLink(item.Name, "GetProductsByCategoryId", "Home", new { Cat_ID = item.ID },
+                                @Ajax.ActionLink(item.Name, "GetProductsByCategoryId", "Shop", new { Cat_ID = item.ID },
                                new AjaxOptions()
                                {
                                    UpdateTargetId = "SelectedModelProducts",
@@ -204,7 +204,7 @@
                 <!-- Product -->
 
                 <div id="SelectedModelProducts">
-                    @Html.Partial("_AllProductsPartialView", Model.VendorProductList);
+                    @Html.Partial("_AllProductsPartialView", Model.VendorProductList)
 
                 </div>
                 <div class="row">
