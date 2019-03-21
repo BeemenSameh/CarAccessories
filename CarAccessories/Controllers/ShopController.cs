@@ -43,6 +43,7 @@ namespace CarAccessories.Controllers
             return PartialView("_AllProductsPartialView", AllVendorProductsList);
         }
 
+        [Authorize]
         public ActionResult addCartDetailsToDataBase(string ProductName, string VendorName)
         {
             ClaimsIdentity claimsIdentity = User.Identity as ClaimsIdentity;
@@ -167,17 +168,17 @@ namespace CarAccessories.Controllers
             return PartialView("_GetProdByCatIdPartialView", VendorProductList);
         }
 
-        public ActionResult filterProductsByPrice(int LowerPrice, int UpperPrice)
-        {
+        //public ActionResult filterProductsByPrice(int LowerPrice, int UpperPrice)
+        //{
            
-            List<VendorProduct> price = db.VendorProducts.Where(v => v.Price >= LowerPrice && v.Price <= UpperPrice).ToList();
-            foreach (var i in price)
-            {
-                db.Entry(i).Reference(p => p.Product).Load();
-                db.Entry(i).Reference(p => p.Vendor).Load();
-            }
+        //    List<VendorProduct> price = db.VendorProducts.Where(v => v.Price >= LowerPrice && v.Price <= UpperPrice).ToList();
+        //    foreach (var i in price)
+        //    {
+        //        db.Entry(i).Reference(p => p.Product).Load();
+        //        db.Entry(i).Reference(p => p.Vendor).Load();
+        //    }
 
-            return PartialView("_AllProductsPartialView", price);
-        }
+        //    return PartialView("_AllProductsPartialView", price);
+        //}
     }
 }

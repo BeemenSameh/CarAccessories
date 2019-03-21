@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace CarAccessories.Controllers
 {
+    [Authorize]
     public class BaughtProductsController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();

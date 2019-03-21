@@ -7,13 +7,13 @@ using System.Web.Mvc;
 
 namespace CarAccessories.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminUsersController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
         // GET: AdminUsers
         public ActionResult Index()
         {
-            
             var users = db.Users.ToList();
             foreach (var user in users)
             {
