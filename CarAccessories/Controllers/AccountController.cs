@@ -79,10 +79,16 @@ namespace CarAccessories.Controllers
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var user = db.Users.FirstOrDefault(u => u.Email == model.Email);
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    if (user.Type == "Vendor")
+                        return RedirectToLocal("/vendor");
+                    else if (user.Type == "Customer")
+                        return RedirectToLocal(returnUrl);
+                    else
+                        return RedirectToLocal("/AdminUsers");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -223,7 +229,6 @@ namespace CarAccessories.Controllers
         }
 
         [HttpPost]
-
         [AllowAnonymous]
         public  async Task<ActionResult> RegistAsCustomer(RegisterAsCustomerViewModel m, HttpPostedFileBase Photo)
         {
