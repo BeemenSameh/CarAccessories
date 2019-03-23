@@ -11,7 +11,7 @@ using Microsoft.AspNet.Identity;
 
 namespace CarAccessories.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Customer")]
     public class RatesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

@@ -15,6 +15,13 @@ namespace CarAccessories.Models.ViewModel
         public Model Model { get; set; }
         public Category Category { get; set; }
 
+        public int Price { get; set; }
+        public double? Sale_price { get; set; }
+        public int Quantity { get; set; }
+        public DateTime Insert_Date { get; set; } = DateTime.Now;
+
+        public int ModelId { get; set; }
+        public int CategoryId { get; set; }
         public List<Model> Models { get; set; }
         public List<Category> Categories { get; set; }
     }

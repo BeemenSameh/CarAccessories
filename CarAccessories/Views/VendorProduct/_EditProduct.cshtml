@@ -5,7 +5,7 @@
         <h3 class="card-title">Update Product</h3>
     </div>
 </div>
-<form class="form-horizontal">
+<form class="form-horizontal" method="post" action="/VendorProduct/EditProduct">
     @Html.HiddenFor(m=>m.ID)
     <div class="form-group">
         <label for="Name" class="col-sm-2 control-label">Name</label>
@@ -28,7 +28,7 @@
         <label for="Model" class="col-sm-2 control-label">Category</label>
 
         <div class="col-sm-10">
-            <select>
+            <select >
                 @foreach (var item in ViewBag.category)
                 {
                     <option value="@item.ID">@item.Name</option>

@@ -210,6 +210,7 @@
     <Compile Include="Models\VendorProduct.cs" />
     <Compile Include="Models\ViewModel\BrandModelsAndBrandProducts.cs" />
     <Compile Include="Models\ViewModel\BrandsProducts.cs" />
+    <Compile Include="Models\ViewModel\ModelBrandVM.cs" />
     <Compile Include="Models\ViewModel\ProductCategoryModelVM.cs" />
     <Compile Include="Models\ViewModel\RegistAsVendorViewModel.cs" />
     <Compile Include="Models\ViewModel\RegisterAsCustomerViewModel.cs" />
@@ -1738,7 +1739,6 @@
     <Content Include="Views\Order\Index.cshtml" />
     <Content Include="Views\BaughtProducts\Index.cshtml" />
     <Content Include="Views\Shared\_GetProdByCatIdPartialView.cshtml" />
-    <Content Include="Views\Shared\_ProductDetailsView.cshtml" />
     <Content Include="Views\Shop\Index.cshtml" />
     <Content Include="Views\Sale\Index.cshtml" />
     <Content Include="Views\Home\ShowThisBrandModels.cshtml" />
@@ -1784,6 +1784,9 @@
     <Content Include="Views\VendorOrder\_VendorOrders.cshtml" />
     <Content Include="Views\VendorOrder\_AddBrand.cshtml" />
     <Content Include="Views\VendorOrder\_AddModel.cshtml" />
+    <Content Include="Views\Shared\_ProductDetailsView.cshtml" />
+    <Content Include="Views\Shared\_VendorAndAdminLogin.cshtml" />
+    <Content Include="Views\VendorProduct\_AddModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

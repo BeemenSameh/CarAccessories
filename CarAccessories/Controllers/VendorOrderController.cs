@@ -1,4 +1,5 @@
 ﻿using CarAccessories.Models;
+using CarAccessories.Models.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Web.Mvc;
 
 namespace CarAccessories.Controllers
 {
+    [Authorize]
     public class VendorOrderController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
@@ -40,20 +42,35 @@ namespace CarAccessories.Controllers
 
         public ActionResult AddModel()
         {
-            var Brands = db.Brands.ToList();
-            ViewBag.Brand = Brands;
-            return PartialView("_AddModel",new Model());
+            ModelBrandVM modelbrandVM = new ModelBrandVM()
+            {
+                Brands = db.Brands.ToList()
+            };
+            return PartialView("_AddModel", modelbrandVM);
         }
 
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public ActionResult AddModel(Model Model)
+        public ActionResult AddModel(ModelBrandVM modelbrandVM)
         {
             if (ModelState.IsValid==true)
             {
-                return RedirectToAction("addProduct", "VendorProduct");
+                var br = db.Brands.Where(b => b.ID == modelbrandVM.Brandid).FirstOrDefault();
+
+                var Model = new Model()
+                {
+                    ModelName = modelbrandVM.ModelName,
+                    Year = modelbrandVM.Year,
+                    Brand = br
+                };
+
+                // db.Entry(modelbrandVM).Collection(m=>m.Brands).Load();
+                db.Models.Add(Model);
+                db.SaveChanges();
+               
             }
-            return PartialView("_AddModel",Model);
+
+            return RedirectToAction("GetProducts", "VendorProduct");
         }
 
         public ActionResult AddBrand()
@@ -69,7 +86,7 @@ namespace CarAccessories.Controllers
             {
                 db.Brands.Add(Brand);
                 db.SaveChanges();
-                return RedirectToAction("addModel");
+                return RedirectToAction("GetProducts", "VendorProduct");
             }
             return PartialView("_AddBrand", Brand);
         }

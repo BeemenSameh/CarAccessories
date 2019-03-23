@@ -182,32 +182,7 @@
 <script type="text/javascript" src="~/Scripts/vendor/daterangepicker/moment.min.js"></script>
 <script type="text/javascript" src="~/Scripts/vendor/daterangepicker/daterangepicker.js"></script>
 <!--===============================================================================================-->
-<script type="text/javascript">
 
-    $('.block2-btn-addcart').each(function () {
-        var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
-        console.log(nameProduct);
-        $(this).on('click', function () {
-            $.ajax({
-                url: "Shop/addCartDetailsToDataBase",
-                method: "get",
-                data: { ProductName: nameProduct },
-                success: function () {
-                    swal(nameProduct, "is added to cart !", "success");
-                },
-                error: function () {
-                    console.log("can't add product to cart");
-                }
-            });
-        });
-    });
-    $('.block2-btn-addwishlist').each(function () {
-        var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
-        $(this).on('click', function () {
-            swal(nameProduct, "is added to wishlist !", "success");
-        });
-    });
-</script>
 
 
 

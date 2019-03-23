@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace CarAccessories.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminProductController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();

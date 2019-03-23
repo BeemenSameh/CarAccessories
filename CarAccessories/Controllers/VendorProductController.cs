@@ -1,5 +1,6 @@
 ﻿using CarAccessories.Models;
 using CarAccessories.Models.ViewModel;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ using System.Web.Mvc;
 
 namespace CarAccessories.Controllers
 {
+    [Authorize]
     public class VendorProductController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
@@ -59,16 +61,29 @@ namespace CarAccessories.Controllers
             // TODO: Add insert logic here
             if (ModelState.IsValid == true)
             {
+                var cat = db.Categories.Where(c => c.ID == ProductCatModelVM.CategoryId).FirstOrDefault();
+                var mod = db.Models.Where(m=>m.ID== ProductCatModelVM.ModelId).FirstOrDefault();
                 var product = new Product()
                 {
                     Name = ProductCatModelVM.Name,
-                    Category = ProductCatModelVM.Category,
-                    Model = ProductCatModelVM.Model,
+                    Category = cat,
+                    Model = mod,
                     Image = ProductCatModelVM.Image,
                     MinDescription = ProductCatModelVM.MinDescription,
-                    State = ProductCatModelVM.State
+                    State = ProductCatModelVM.State,
+                
+
                 };
                 db.Products.Add(product);
+                VendorProduct vp = new VendorProduct();
+                vp.Price = ProductCatModelVM.Price;
+                vp.Sale_price = ProductCatModelVM.Sale_price;
+                vp.Quantity = ProductCatModelVM.Quantity;
+                vp.Product = product;
+                string  vid = User.Identity.GetUserId();
+                Vendor v = db.Vendors.Where(i => i.ID == vid).FirstOrDefault();
+                vp.Vendor = v;
+                db.VendorProducts.Add(vp);
                 db.SaveChanges();
                 return RedirectToAction("GetProducts");
             }
@@ -93,20 +108,17 @@ namespace CarAccessories.Controllers
         [HttpPost]
         public ActionResult EditProduct(int id, Product product)
         {
-            // TODO: Add update logic here
-            if (ModelState.IsValid == true)
-            {
+             
                 Product ProductFromDb = db.Products.Find(id);
                 ProductFromDb.Name = product.Name;
                 ProductFromDb.Image = product.Image;
                 ProductFromDb.MinDescription = product.MinDescription;
                 //ProductFromDb.Category. = product.State;
-                return RedirectToAction("GetAllProducts");
-            }
-            else
-            {
-                return View(product);
-            }
+                db.SaveChanges();
+                return RedirectToAction("GetProducts");
+             
+
+                //return View(product);
         }
 
         // GET: vendor/Delete/5
