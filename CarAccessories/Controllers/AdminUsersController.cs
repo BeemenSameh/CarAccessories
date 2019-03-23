@@ -14,7 +14,6 @@ namespace CarAccessories.Controllers
         // GET: AdminUsers
         public ActionResult Index()
         {
-            
             var users = db.Users.ToList();
             foreach (var user in users)
             {

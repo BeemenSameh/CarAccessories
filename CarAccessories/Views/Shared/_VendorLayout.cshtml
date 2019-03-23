@@ -17,7 +17,7 @@
     @RenderSection("style", required: false)
 </head>
 <body class="hold-transition sidebar-mini">
-        <!-- Content Wrapper. Contains page content -->
+    <!-- Content Wrapper. Contains page content -->
     <div class="container-fluid">
         <div>
             <section class="content">
@@ -28,7 +28,8 @@
                             <!-- Profile Image -->
                             <div class="card card-primary card-outline">
                                 <div class="card-body box-profile">
-                                    @{ 
+                                    @Html.Partial("_LoginPartial")
+                                    @{
                                         Html.RenderAction("Details", "Vendor");
                                     }
                                 </div>
@@ -54,7 +55,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="tab-content">
-                                        @RenderBody();
+                                        @RenderBody()
                                     </div>
                                     <!-- /.tab-content -->
                                 </div><!-- /.card-body -->
@@ -91,15 +92,15 @@
     <script src="~/Scripts/js/demo.js"></script>
     <script>
         $(function () {
-          $("#example1").DataTable();
-          $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false
-          });
+            $("#example1").DataTable();
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false
+            });
         });
     </script>
     @RenderSection("scripts", required: false)

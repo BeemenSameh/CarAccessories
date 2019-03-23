@@ -116,7 +116,7 @@ using System.Web.Mvc;
 
 namespace CarAccessories.Controllers
 {
-
+    [Authorize]
     public class OrderController : Controller
     {
         ApplicationDbContext context = new ApplicationDbContext();
