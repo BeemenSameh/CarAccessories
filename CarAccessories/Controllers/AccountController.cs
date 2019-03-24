@@ -84,7 +84,7 @@ namespace CarAccessories.Controllers
             {
                 case SignInStatus.Success:
                     if (user.Type == "Vendor")
-                        return RedirectToLocal("/vendor");
+                        return RedirectToLocal("/vendorProduct/GetProducts");
                     else if (user.Type == "Customer")
                         return RedirectToLocal(returnUrl);
                     else
@@ -167,6 +167,7 @@ namespace CarAccessories.Controllers
                     var result = await UserManager.CreateAsync(user, model.Password);
                     if (result.Succeeded)
                     {
+                        UserManager.AddToRole<ApplicationUser,string>(user.Id, "Customer");
                         return RedirectToAction("RegistAsCustomer",user);
                     }
                     AddErrors(result);
@@ -178,6 +179,7 @@ namespace CarAccessories.Controllers
                     var result = await UserManager.CreateAsync(user, model.Password);
                     if (result.Succeeded)
                     {
+                        UserManager.AddToRole<ApplicationUser, string>(user.Id, "Vendor");
                         return RedirectToAction("RegistAsVendor", user);
                     }
                     AddErrors(result);

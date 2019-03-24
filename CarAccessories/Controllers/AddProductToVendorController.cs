@@ -8,10 +8,10 @@ using System.Web.Mvc;
 
 namespace CarAccessories.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Vendor")]
     public class AddProductToVendorController : Controller
     {
-        ApplicationDbContext db = new ApplicationDbContext(); 
+        ApplicationDbContext db = new ApplicationDbContext();
         // GET: VendorProduct
         public ActionResult Index()
         {

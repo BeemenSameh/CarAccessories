@@ -8,6 +8,7 @@ using CarAccessories.Models.ViewModel;
 
 namespace CarAccessories.Controllers
 {
+    //[Authorize(Roles = "Customer"),AllowAnonymous]
     public class HomeController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();

@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace CarAccessories.Controllers
 {
+    [Authorize(Roles = "Vendor")]
     public class VendorController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
