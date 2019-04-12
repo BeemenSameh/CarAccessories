@@ -79,14 +79,14 @@
 
 
                     <!--Categories-->
-                    <h4 class="m-text14 p-b-7">
+                    <h4 class="m-text14 p-b-7" style="margin-top:50px">
                         Categories
                     </h4>
 
                     <ul class="p-b-54">
                         @foreach (var item in Model.CategoriesList)
                         {
-                            <li class="p-t-4">
+                            <li class="p-t-4 card-header">
                                 @*<a href="/GetSelectedCatProd/@item.ID" class="s-text13">@item.Name</a>*@
                                 @Ajax.ActionLink(item.Name, "GetProductsByCategoryId", "Sale", new { Cat_ID = item.ID },
                                new AjaxOptions()

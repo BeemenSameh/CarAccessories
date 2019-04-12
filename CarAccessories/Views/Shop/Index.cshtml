@@ -74,14 +74,14 @@
                         }
                     </div>
                     <!--Categories-->
-                    <h4 class="m-text14 p-b-7">
+                    <h4 class="m-text14 p-b-7" style="margin-top:50px">
                         Categories
                     </h4>
 
-                    <ul class="p-b-54">
+                    <ul class=" p-b-54" >
                         @foreach (var item in Model.CategoriesList)
                         {
-                            <li class="p-t-4">
+                            <li class="card-header">
                                 @Ajax.ActionLink(item.Name, "GetProductsByCategoryId", "Shop", new { Cat_ID = item.ID },
                                new AjaxOptions()
                                {
@@ -232,7 +232,7 @@
             skipValues[handle].innerHTML = Math.round(values[handle]);
         });
     </script>
-
+    
 
 }
 
